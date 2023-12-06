@@ -11,7 +11,7 @@ export default function Layout() {
         }}
       />
       <Drawer.Screen
-        name="quizes/index"
+        name="subjects/index"
         options={{
           drawerLabel: "ტესტები",
           title: "ტესტები",
