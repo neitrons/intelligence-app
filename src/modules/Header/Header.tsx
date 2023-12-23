@@ -7,9 +7,15 @@ export function Header() {
   const { colors } = useThemeProvider();
 
   const { header } = getStyleSheet({ colors, top });
+
   return (
     <View style={header}>
-      <Text>ჰედერი</Text>
+      <View>
+        <Text>ჰედერი</Text>
+      </View>
+      <View>
+        <Text>ჰედერი</Text>
+      </View>
     </View>
   );
 }
@@ -24,6 +30,9 @@ export function getStyleSheet({
   return StyleSheet.create({
     header: {
       width: "100%",
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
       paddingTop: 8 + top,
       padding: 12,
       borderBottomWidth: 1,

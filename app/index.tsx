@@ -1,22 +1,16 @@
-import { Link } from "expo-router";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 export default function Page() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>გეოგრაფია</Text>
-      <Link href={"/flags"}>Flags</Link>
-      <Link href={"/countries"}>Countries</Link>
-    </View>
-  );
+  return <View style={styles.container}></View>;
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    flex: 1,
     padding: 24,
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: "red",
   },
   title: {
     fontSize: 48,
