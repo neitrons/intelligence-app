@@ -11,16 +11,8 @@ export function Header() {
 const styles = StyleSheet.create({
   header: {
     width: "100%",
-    paddingTop: 0,
     padding: 12,
-    backgroundColor: "#fff",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 1,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    borderBottomColor: "rgba(0, 0, 0, 0.2)",
+    borderBottomWidth: 1,
   },
 });

@@ -1,12 +1,16 @@
 import { Slot } from "expo-router";
-import { Header } from "../src/modules/Header/Header";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import { Header } from "~/modules/Header/Header";
+import { Providers } from "~/providers/Providers";
+import { LayoutContainer } from "~/components/LayoutCointainer";
 
 export default function _layout() {
   return (
-    <SafeAreaProvider>
-      <Header />
-      <Slot />
-    </SafeAreaProvider>
+    <Providers>
+      <LayoutContainer>
+        <Header />
+        <Slot />
+      </LayoutContainer>
+    </Providers>
   );
 }
