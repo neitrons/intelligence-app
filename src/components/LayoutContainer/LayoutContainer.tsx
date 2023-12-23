@@ -1,9 +1,7 @@
 import { PropsWithChildren } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-import { useThemeProvider } from "../../providers/ThemeProvider";
-import { ColorScheme } from "../../providers/ThemeProvider/config/colors";
+import { useThemeProvider, ColorScheme } from "~/providers/ThemeProvider";
 
 export function LayoutContainer({ children }: PropsWithChildren) {
   const insets = useSafeAreaInsets();
@@ -14,13 +12,11 @@ export function LayoutContainer({ children }: PropsWithChildren) {
 }
 
 function getStyleSheet({
-  top,
   left,
   right,
   bottom,
   colors,
 }: {
-  top: number;
   left: number;
   right: number;
   bottom: number;
@@ -29,7 +25,6 @@ function getStyleSheet({
   return StyleSheet.create({
     container: {
       flex: 1,
-      paddingTop: top,
       paddingBottom: bottom,
       paddingLeft: left,
       paddingRight: right,

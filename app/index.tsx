@@ -1,9 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
+import { Link } from "expo-router";
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>გეოგრაფია</Text>
+      <Link href={"/flags"}>Flags</Link>
+      <Link href={"/countries"}>Countries</Link>
     </View>
   );
 }
