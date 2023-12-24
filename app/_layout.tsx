@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
 
-import { Header } from "~/modules/Header/Header";
+import { Header } from "~/modules/Header";
+import { Footer } from "~/modules/Footer";
 import { Providers } from "~/providers/Providers";
 
 import { LayoutContainer } from "~/components/LayoutContainer";
@@ -25,6 +26,7 @@ export default function AppLayout() {
           />
         </Stack>
       </LayoutContainer>
+      <Footer />
     </Providers>
   );
 }
