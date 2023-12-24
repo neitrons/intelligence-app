@@ -19,6 +19,10 @@ export default function AppLayout() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="flags/index" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="settings/index"
+            options={{ headerShown: false }}
+          />
         </Stack>
       </LayoutContainer>
     </Providers>
