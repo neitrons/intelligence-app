@@ -7,7 +7,7 @@ import ka from "./translations/ka.json";
 import { Locale_Enum, LocaleContext } from "./LocaleContext";
 
 export function LocaleProvider({ children }: PropsWithChildren) {
-  const [locale, setLocale] = useState<Locale_Enum>(Locale_Enum.EN);
+  const [locale, setLocale] = useState<Locale_Enum>(Locale_Enum.KA);
 
   const languages = { en, ka };
 

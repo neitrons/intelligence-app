@@ -6,6 +6,10 @@ export interface SizesScheme {
   spaceMedium: number;
   spaceLarge: number;
   iconSmall: number;
+  iconMedium: number;
+  iconLarge: number;
+  radiusSmall: number;
+  radiusFull: string;
 }
 
 export const sizes: SizesScheme = {
@@ -16,4 +20,8 @@ export const sizes: SizesScheme = {
   spaceMedium: 12,
   spaceLarge: 24,
   iconSmall: 28,
+  iconMedium: 48,
+  iconLarge: 64,
+  radiusSmall: 12,
+  radiusFull: "100%",
 };

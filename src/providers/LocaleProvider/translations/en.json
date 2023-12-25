@@ -1,4 +1,6 @@
 {
   "hello": "hello",
-  "back": "back"
+  "back": "back",
+  "flags.title": "Flags",
+  "capitals.title": "Capitals"
 }
