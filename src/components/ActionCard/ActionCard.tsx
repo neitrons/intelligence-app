@@ -8,14 +8,15 @@ import { Title } from "../Title";
 type ActionCardProps = {
   title: string;
   description: string;
+  onPress?: () => void;
 };
 
-export function ActionCard({ title, description }: ActionCardProps) {
+export function ActionCard({ title, description, onPress }: ActionCardProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <View style={styles.content}>
         <Title>{title}</Title>
         <Text style={styles.description}>{description}</Text>

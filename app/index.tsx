@@ -1,4 +1,5 @@
 import { useIntl } from "react-intl";
+import { useNavigation, router } from "expo-router";
 import { View, StyleSheet, Text } from "react-native";
 import { ActionCard } from "~/components/ActionCard";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
@@ -6,6 +7,7 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 export default function Page() {
   const theme = useThemeProvider();
   const { formatMessage } = useIntl();
+  const navigation = useNavigation();
 
   const styles = getStyleSheet({ ...theme });
 
@@ -14,10 +16,12 @@ export default function Page() {
       <Text style={styles.title}>{formatMessage({ id: "main.title" })}</Text>
       <View style={styles.cardsContainer}>
         <ActionCard
+          onPress={() => router.push("/flags")}
           title={formatMessage({ id: "main.flags.title" })}
           description={formatMessage({ id: "main.flags.description" })}
         />
         <ActionCard
+          onPress={() => router.push("/capitals")}
           title={formatMessage({ id: "main.capitals.title" })}
           description={formatMessage({ id: "main.capitals.description" })}
         />

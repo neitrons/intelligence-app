@@ -14,7 +14,6 @@ export function LayoutContainer({ children }: PropsWithChildren) {
 function getStyleSheet({
   left,
   right,
-  bottom,
   colors,
 }: {
   left: number;
@@ -25,7 +24,6 @@ function getStyleSheet({
   return StyleSheet.create({
     container: {
       flex: 1,
-      paddingBottom: bottom,
       paddingLeft: left,
       paddingRight: right,
       backgroundColor: colors.primaryBg,

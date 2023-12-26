@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function Countries() {
+export default function Capitals() {
   return (
     <View>
-      <Text>This is your text</Text>
+      <Text>Capitals Page</Text>
     </View>
   );
 }

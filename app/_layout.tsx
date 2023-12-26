@@ -3,20 +3,24 @@ import { Stack } from "expo-router";
 import { Header } from "~/modules/Header";
 import { Footer } from "~/modules/Footer";
 import { Providers } from "~/providers/Providers";
-
+import { useThemeProvider } from "~/providers/ThemeProvider";
 import { LayoutContainer } from "~/components/LayoutContainer";
 
 export default function AppLayout() {
+  const { colors } = useThemeProvider();
+
   return (
     <Providers>
       <Header />
       <LayoutContainer>
         <Stack
-          screenOptions={{ contentStyle: { backgroundColor: "transparent" } }}
+          screenOptions={{
+            contentStyle: { backgroundColor: colors.primaryBg },
+          }}
         >
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen
-            name="countries/index"
+            name="capitals/index"
             options={{ headerShown: false }}
           />
           <Stack.Screen name="flags/index" options={{ headerShown: false }} />
