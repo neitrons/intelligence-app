@@ -19,13 +19,22 @@ export function SquareCard({ text, style }: SquareCardProps) {
   );
 }
 
-function getStyleSheet({ colors }: ThemeContextValue) {
+function getStyleSheet({ colors, sizes }: ThemeContextValue) {
   return StyleSheet.create({
     card: {
       flex: 1,
       maxWidth: "25%",
       backgroundColor: colors.secondaryBg,
+      borderRadius: sizes.radiusSmall,
+      padding: sizes.spaceSmall,
+      paddingVertical: sizes.spaceMedium,
     },
-    text: {},
+    text: {
+      fontWeight: "bold",
+      color: colors.primaryText,
+      width: "100%",
+      textAlign: "center",
+      fontSize: sizes.textMedium,
+    },
   });
 }
