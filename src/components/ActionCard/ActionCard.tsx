@@ -1,32 +1,46 @@
-import { Pressable, Text, StyleSheet, View } from "react-native";
-import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import {
+  Text,
+  View,
+  Image,
+  StyleProp,
+  Pressable,
+  StyleSheet,
+  ViewStyle,
+  ImageSourcePropType,
+} from "react-native";
 
-import Icon from "react-native-vector-icons/AntDesign";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { Title } from "../Title";
 
 type ActionCardProps = {
   title: string;
   description: string;
+  style?: StyleProp<ViewStyle>;
   onPress?: () => void;
+  image: ImageSourcePropType;
 };
 
-export function ActionCard({ title, description, onPress }: ActionCardProps) {
+export function ActionCard({
+  title,
+  description,
+  image,
+  onPress,
+  style,
+}: ActionCardProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
+  const pressableStyles = StyleSheet.flatten([styles.container, style]);
+
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable style={pressableStyles} onPress={onPress}>
       <View style={styles.content}>
         <Title>{title}</Title>
         <Text style={styles.description}>{description}</Text>
       </View>
       <View style={styles.action}>
-        <Icon
-          name="rightcircle"
-          size={theme.sizes.iconLarge}
-          color={theme.colors.primaryActions}
-        />
+        <Image source={image} alt="'image" style={styles.actionBackground} />
       </View>
     </Pressable>
   );
@@ -36,8 +50,8 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
   return StyleSheet.create({
     container: {
       width: "100%",
-      flexDirection: "row",
       borderWidth: 1,
+      flexDirection: "row",
       borderRadius: sizes.radiusSmall,
       backgroundColor: colors.secondaryBg,
     },
@@ -45,16 +59,23 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       flex: 2,
       padding: sizes.spaceMedium,
     },
+    actionBackground: {
+      position: "absolute",
+      width: 110,
+      height: "100%",
+    },
     action: {
       width: 100,
       flex: 1,
+      display: "flex",
+      overflow: "hidden",
       borderLeftWidth: 1,
+      position: "relative",
+      alignItems: "center",
+      justifyContent: "center",
       backgroundColor: colors.primaryBg,
       borderTopRightRadius: sizes.radiusSmall,
       borderBottomRightRadius: sizes.radiusSmall,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
     },
     description: {
       color: colors.primaryText,
