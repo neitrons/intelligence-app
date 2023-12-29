@@ -1,4 +1,5 @@
 import { TopicLayout, TTopicCategory } from "~/modules/TopicLayout";
+
 import map from "~/assets/images/map.png";
 
 const categories: TTopicCategory[] = [
