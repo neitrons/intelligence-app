@@ -57,9 +57,7 @@ export default function Flags() {
           columnWrapperStyle={styles.quizWrapper}
           contentContainerStyle={styles.quizContainer}
           keyExtractor={(item) => item}
-          renderItem={({ index, item }) => (
-            <SquareCard index={index} text={item} />
-          )}
+          renderItem={({ item }) => <SquareCard text={`${item}`} />}
         />
       </View>
       <ScrollView

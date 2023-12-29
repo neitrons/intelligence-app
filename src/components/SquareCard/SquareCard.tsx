@@ -3,7 +3,6 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 type SquareCardProps = {
   text: string;
-  index?: number;
   style?: StyleProp<ViewStyle>;
 };
 

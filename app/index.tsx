@@ -10,7 +10,6 @@ import mapImage from "~/assets/images/map.png";
 export default function Page() {
   const theme = useThemeProvider();
   const { formatMessage } = useIntl();
-  const navigation = useNavigation();
 
   const styles = getStyleSheet({ ...theme });
 
@@ -38,6 +37,7 @@ export default function Page() {
 function getStyleSheet({ colors, sizes }: ThemeContextValue) {
   return StyleSheet.create({
     container: {
+      flex: 1,
       padding: sizes.spaceMedium,
     },
     title: {
