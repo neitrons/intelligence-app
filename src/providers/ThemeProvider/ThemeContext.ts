@@ -4,6 +4,7 @@ import { SizesScheme } from "./config/sizes";
 
 export enum ThemeMode_Enum {
   DARK = "dark",
+  LIGHT = "light",
 }
 
 export type ThemeContextValue = {

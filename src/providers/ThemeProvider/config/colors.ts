@@ -18,4 +18,10 @@ export const colors: Colors = {
     primaryText: "#DFE0DA",
     primaryActions: "#D5A368",
   },
+  [ThemeMode_Enum.LIGHT]: {
+    primaryBg: "#FFFFFF",
+    secondaryBg: "#F5F5F5",
+    primaryText: "#000000",
+    primaryActions: "#f39c12",
+  },
 };
