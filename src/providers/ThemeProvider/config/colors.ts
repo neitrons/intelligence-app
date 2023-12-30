@@ -12,7 +12,7 @@ export type Colors = {
 };
 
 export const colors: Colors = {
-  [ThemeMode_Enum.DARK]: {
+  [ThemeMode_Enum.GREEN]: {
     primaryBg: "#1C3132",
     secondaryBg: "#244443",
     primaryText: "#DFE0DA",

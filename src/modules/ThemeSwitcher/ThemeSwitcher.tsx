@@ -2,7 +2,11 @@ import { StyleSheet, View, ViewStyle, StyleProp } from "react-native";
 
 import { Title } from "~/components/Title";
 import { SwitcherButton } from "./SwitherButton";
-import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
+import {
+  ThemeContextValue,
+  ThemeMode_Enum,
+  useThemeProvider,
+} from "~/providers/ThemeProvider";
 
 import IconAwesome from "react-native-vector-icons/FontAwesome5";
 import IconFeather from "react-native-vector-icons/Feather";
@@ -13,6 +17,8 @@ type ThemeSwitcherProps = {
 
 export function ThemeSwitcher({ style }: ThemeSwitcherProps) {
   const themeValues = useThemeProvider();
+  const { changeTheme } = themeValues;
+
   const styles = getStyleSheet({ ...themeValues });
 
   const containerStyles = StyleSheet.flatten([styles.container, style]);
@@ -23,6 +29,7 @@ export function ThemeSwitcher({ style }: ThemeSwitcherProps) {
       <View style={styles.buttons}>
         <SwitcherButton
           text="მწვანე"
+          onPress={() => changeTheme(ThemeMode_Enum.GREEN)}
           icon={
             <IconAwesome
               name="frog"
@@ -33,6 +40,7 @@ export function ThemeSwitcher({ style }: ThemeSwitcherProps) {
         />
         <SwitcherButton
           text="დღე"
+          onPress={() => changeTheme(ThemeMode_Enum.LIGHT)}
           icon={
             <IconFeather
               name="sun"
@@ -51,7 +59,7 @@ function getStyleSheet({ sizes }: ThemeContextValue) {
     container: {},
     buttons: {
       flex: 1,
-  
+
       display: "flex",
       flexDirection: "row",
       gap: sizes.spaceMedium,
