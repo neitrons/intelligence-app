@@ -35,7 +35,7 @@ export function StandardResult() {
             />
           }
         >
-          თავიდან დაწყბა
+          თავიდან დაწყება
         </SButton>
         <SButton
           style={styles.goToMain}
