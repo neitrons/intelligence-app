@@ -1,1 +1,1 @@
-# ra_sad_rodis App
+# Intelligence App
