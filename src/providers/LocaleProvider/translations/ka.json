@@ -1,3 +1,9 @@
 {
-  "main.title": "რა სად როდის"
+  "main.title": "ინტელექტი",
+  "main.standard.game.title": "სტანდარტული რეჟიმი",
+  "main.standard.game.description": "სტანდარტული რეჟიმი სადაც თამაშობს ჯგუფი",
+  "main.learning.title": "სასწავლო რეჟიმი",
+  "main.learning.description": "სასწავლო რეჟიმი ცოდნის გასარღმავებლად",
+  "main.all.questions.title": "ყველა შეკითხვა",
+  "main.all.questions.description": "თავისუფალი რეჟიმი, მოცემულია ყველა შეკთხვა"
 }

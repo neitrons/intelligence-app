@@ -1,7 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
-
 import { ThemeSwitcher } from "~/modules/ThemeSwitcher";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 export default function Settings() {
   const theme = useThemeProvider();
