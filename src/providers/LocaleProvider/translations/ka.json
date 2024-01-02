@@ -1,11 +1,3 @@
 {
-  "hello": "გამარჯობა",
-  "back": "უკან",
-  "main.title": "გეოგრაფია",
-  "main.flags.title": "დროშები",
-  "main.flags.description": "შეისწავლე მსოფილიოს ყველა დროშა თამაშ თამაშით",
-  "main.capitals.title": "დედაქალაქები",
-  "main.capitals.description": "შეისწავლე მსოფლიოს ყველა დედაქალაქი თამაშ თამაშით",
-
-  "flags.quizes.title": "ისწავლე 245 დროშა ქვიზებით"
+  "main.title": "რა სად როდის"
 }

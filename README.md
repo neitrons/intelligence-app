@@ -1,1 +1,1 @@
-# Geography Application React Native
+# ra_sad_rodis App

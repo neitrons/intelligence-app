@@ -2,7 +2,6 @@ import { View, StyleSheet } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { ThemeSwitcher } from "~/modules/ThemeSwitcher";
-import { LanguageSwitcher } from "~/modules/LanguageSwitcher";
 
 export default function Settings() {
   const theme = useThemeProvider();
@@ -11,8 +10,7 @@ export default function Settings() {
 
   return (
     <View style={styles.container}>
-      <LanguageSwitcher />
-      <ThemeSwitcher style={styles.themeSwitcher} />
+      <ThemeSwitcher />
     </View>
   );
 }
@@ -22,9 +20,6 @@ function getStyleSheet({ sizes }: ThemeContextValue) {
     container: {
       flex: 1,
       padding: sizes.spaceMedium,
-    },
-    themeSwitcher: {
-      marginTop: sizes.spaceMedium,
     },
   });
 }

@@ -1,11 +1,8 @@
 import { useIntl } from "react-intl";
-import { useNavigation, router } from "expo-router";
+import { router } from "expo-router";
 import { View, StyleSheet, Text } from "react-native";
 import { ActionCard } from "~/components/ActionCard";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
-
-import flagImage from "~/assets/images/ge.png";
-import mapImage from "~/assets/images/map.png";
 
 export default function Page() {
   const theme = useThemeProvider();
@@ -21,13 +18,7 @@ export default function Page() {
           onPress={() => router.push("/flags")}
           title={formatMessage({ id: "main.flags.title" })}
           description={formatMessage({ id: "main.flags.description" })}
-          image={flagImage}
-        />
-        <ActionCard
-          onPress={() => router.push("/capitals")}
-          title={formatMessage({ id: "main.capitals.title" })}
-          description={formatMessage({ id: "main.capitals.description" })}
-          image={mapImage}
+          image={{}}
         />
       </View>
     </View>
