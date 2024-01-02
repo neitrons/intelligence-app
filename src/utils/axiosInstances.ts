@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const axiosGithub = axios.create({
-  baseURL: "https://raw.githubusercontent.com/neitrons/intelligence-data/main",
+  baseURL: process.env.GITHUB_API_ENDPOINT,
   headers: {
-    Authorization: "token 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",
+    Authorization: `token ${process.env.GITHUB_API_KEY}`,
   },
 });
