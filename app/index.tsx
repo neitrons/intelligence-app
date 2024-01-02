@@ -26,13 +26,13 @@ export default function Page() {
           image={cup}
         />
         <ActionCard
-          onPress={() => router.push("/standard")}
+          onPress={() => router.push("/learning")}
           title={formatMessage({ id: "main.learning.title" })}
           description={formatMessage({ id: "main.learning.description" })}
           image={books}
         />
         <ActionCard
-          onPress={() => router.push("/standard")}
+          onPress={() => router.push("/list")}
           title={formatMessage({ id: "main.all.questions.title" })}
           description={formatMessage({ id: "main.all.questions.description" })}
           image={list}
