@@ -37,6 +37,7 @@ export function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
       gap: sizes.spaceMedium,
       padding: sizes.spaceMedium,
       borderRadius: sizes.radiusSmall,
+      borderColor: colors.primaryBorder,
     },
     switcherText: {
       fontWeight: "bold",

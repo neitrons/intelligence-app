@@ -46,6 +46,7 @@ export function getStyleSheet({
       padding: sizes.spaceSmall,
       paddingTop: sizes.spaceSmall + top,
       borderBottomWidth: 1,
+      borderColor: colors.primaryBorder,
       backgroundColor: colors.secondaryBg,
       position: "relative",
     },

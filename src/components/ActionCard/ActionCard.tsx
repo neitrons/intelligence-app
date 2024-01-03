@@ -52,6 +52,7 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       borderWidth: 1,
       flexDirection: "row",
       borderRadius: sizes.radiusSmall,
+      borderColor: colors.primaryBorder,
       backgroundColor: colors.secondaryBg,
     },
     content: {
@@ -73,6 +74,7 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: colors.primaryBg,
+      borderColor: colors.primaryBorder,
       borderTopRightRadius: sizes.radiusSmall,
       borderBottomRightRadius: sizes.radiusSmall,
     },

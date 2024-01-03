@@ -25,6 +25,7 @@ function getStyleSheet({
       width: "100%",
       borderTopWidth: 1,
       padding: sizes.spaceLarge,
+      borderColor: colors.primaryBorder,
       backgroundColor: colors.secondaryBg,
       paddingBottom: sizes.spaceLarge + bottom,
     },
