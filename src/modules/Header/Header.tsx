@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { router } from "expo-router";
 import { View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
@@ -6,6 +6,7 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { HeaderBack } from "./HeaderBack";
 
 import Icon from "react-native-vector-icons/AntDesign";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export function Header() {
   const { top } = useSafeAreaInsets();
@@ -16,15 +17,13 @@ export function Header() {
   return (
     <View style={header}>
       <HeaderBack />
-      <View>
-        <Link href={"/settings"}>
-          <Icon
-            name="setting"
-            size={theme.sizes.iconSmall}
-            color={theme.colors.primaryActions}
-          />
-        </Link>
-      </View>
+      <TouchableOpacity onPress={() => router.push({ pathname: "/settings" })}>
+        <Icon
+          name="setting"
+          size={theme.sizes.iconSmall}
+          color={theme.colors.primaryActions}
+        />
+      </TouchableOpacity>
     </View>
   );
 }

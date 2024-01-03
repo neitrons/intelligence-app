@@ -3,10 +3,10 @@ import {
   View,
   Image,
   StyleProp,
-  Pressable,
   StyleSheet,
   ViewStyle,
   ImageSourcePropType,
+  TouchableOpacity,
 } from "react-native";
 
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
@@ -33,7 +33,7 @@ export function ActionCard({
   const pressableStyles = StyleSheet.flatten([styles.container, style]);
 
   return (
-    <Pressable style={pressableStyles} onPress={onPress}>
+    <TouchableOpacity style={pressableStyles} onPress={onPress}>
       <View style={styles.content}>
         <Title>{title}</Title>
         <Text style={styles.description}>{description}</Text>
@@ -41,7 +41,7 @@ export function ActionCard({
       <View style={styles.action}>
         <Image source={image} alt="'image" style={styles.actionBackground} />
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 

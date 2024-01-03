@@ -1,6 +1,6 @@
 import React from "react";
 import { usePathname, useNavigation } from "expo-router";
-import { Text, StyleSheet, Pressable } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -12,7 +12,10 @@ export function HeaderBack() {
   const styles = getStyleSheet({ ...theme });
 
   return (
-    <Pressable style={styles.container} onPress={() => navigation.goBack()}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.goBack()}
+    >
       {pathName !== "/" && (
         <>
           <Icon
@@ -23,7 +26,7 @@ export function HeaderBack() {
           <Text style={styles.title}>Back</Text>
         </>
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
