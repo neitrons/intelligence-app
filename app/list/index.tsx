@@ -18,6 +18,7 @@ export default function List() {
     <View style={styles.container}>
       <FlatList
         data={questions}
+        contentContainerStyle={styles.listContainerStyles}
         renderItem={({ item }) => (
           <Question question={item.questionText} answer={item.answer} />
         )}
@@ -25,6 +26,7 @@ export default function List() {
       <Pagination
         totalPages={140}
         current={currentPage}
+        style={styles.paginationStyles}
         onChange={(newPage) => setCurrentPage(newPage)}
       />
     </View>
@@ -37,5 +39,7 @@ function getStyleSheet({ sizes }: ThemeContextValue) {
       flex: 1,
       padding: sizes.spaceMedium,
     },
+    listContainerStyles: { gap: 10 },
+    paginationStyles: { paddingTop: sizes.spaceMedium },
   });
 }

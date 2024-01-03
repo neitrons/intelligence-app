@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { composeVisiblePages } from "./utils/pagination.utils";
 
@@ -9,15 +9,23 @@ type PaginationProps = {
   totalPages: number;
   current: number;
   onChange: (newPage: number) => void;
+  style?: StyleProp<ViewStyle>;
 };
 
-export function Pagination({ current, totalPages, onChange }: PaginationProps) {
+export function Pagination({
+  current,
+  style,
+  onChange,
+  totalPages,
+}: PaginationProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
+  const containerStyles = StyleSheet.flatten([styles.container, style]);
+
   const { visiblePages } = composeVisiblePages(current, totalPages);
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles}>
       {current - 2 > 0 && (
         <>
           <SButton style={styles.button} onPress={() => onChange(1)}>
