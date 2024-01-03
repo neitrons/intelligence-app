@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
-import { SButton } from "../SButton";
 import { composeVisiblePages } from "./utils/pagination.utils";
 
+import { SButton } from "~/components/SButton";
 import Icon from "react-native-vector-icons/AntDesign";
 
 type PaginationProps = {
@@ -14,7 +14,6 @@ type PaginationProps = {
 export function Pagination({ current, totalPages, onChange }: PaginationProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
-
   const { visiblePages } = composeVisiblePages(current, totalPages);
 
   return (
@@ -31,6 +30,7 @@ export function Pagination({ current, totalPages, onChange }: PaginationProps) {
       {visiblePages.map((page) => {
         return (
           <SButton
+            key={page}
             style={styles.button}
             onPress={() => onChange(page)}
             type={(page === current && "primary") || "default"}
