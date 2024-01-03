@@ -3,8 +3,9 @@ import { View, StyleSheet } from "react-native";
 import { Pagination } from "~/components/Pagination";
 import { useStaticData } from "~/providers/StaticDataProvider/hooks/useStaticData";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import { composeCurrentQuestions } from "~/view/list/utils/composeList.utils";
 
-import { Question } from "./Question";
+import { Question } from "~/view/list/components/Question";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function List() {
@@ -12,12 +13,18 @@ export default function List() {
   const { questions } = useStaticData();
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { currentQuestions } = composeCurrentQuestions({
+    questions,
+    currentPage,
+    size: 15,
+  });
+
   const styles = getStyleSheet({ ...theme });
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={questions}
+        data={currentQuestions}
         contentContainerStyle={styles.listContainerStyles}
         renderItem={({ item }) => (
           <Question question={item.questionText} answer={item.answer} />
