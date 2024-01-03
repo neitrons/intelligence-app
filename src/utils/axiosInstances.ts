@@ -1,8 +1,10 @@
 import axios from "axios";
 
+import { GITHUB_API_ENDPOINT, GITHUB_API_KEY } from "@env";
+
 export const axiosGithub = axios.create({
-  baseURL: process.env.GITHUB_API_ENDPOINT,
+  baseURL: GITHUB_API_ENDPOINT,
   headers: {
-    Authorization: `token ${process.env.GITHUB_API_KEY}`,
+    Authorization: `token ${GITHUB_API_KEY}`,
   },
 });

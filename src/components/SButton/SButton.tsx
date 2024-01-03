@@ -10,12 +10,17 @@ type TSButtonTypes = "primary" | "default";
 
 type SButtonProps = {
   type?: TSButtonTypes;
+  noRadius?: boolean;
+  prefix?: React.ReactNode;
+  sufix?: React.ReactNode;
 } & TouchableOpacityProps;
 
 export function SButton({
   style,
   children,
   type = "default",
+  prefix,
+  sufix,
   ...props
 }: SButtonProps) {
   const theme = useThemeProvider();
@@ -25,7 +30,9 @@ export function SButton({
 
   return (
     <TouchableOpacity {...props} style={touchableStyles}>
+      {prefix && prefix}
       {children && <Text style={styles.text}>{children}</Text>}
+      {sufix && sufix}
     </TouchableOpacity>
   );
 }
@@ -37,6 +44,7 @@ export function getStyleSheet({
 }: { type: TSButtonTypes } & ThemeContextValue) {
   return StyleSheet.create({
     touchable: {
+      flexDirection: "row",
       borderWidth: 1,
       alignItems: "center",
       justifyContent: "center",
