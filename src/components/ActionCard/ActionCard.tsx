@@ -30,7 +30,6 @@ export function ActionCard({
 }: ActionCardProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
-
   const pressableStyles = StyleSheet.flatten([styles.container, style]);
 
   return (
@@ -80,6 +79,7 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
     description: {
       color: colors.primaryText,
       marginTop: sizes.spaceSmall,
+      fontSize: sizes.textSmall,
     },
   });
 }
