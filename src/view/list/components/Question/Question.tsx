@@ -16,7 +16,7 @@ export function Question({ question, answer }: QuestionProps) {
         <Text style={styles.questionText}>{question}</Text>
       </View>
       <SButton
-        style={styles.showButton}
+        style={[styles.showButton, showAnswer && styles.openedButton]}
         onPress={() => setShowAnswer(!showAnswer)}
       >
         {showAnswer ? "დახურვა" : "ნახვა"}
@@ -53,6 +53,10 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       borderRadius: 0,
       borderLeftWidth: 0,
       borderRightWidth: 0,
+      borderBottomWidth: 0,
+    },
+    openedButton: {
+      borderBottomWidth: 1,
     },
   });
 }
