@@ -6,6 +6,7 @@ export interface ColorScheme {
   primaryText: string;
   primaryActions: string;
   primaryBorder: string;
+  primaryOverlay: string;
 }
 
 export type Colors = {
@@ -19,6 +20,7 @@ export const colors: Colors = {
     secondaryBg: "#244443",
     primaryText: "#DFE0DA",
     primaryActions: "#D5A368",
+    primaryOverlay: "rgba(0, 0, 0, 0.5)",
   },
   [ThemeMode_Enum.LIGHT]: {
     primaryBg: "#FFFFFF",
@@ -26,5 +28,6 @@ export const colors: Colors = {
     secondaryBg: "#F5F5F5",
     primaryText: "#000000",
     primaryActions: "#f39c12",
+    primaryOverlay: "rgba(0, 0, 0, 0.5)",
   },
 };
