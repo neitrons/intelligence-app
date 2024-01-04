@@ -20,10 +20,7 @@ export default function AppLayout() {
         >
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="list/index" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="learning/index"
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="quiz/index" options={{ headerShown: false }} />
           <Stack.Screen
             name="standard/index"
             options={{ headerShown: false }}

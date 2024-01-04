@@ -26,9 +26,9 @@ export default function Page() {
           image={cup}
         />
         <ActionCard
-          onPress={() => router.push("/learning")}
-          title={formatMessage({ id: "main.learning.title" })}
-          description={formatMessage({ id: "main.learning.description" })}
+          onPress={() => router.push("/quiz")}
+          title={formatMessage({ id: "main.quiz.title" })}
+          description={formatMessage({ id: "main.quiz.description" })}
           image={books}
         />
         <ActionCard
