@@ -5,7 +5,7 @@ import { useStaticData } from "~/providers/StaticDataProvider/hooks/useStaticDat
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { composeCurrentQuestions } from "~/view/list/utils/composeList.utils";
 
-import { Question } from "~/view/list/components/Question";
+import { Question } from "~/view/list/Question";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function List() {

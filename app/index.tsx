@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { useIntl } from "react-intl";
 import { router } from "expo-router";
+import { ActionCard } from "~/components/ActionCard";
 import { View, StyleSheet, Text } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
-
-import { ActionCard } from "~/components/ActionCard";
 
 import cup from "~/assets/images/cup.png";
 import books from "~/assets/images/books.png";
 import list from "~/assets/images/list.png";
+import { StandardGuideModal } from "~/view/standard/StandardGuideModal";
 
 export default function Page() {
+  const [showStandardModal, setShowStandardModal] = useState(false);
+
   const theme = useThemeProvider();
   const { formatMessage } = useIntl();
 
@@ -20,7 +23,7 @@ export default function Page() {
       <Text style={styles.title}>{formatMessage({ id: "main.title" })}</Text>
       <View style={styles.cardsContainer}>
         <ActionCard
-          onPress={() => router.push("/standard")}
+          onPress={() => setShowStandardModal(true)}
           title={formatMessage({ id: "main.standard.game.title" })}
           description={formatMessage({ id: "main.standard.game.description" })}
           image={cup}
@@ -38,6 +41,10 @@ export default function Page() {
           image={list}
         />
       </View>
+      <StandardGuideModal
+        open={showStandardModal}
+        onClose={() => setShowStandardModal(false)}
+      />
     </View>
   );
 }
