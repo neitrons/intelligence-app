@@ -1,5 +1,10 @@
-import { Text } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
+
+import { Title } from "~/components/Title";
 import { SModal } from "~/components/SModal";
+import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
+
+import cup from "~/assets/images/cup.png";
 
 type StandardGuideModalProps = {
   open: boolean;
@@ -7,9 +12,35 @@ type StandardGuideModalProps = {
 };
 
 export function StandardGuideModal({ open, onClose }: StandardGuideModalProps) {
+  const theme = useThemeProvider();
+  const styles = getStyleSheet({ ...theme });
+
   return (
-    <SModal open={open} onClose={onClose}>
-      <Text> Standard Guide Modal</Text>
+    <SModal viewStyle={styles.modalContainer} open={open} onClose={onClose}>
+      <View style={styles.imageWrapper}>
+        <Image style={styles.image} source={cup} />
+      </View>
+      <Title size="large">ჩემპიონატის წესები</Title>
     </SModal>
   );
+}
+
+function getStyleSheet(theme: ThemeContextValue) {
+  return StyleSheet.create({
+    modalContainer: {},
+    imageWrapper: {
+      width: 200,
+      height: 200,
+      overflow: "hidden",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    image: {
+      width: "100%",
+      height: "100%",
+      aspectRatio: 2,
+      resizeMode: "contain",
+    },
+  });
 }

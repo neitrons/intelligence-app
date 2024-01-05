@@ -3,6 +3,8 @@ import {
   View,
   Modal,
   StyleSheet,
+  StyleProp,
+  ViewStyle,
   TouchableWithoutFeedback,
 } from "react-native";
 
@@ -11,19 +13,22 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 type SModalProps = {
   open: boolean;
   onClose: () => void;
+  viewStyle?: StyleProp<ViewStyle>;
 };
 
 export function SModal({
   open,
   onClose,
+  viewStyle,
   children,
 }: PropsWithChildren<SModalProps>) {
   const theme = useThemeProvider();
-
   const styles = getStyleSheet({ ...theme });
+  const modalView = StyleSheet.flatten([styles.modalView, viewStyle]);
 
   return (
     <Modal
+      style={{}}
       animationType="slide"
       transparent={true}
       visible={open}
@@ -31,7 +36,7 @@ export function SModal({
     >
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.modalContainer}>
-          <View style={styles.modalView}>{children}</View>
+          <View style={modalView}>{children}</View>
         </View>
       </TouchableWithoutFeedback>
     </Modal>
