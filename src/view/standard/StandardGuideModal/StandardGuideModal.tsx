@@ -2,6 +2,8 @@ import { StyleSheet, Image, View } from "react-native";
 
 import { Title } from "~/components/Title";
 import { SModal } from "~/components/SModal";
+import { PlayButton } from "~/components/PlayButton";
+
 import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
 
 import cup from "~/assets/images/cup.png";
@@ -21,11 +23,12 @@ export function StandardGuideModal({ open, onClose }: StandardGuideModalProps) {
         <Image style={styles.image} source={cup} />
       </View>
       <Title size="large">ჩემპიონატის წესები</Title>
+      <PlayButton />
     </SModal>
   );
 }
 
-function getStyleSheet(theme: ThemeContextValue) {
+function getStyleSheet({}: ThemeContextValue) {
   return StyleSheet.create({
     modalContainer: {},
     imageWrapper: {

@@ -9,7 +9,7 @@ export interface SizesScheme {
   iconMedium: number;
   iconLarge: number;
   radiusSmall: number;
-  radiusFull: string;
+  radiusFull: number;
 }
 
 export const sizes: SizesScheme = {
@@ -23,5 +23,5 @@ export const sizes: SizesScheme = {
   iconMedium: 48,
   iconLarge: 64,
   radiusSmall: 12,
-  radiusFull: "100%",
+  radiusFull: 100,
 };
