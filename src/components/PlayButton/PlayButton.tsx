@@ -4,12 +4,12 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 
-import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import Icon from "react-native-vector-icons/AntDesign";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-type CircleButtonProps = {} & TouchableOpacityProps;
+type PlayButtonProps = {} & TouchableOpacityProps;
 
-export function PlayButton({ children, style, ...props }: CircleButtonProps) {
+export function PlayButton({ children, style, ...props }: PlayButtonProps) {
   const theme = useThemeProvider();
 
   const styles = getStyleSheet({ ...theme });
