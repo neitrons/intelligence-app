@@ -19,19 +19,20 @@ export function TextList({ texts }: TextListProps) {
     </>
   );
 }
-function getStyleSheet({ sizes }: ThemeContextValue) {
+function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
     itemContainer: {
       flexDirection: "row",
       alignItems: "center",
       marginBottom: 8,
     },
-
     dot: {
       fontSize: 10,
       marginRight: 8,
+      color: colors.primaryText,
     },
     itemText: {
+      color: colors.primaryText,
       ...Platform.select({
         ios: { fontSize: sizes.textSmall },
       }),

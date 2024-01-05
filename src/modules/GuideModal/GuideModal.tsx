@@ -67,6 +67,7 @@ function getStyleSheet({ sizes }: ThemeContextValue) {
       resizeMode: "contain",
     },
     itemsContainer: {
+      width: "100%",
       marginTop: sizes.spaceMedium,
       justifyContent: "flex-start",
       paddingHorizontal: sizes.spaceLarge,

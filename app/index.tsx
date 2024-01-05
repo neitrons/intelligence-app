@@ -8,7 +8,9 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import cup from "~/assets/images/cup.png";
 import books from "~/assets/images/books.png";
 import list from "~/assets/images/list.png";
+
 import cupLarge from "~/assets/images/cupLarge.png";
+import booksLarge from "~/assets/images/booksLarge.png";
 
 import { GuideModal } from "~/modules/GuideModal";
 
@@ -17,6 +19,7 @@ export default function Page() {
   const { formatMessage } = useIntl();
   const styles = getStyleSheet({ ...theme });
   const [showStandardModal, setShowStandardModal] = useState(false);
+  const [showQuizModal, setShowQuizModal] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -29,7 +32,7 @@ export default function Page() {
           image={cup}
         />
         <ActionCard
-          onPress={() => router.push("/quiz")}
+          onPress={() => setShowQuizModal(true)}
           title={formatMessage({ id: "main.quiz.title" })}
           description={formatMessage({ id: "main.quiz.description" })}
           image={books}
@@ -54,6 +57,18 @@ export default function Page() {
         ]}
         onSubmit={() => router.push("/standard")}
         onClose={() => setShowStandardModal(false)}
+      />
+      <GuideModal
+        title="ქვიზის რეჟიმი"
+        image={booksLarge}
+        open={showQuizModal}
+        guideTexts={[
+          "ქვიზი შედგება 15 შეკითხვისგან",
+          "ქვიზის მთავარი მიზანია საკუთარი ცოდნის გაუმჯობესება",
+          "ასერომ არდაიძაბო და გისურვებ წარმატებებს",
+        ]}
+        onSubmit={() => router.push("/quiz")}
+        onClose={() => setShowQuizModal(false)}
       />
     </View>
   );
