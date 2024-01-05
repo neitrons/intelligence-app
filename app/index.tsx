@@ -8,15 +8,15 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import cup from "~/assets/images/cup.png";
 import books from "~/assets/images/books.png";
 import list from "~/assets/images/list.png";
-import { StandardGuideModal } from "~/view/standard/StandardGuideModal";
+import cupLarge from "~/assets/images/cupLarge.png";
+
+import { GuideModal } from "~/modules/GuideModal";
 
 export default function Page() {
-  const [showStandardModal, setShowStandardModal] = useState(false);
-
   const theme = useThemeProvider();
   const { formatMessage } = useIntl();
-
   const styles = getStyleSheet({ ...theme });
+  const [showStandardModal, setShowStandardModal] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -41,8 +41,18 @@ export default function Page() {
           image={list}
         />
       </View>
-      <StandardGuideModal
+      <GuideModal
+        title="ჩემპიონატის რეჟიმი"
+        image={cupLarge}
         open={showStandardModal}
+        guideTexts={[
+          "ჩემპიონატი შედგება 12 შემთხვევითი კითხვისაგან",
+          "მინიმუმ 7 კითხვას უნდა გასცეთ სწორად პასუხი რომ გაიმარჯვოთ",
+          "თითოეულ კითხვაზე პასუხის გასაცემად გექნებათ 1 წუთი",
+          "პასუხის სწრაფად გაცემის შემთხვევაში დარჩენილი დრო შეგენახებათ",
+          "შენახული დროის გამოყენებას შეძლებთ დამატებითი დროის სახით სხვა კითხვაზე",
+        ]}
+        onSubmit={() => router.push("/standard")}
         onClose={() => setShowStandardModal(false)}
       />
     </View>
