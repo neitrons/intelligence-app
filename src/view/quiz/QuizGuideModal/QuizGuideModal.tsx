@@ -2,11 +2,12 @@ import { StyleSheet, Image, View } from "react-native";
 
 import { Title } from "~/components/Title";
 import { SModal } from "~/components/SModal";
-import { TextList } from "~/components/TextList";
 import { PlayButton } from "~/components/PlayButton";
+import { TextList } from "~/components/TextList";
 
 import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
-import cupLarge from "~/assets/images/cupLarge.png";
+
+import cup from "~/assets/images/cupLarge.png";
 
 type StandardGuideModalProps = {
   open: boolean;
@@ -28,7 +29,7 @@ export function StandardGuideModal({ open, onClose }: StandardGuideModalProps) {
   return (
     <SModal viewStyle={styles.modalContainer} open={open} onClose={onClose}>
       <View style={styles.imageWrapper}>
-        <Image style={styles.image} source={cupLarge} />
+        <Image style={styles.image} source={cup} />
       </View>
       <Title size="large">ჩემპიონატის წესები</Title>
       <View style={styles.itemsContainer}>
