@@ -1,15 +1,28 @@
-import { View, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { useStaticData } from "~/providers/StaticDataProvider/hooks/useStaticData";
 import { composeRandomQuestions } from "~/view/Quiz/utils/composeRandomQuestions";
 
-export default function Quiz() {
-  const { questions } = useStaticData();
+import { QuizQuestion } from "~/view/Quiz/QuizQuestion";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
+export default function Quiz() {
+  const theme = useThemeProvider();
+  const styles = getStyleSheet({ ...theme });
+
+  const { questions } = useStaticData();
   const randomQuestions = composeRandomQuestions(questions, 15);
 
   return (
-    <View>
-      <Text>ქვიზის რეჟიმი</Text>
+    <View style={styles.container}>
+      <Text></Text>
     </View>
   );
+}
+
+function getStyleSheet({ sizes }: ThemeContextValue) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+  });
 }

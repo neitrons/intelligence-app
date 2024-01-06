@@ -1,26 +1,20 @@
 import { useState, useEffect } from "react";
-import { axiosGithub } from "~/utils/axiosInstances";
-import { QUESTIONS_KEY } from "~/config/storageKeys";
-
-import Storage from "@react-native-async-storage/async-storage";
 import { TQuestion } from "~/@types/question.types";
+import { axiosGithub } from "~/utils/axiosInstances";
 
 export function useFetchQuestions() {
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [loading, setLoading] = useState(false);
 
   async function fetchQuestions() {
-    setLoading(true);
-    const questionsString = await Storage.getItem(QUESTIONS_KEY);
-
-    if (questionsString !== null) {
-      setQuestions(JSON.parse(questionsString) as TQuestion[]);
-    } else {
+    try {
+      setLoading(true);
       const response = await axiosGithub.get("/result.json");
-      await Storage.setItem(QUESTIONS_KEY, JSON.stringify(response.data));
       setQuestions(response.data as TQuestion[]);
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
