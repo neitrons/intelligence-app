@@ -7,8 +7,7 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "ts:check": "tsc",
-    "eas-build-pre-install": "sudo sysctl -w fs.inotify.max_user_watches=524288"
+    "ts:check": "tsc"
   },
   "resolutions": {
     "metro": "0.76.0",
@@ -29,7 +28,6 @@
     "react": "18.2.0",
     "react-intl": "^6.5.5",
     "react-native": "0.72.6",
-    "react-native-dotenv": "^3.4.9",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-reanimated": "3.3.0",
     "react-native-safe-area-context": "4.6.3",
