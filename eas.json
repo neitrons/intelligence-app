@@ -1,0 +1,36 @@
+{
+  "cli": {
+    "version": ">= 5.9.3"
+  },
+
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "GITHUB_API_KEY": "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",
+        "GITHUB_API_ENDPOINT": "https://raw.githubusercontent.com/neitrons/intelligence-data/main"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "image": "latest"
+      },
+      "env": {
+        "GITHUB_API_KEY": "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",
+        "GITHUB_API_ENDPOINT": "https://raw.githubusercontent.com/neitrons/intelligence-data/main"
+      }
+    },
+    "production": {
+      "env": {
+        "GITHUB_API_KEY": "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",
+        "GITHUB_API_ENDPOINT": "https://raw.githubusercontent.com/neitrons/intelligence-data/main"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

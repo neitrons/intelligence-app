@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nikocxvedadze.intelligence"
@@ -27,6 +29,17 @@
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
-    "plugins": ["expo-router", "./plugins/withModifyGradle.js"]
+    "plugins": [
+      "expo-router",
+      "./plugins/withModifyGradle.js"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b1010f58-e592-4c39-8df0-2164e62a7a1a"
+      }
+    }
   }
 }
