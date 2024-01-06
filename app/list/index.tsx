@@ -27,7 +27,7 @@ export default function List() {
         data={currentQuestions}
         contentContainerStyle={styles.listContainerStyles}
         renderItem={({ item }) => (
-          <Question question={item.questionText} answer={item.answer} />
+          <Question key={item.questionText} question={item} />
         )}
       />
       <Pagination

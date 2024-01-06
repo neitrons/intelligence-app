@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
+import { TQuestion } from "~/@types/question";
 import { SButton } from "~/components/SButton";
 import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
 
-type QuestionProps = { question: React.ReactNode; answer: React.ReactNode };
+type QuestionProps = { question: TQuestion };
 
-export function Question({ question, answer }: QuestionProps) {
+export function Question({ question }: QuestionProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
@@ -13,8 +14,17 @@ export function Question({ question, answer }: QuestionProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.questionText}>{question}</Text>
+        <Text style={styles.questionText}>{question.questionText}</Text>
+        <View style={styles.imageWrapper}>
+          {question.questionImage && (
+            <Image
+              style={styles.questionImage}
+              source={{ uri: question.questionImage }}
+            />
+          )}
+        </View>
       </View>
+
       <SButton
         style={[styles.showButton, showAnswer && styles.openedButton]}
         onPress={() => setShowAnswer(!showAnswer)}
@@ -23,7 +33,7 @@ export function Question({ question, answer }: QuestionProps) {
       </SButton>
       {showAnswer && (
         <View style={styles.content}>
-          <Text style={styles.answerText}>{answer}</Text>
+          <Text style={styles.answerText}>{question.answer}</Text>
         </View>
       )}
     </View>
@@ -39,7 +49,6 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       borderRadius: sizes.radiusSmall,
       overflow: "hidden",
     },
-
     header: {
       backgroundColor: colors.secondaryBg,
       padding: sizes.spaceMedium,
@@ -47,7 +56,21 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
     content: {
       padding: sizes.spaceMedium,
     },
+    imageWrapper: {
+      flex: 1,
+      overflow: "hidden",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: sizes.spaceMedium,
+    },
     questionText: { fontSize: sizes.textSmall },
+    questionImage: {
+      width: "100%",
+      height: "100%",
+      aspectRatio: 1.5,
+      resizeMode: "contain",
+    },
     answerText: { fontSize: sizes.textSmall },
     showButton: {
       borderRadius: 0,
