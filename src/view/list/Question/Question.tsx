@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
-import { TQuestion } from "~/@types/question";
+import { TQuestion } from "~/@types/question.types";
 import { SButton } from "~/components/SButton";
+import { View, StyleSheet, Text, Image } from "react-native";
 import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
 
 type QuestionProps = { question: TQuestion };

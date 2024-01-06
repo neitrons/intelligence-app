@@ -1,6 +1,6 @@
-import { TQuestion } from "~/@types/question";
-
-type TQuizQuestion = { possibleAnswers: string[] } & TQuestion;
+import { TQuestion } from "~/@types/question.types";
+import { TQuizQuestion } from "../../@types/quiz.types";
+import { composeRandomNumbers } from "~/utils/composeRandomNumbers";
 
 export function composeRandomQuestions(
   questions: TQuestion[],
@@ -37,15 +37,4 @@ export function composeRandomAnswers(
   }
 
   return Array.from(randomAnswers).sort(() => Math.random() - 0.5);
-}
-
-export function composeRandomNumbers(to: number, amount: number): number[] {
-  const randomNumbers: Set<number> = new Set();
-
-  while (randomNumbers.size !== amount) {
-    const randomNumber = Math.floor(Math.random() * to);
-    randomNumbers.add(randomNumber);
-  }
-
-  return Array.from(randomNumbers);
 }

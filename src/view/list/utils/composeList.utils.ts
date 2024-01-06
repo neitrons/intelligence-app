@@ -1,4 +1,4 @@
-import { TQuestion } from "~/@types/question";
+import { TQuestion } from "~/@types/question.types";
 
 export function composeCurrentQuestions({
   currentPage,

@@ -3,9 +3,9 @@ import { View, StyleSheet } from "react-native";
 import { Pagination } from "~/components/Pagination";
 import { useStaticData } from "~/providers/StaticDataProvider/hooks/useStaticData";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
-import { composeCurrentQuestions } from "~/view/list/utils/composeList.utils";
+import { composeCurrentQuestions } from "~/view/List/utils/composeList.utils";
 
-import { Question } from "~/view/list/Question";
+import { Question } from "~/view/List/Question";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function List() {

@@ -3,7 +3,7 @@ import { axiosGithub } from "~/utils/axiosInstances";
 import { QUESTIONS_KEY } from "~/config/storageKeys";
 
 import Storage from "@react-native-async-storage/async-storage";
-import { TQuestion } from "~/@types/question";
+import { TQuestion } from "~/@types/question.types";
 
 export function useFetchQuestions() {
   const [questions, setQuestions] = useState<TQuestion[]>([]);

@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { TQuestion } from "~/@types/question";
+import { TQuestion } from "~/@types/question.types";
 
 type StaticDataContextValue = {
   questions: TQuestion[];
