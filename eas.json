@@ -15,8 +15,7 @@
     "preview": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk",
-        "image": "latest"
+        "image": "default"
       },
       "env": {
         "GITHUB_API_KEY": "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",

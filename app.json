@@ -11,9 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "experiments": {
+      "tsconfigPaths": true
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nikocxvedadze.intelligence"
@@ -29,10 +29,7 @@
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "./plugins/withModifyGradle.js"
-    ],
+    "plugins": ["expo-router"],
     "extra": {
       "router": {
         "origin": false

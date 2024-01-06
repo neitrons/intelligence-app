@@ -6,15 +6,6 @@ module.exports = function (api) {
       "expo-router/babel",
       "react-native-reanimated/plugin",
       [
-        "module-resolver",
-        {
-          root: ["./src"],
-          alias: {
-            "~": "./src",
-          },
-        },
-      ],
-      [
         "module:react-native-dotenv",
         {
           envName: "APP_ENV",
