@@ -10,10 +10,9 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 export default function Quiz() {
   const theme = useThemeProvider();
+  const { questions } = useStaticData();
   const styles = getStyleSheet({ ...theme });
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
-  const { questions } = useStaticData();
   const randomQuestions = composeRandomQuestions(questions, 15);
 
   return (

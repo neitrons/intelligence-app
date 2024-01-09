@@ -34,7 +34,7 @@ export function QuizQuestion({ question }: QuizQuestionProps) {
   );
 }
 
-export function getStyleSheet({ sizes, colors }: ThemeContextValue) {
+export function getStyleSheet({ sizes }: ThemeContextValue) {
   return StyleSheet.create({
     titleStyles: { paddingVertical: sizes.spaceMedium },
     answersWrapper: {
