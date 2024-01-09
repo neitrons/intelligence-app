@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-export function QuizQuestionHeader() {
+export function QuizHeader() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 

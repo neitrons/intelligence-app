@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 import { TQuizQuestion } from "../@types/quiz.types";
+import { ScrollView } from "react-native-gesture-handler";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-import { QuizQuestionHeader } from "./QuizQuestionHeader";
-import { QuizQuestionFooter } from "./QuizQuestionFooter";
-import { ScrollView } from "react-native-gesture-handler";
+import { Card } from "~/components/Card";
+import { Title } from "~/components/Title";
 
 type QuizQuestionProps = {
   question: TQuizQuestion;
@@ -15,31 +15,35 @@ export function QuizQuestion({ question }: QuizQuestionProps) {
   const styles = getStyleSheet({ ...theme });
 
   return (
-    <View style={styles.container}>
-      <QuizQuestionHeader />
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.questionBox}>
-          <Text>{question.questionText}</Text>
-        </View>
-      </ScrollView>
-      <QuizQuestionFooter />
-    </View>
+    <ScrollView style={styles.scrollView}>
+      <Title style={styles.titleStyles}>კითხვა</Title>
+      <Card>
+        <Text>{question.questionText}</Text>
+      </Card>
+      <Title style={styles.titleStyles}>პასუხები</Title>
+      <View style={styles.answersWrapper}>
+        {question.possibleAnswers.map((possibleAnswer) => {
+          return (
+            <Card key={possibleAnswer}>
+              <Text>{possibleAnswer}</Text>
+            </Card>
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 }
 
 export function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
-    container: {
-      flex: 1,
+    titleStyles: { paddingVertical: sizes.spaceMedium },
+    answersWrapper: {
+      display: "flex",
+      flexDirection: "column",
+      gap: sizes.spaceMedium,
     },
     scrollView: {
       paddingHorizontal: sizes.spaceMedium,
-    },
-    questionBox: {
-      borderWidth: 1,
-      padding: sizes.spaceMedium,
-      borderRadius: sizes.radiusSmall,
-      backgroundColor: colors.primaryBg,
     },
   });
 }

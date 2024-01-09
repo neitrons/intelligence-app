@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useStaticData } from "~/providers/StaticDataProvider/hooks/useStaticData";
 import { composeRandomQuestions } from "~/view/Quiz/utils/composeRandomQuestions";
 
+import { QuizHeader } from "~/view/Quiz/QuizHeader";
+import { QuizFooter } from "~/view/Quiz/QuizFooter";
 import { QuizQuestion } from "~/view/Quiz/QuizQuestion";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
@@ -16,7 +18,9 @@ export default function Quiz() {
 
   return (
     <View style={styles.container}>
-      <Text></Text>
+      <QuizHeader />
+      <QuizQuestion question={randomQuestions[0]} />
+      <QuizFooter />
     </View>
   );
 }
