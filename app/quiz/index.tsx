@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { useStaticData } from "~/providers/StaticDataProvider/hooks/useStaticData";
 import { composeRandomQuestions } from "~/view/Quiz/utils/composeRandomQuestions";
@@ -8,6 +9,7 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 export default function Quiz() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
   const { questions } = useStaticData();
   const randomQuestions = composeRandomQuestions(questions, 15);
