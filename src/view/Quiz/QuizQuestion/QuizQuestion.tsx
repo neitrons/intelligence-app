@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
 import { TQuizQuestion } from "../@types/quiz.types";
 import { ScrollView } from "react-native-gesture-handler";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { Card } from "~/components/Card";
@@ -24,9 +24,11 @@ export function QuizQuestion({ question }: QuizQuestionProps) {
       <View style={styles.answersWrapper}>
         {question.possibleAnswers.map((possibleAnswer) => {
           return (
-            <Card key={possibleAnswer}>
-              <Text>{possibleAnswer}</Text>
-            </Card>
+            <TouchableOpacity key={possibleAnswer}>
+              <Card>
+                <Text>{possibleAnswer}</Text>
+              </Card>
+            </TouchableOpacity>
           );
         })}
       </View>
