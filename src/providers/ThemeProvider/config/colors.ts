@@ -8,6 +8,7 @@ export interface ColorScheme {
   primaryBorder: string;
   primaryOverlay: string;
   successColor: string;
+  errorColor: string;
 }
 
 export type Colors = {
@@ -23,6 +24,7 @@ export const colors: Colors = {
     primaryActions: "#D5A368",
     primaryOverlay: "rgba(0, 0, 0, 0.5)",
     successColor: "#4BB543",
+    errorColor: "#B54B4B",
   },
   [ThemeMode_Enum.LIGHT]: {
     primaryBg: "#FFFFFF",
@@ -32,5 +34,6 @@ export const colors: Colors = {
     primaryActions: "#f39c12",
     primaryOverlay: "rgba(0, 0, 0, 0.5)",
     successColor: "#4BB543",
+    errorColor: "#B54B4B",
   },
 };
