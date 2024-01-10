@@ -8,8 +8,8 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 export default function Quiz() {
   const theme = useThemeProvider();
-  const styles = getStyleSheet({ ...theme });
   const { questions } = useStaticData();
+  const styles = getStyleSheet({ ...theme });
   const randomQuestions = composeRandomQuestions(questions, 15);
 
   return (

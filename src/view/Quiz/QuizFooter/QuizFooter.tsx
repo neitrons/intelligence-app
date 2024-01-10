@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import { SButton } from "~/components/SButton";
 
 export function QuizFooter() {
   const theme = useThemeProvider();
@@ -7,7 +8,7 @@ export function QuizFooter() {
 
   return (
     <View style={styles.footer}>
-      <Text>Footer</Text>
+      <SButton type="primary">შემდეგი</SButton>
     </View>
   );
 }
