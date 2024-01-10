@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { TQuizQuestion } from "../@types/quiz.types";
 import { ScrollView } from "react-native-gesture-handler";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  useWindowDimensions,
+} from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
-
+import HTML from "react-native-render-html";
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 
@@ -20,6 +26,8 @@ type QuizQuestionProps = {
 
 export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
   const theme = useThemeProvider();
+  const { width } = useWindowDimensions();
+
   const styles = getStyleSheet({ ...theme });
 
   const [isCorrectAnswer, setIsCorrectAnswer] = useState<boolean>(false);
@@ -56,7 +64,7 @@ export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
             onPress={() => onAnswerSelect(possibleAnswer)}
           >
             <Card style={stylesByAnswer(possibleAnswer)}>
-              <Text>{possibleAnswer}</Text>
+              <HTML contentWidth={width} source={{ html: possibleAnswer }} />
             </Card>
           </TouchableOpacity>
         ))}
