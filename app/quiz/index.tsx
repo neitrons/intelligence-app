@@ -18,7 +18,7 @@ export default function Quiz() {
   return (
     <View style={styles.container}>
       <QuizHeader />
-      <QuizQuestion question={randomQuestions[0]} />
+      <QuizQuestion question={randomQuestions[0]} onAnswer={(data) => {}} />
       <QuizFooter />
     </View>
   );

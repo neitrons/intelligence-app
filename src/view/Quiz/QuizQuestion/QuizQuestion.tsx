@@ -7,11 +7,18 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 
-type QuizQuestionProps = {
+type TOnAnswerArgs = {
+  userAnswer: string;
   question: TQuizQuestion;
+  isCorrectAnswer: boolean;
 };
 
-export function QuizQuestion({ question }: QuizQuestionProps) {
+type QuizQuestionProps = {
+  question: TQuizQuestion;
+  onAnswer: (data: TOnAnswerArgs) => void;
+};
+
+export function QuizQuestion({ question, onAnswer }: QuizQuestionProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
@@ -19,10 +26,10 @@ export function QuizQuestion({ question }: QuizQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string>();
 
   function onAnswerSelect(answer: string) {
+    const isCorrect = answer === question.answer;
     setSelectedAnswer(answer);
-    if (answer === question.answer) {
-      setIsCorrectAnswer(true);
-    }
+    setIsCorrectAnswer(isCorrect);
+    onAnswer({ question, isCorrectAnswer: isCorrect, userAnswer: answer });
   }
 
   function stylesByAnswer(currentQuestion: string) {
@@ -42,20 +49,17 @@ export function QuizQuestion({ question }: QuizQuestionProps) {
       </Card>
       <Title style={styles.titleStyles}>პასუხები</Title>
       <View style={styles.answersWrapper}>
-        {question.possibleAnswers.map((possibleAnswer) => {
-          const styles = stylesByAnswer(possibleAnswer);
-          return (
-            <TouchableOpacity
-              key={possibleAnswer}
-              disabled={!!selectedAnswer}
-              onPress={() => onAnswerSelect(possibleAnswer)}
-            >
-              <Card style={styles}>
-                <Text>{possibleAnswer}</Text>
-              </Card>
-            </TouchableOpacity>
-          );
-        })}
+        {question.possibleAnswers.map((possibleAnswer) => (
+          <TouchableOpacity
+            key={possibleAnswer}
+            disabled={!!selectedAnswer}
+            onPress={() => onAnswerSelect(possibleAnswer)}
+          >
+            <Card style={stylesByAnswer(possibleAnswer)}>
+              <Text>{possibleAnswer}</Text>
+            </Card>
+          </TouchableOpacity>
+        ))}
       </View>
     </ScrollView>
   );
