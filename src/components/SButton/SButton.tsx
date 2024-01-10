@@ -25,7 +25,7 @@ export function SButton({
 }: SButtonProps) {
   const theme = useThemeProvider();
 
-  const styles = getStyleSheet({ ...theme, type });
+  const styles = getStyleSheet({ ...theme, type, disabled: props.disabled });
   const touchableStyles = StyleSheet.flatten([styles.touchable, style]);
 
   return (
@@ -41,7 +41,8 @@ export function getStyleSheet({
   sizes,
   colors,
   type,
-}: { type: TSButtonTypes } & ThemeContextValue) {
+  disabled,
+}: { type: TSButtonTypes; disabled?: boolean } & ThemeContextValue) {
   return StyleSheet.create({
     touchable: {
       flexDirection: "row",
@@ -50,6 +51,7 @@ export function getStyleSheet({
       justifyContent: "center",
       padding: sizes.spaceSmall,
       borderRadius: sizes.radiusSmall,
+      opacity: disabled ? 0.5 : 1,
       borderColor:
         (type === "primary" && colors.primaryText) ||
         ((type === "default" && colors.primaryActions) as string),

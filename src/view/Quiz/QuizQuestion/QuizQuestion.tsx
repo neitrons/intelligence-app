@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { TQuizQuestion } from "../@types/quiz.types";
-import { ScrollView } from "react-native-gesture-handler";
 import {
   View,
   Text,
@@ -8,8 +6,11 @@ import {
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
-import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import HTML from "react-native-render-html";
+import { ScrollView } from "react-native-gesture-handler";
+
+import { TQuizQuestion } from "../@types/quiz.types";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 

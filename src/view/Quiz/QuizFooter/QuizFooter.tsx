@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
-import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { SButton } from "~/components/SButton";
+import { View, StyleSheet } from "react-native";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 export function QuizFooter() {
   const theme = useThemeProvider();
