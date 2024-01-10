@@ -1,31 +1,28 @@
-import { router } from "expo-router";
+import { useMemo } from "react";
+import { usePathname } from "expo-router";
 import { View, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-import { HeaderBack } from "./HeaderBack";
-
-import Icon from "react-native-vector-icons/AntDesign";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { QuizHeader } from "./HeaderModes/QuizHeader";
+import { StandardHeader } from "./HeaderModes/StandardHeader";
 
 export function Header() {
-  const { top } = useSafeAreaInsets();
+  const pathname = usePathname();
   const theme = useThemeProvider();
+  const insets = useSafeAreaInsets();
 
-  const { header } = getStyleSheet({ top, ...theme });
+  const { header } = getStyleSheet({ top: insets.top, ...theme });
 
-  return (
-    <View style={header}>
-      <HeaderBack />
-      <TouchableOpacity onPress={() => router.push({ pathname: "/settings" })}>
-        <Icon
-          name="setting"
-          size={theme.sizes.iconSmall}
-          color={theme.colors.primaryActions}
-        />
-      </TouchableOpacity>
-    </View>
-  );
+  const headerContent = useMemo(() => {
+    if (pathname.includes("/quiz")) {
+      return <QuizHeader />;
+    } else {
+      return <StandardHeader />;
+    }
+  }, [pathname]);
+
+  return <View style={header}>{headerContent}</View>;
 }
 
 export function getStyleSheet({
@@ -49,18 +46,6 @@ export function getStyleSheet({
       backgroundColor: colors.secondaryBg,
       position: "relative",
     },
-    titleContainer: {
-      position: "absolute",
-      bottom: sizes.spaceSmall,
-      left: 0,
-      right: 0,
-      color: "white",
-      alignItems: "center",
-    },
-    title: {
-      fontSize: sizes.textMedium,
-      fontWeight: "bold",
-      color: colors.primaryText,
-    },
+   
   });
 }
