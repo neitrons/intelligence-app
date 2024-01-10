@@ -1,14 +1,18 @@
-import { SButton } from "~/components/SButton";
 import { View, StyleSheet } from "react-native";
+import { SButton } from "~/components/SButton";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-export function QuizFooter() {
+type QuizFooterProps = { onNext: () => void };
+
+export function QuizFooter({ onNext }: QuizFooterProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
   return (
     <View style={styles.footer}>
-      <SButton type="primary">შემდეგი</SButton>
+      <SButton type="primary" onPress={onNext}>
+        შემდეგი
+      </SButton>
     </View>
   );
 }

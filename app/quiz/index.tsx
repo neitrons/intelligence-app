@@ -1,12 +1,16 @@
 import { View, StyleSheet } from "react-native";
 import { useStaticData } from "~/providers/StaticDataProvider/hooks/useStaticData";
-import { composeRandomQuestions } from "~/view/Quiz/utils/composeRandomQuestions";
 
 import { QuizFooter } from "~/view/Quiz/QuizFooter";
 import { QuizQuestion } from "~/view/Quiz/QuizQuestion";
+import { composeRandomQuestions } from "~/view/Quiz/utils/composeRandomQuestions";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
+import { useGlobalContext } from "~/providers/GlobalProvider";
+
 export default function Quiz() {
+  const { currentQuiz, setCurrentQuiz } = useGlobalContext();
+
   const theme = useThemeProvider();
   const { questions } = useStaticData();
   const styles = getStyleSheet({ ...theme });
@@ -14,8 +18,11 @@ export default function Quiz() {
 
   return (
     <View style={styles.container}>
-      <QuizQuestion question={randomQuestions[0]} onAnswer={(data) => {}} />
-      <QuizFooter />
+      <QuizQuestion
+        question={randomQuestions[currentQuiz]}
+        onAnswer={(data) => {}}
+      />
+      <QuizFooter onNext={() => setCurrentQuiz(currentQuiz + 1)} />
     </View>
   );
 }
