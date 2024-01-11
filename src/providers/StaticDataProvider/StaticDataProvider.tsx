@@ -17,7 +17,7 @@ export function StaticDataProvider({ children }: PropsWithChildren) {
         quizQuestionsLoading,
       }}
     >
-      {questionsLoading ? <LoadingLayout /> : children}
+      {questionsLoading || quizQuestionsLoading ? <LoadingLayout /> : children}
     </StaticDataContext.Provider>
   );
 }

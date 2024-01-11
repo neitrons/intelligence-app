@@ -6,6 +6,7 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
+import { STextInput } from "~/components/STextInput";
 import { TQuestion } from "~/@types/question.types";
 
 type QuizQuestionProps = {
@@ -22,7 +23,8 @@ export function QuizQuestion({ question }: QuizQuestionProps) {
       <Card>
         <Text>{question.questionText}</Text>
       </Card>
-      <Title style={styles.titleStyles}>პასუხები</Title>
+      <Title style={styles.titleStyles}>შეიყვანეთ პასუხი</Title>
+      <STextInput placeholder="შეიყვანეთ პასუხი" />
     </ScrollView>
   );
 }
