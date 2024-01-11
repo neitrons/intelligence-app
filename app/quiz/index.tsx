@@ -9,19 +9,16 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { useGlobalContext } from "~/providers/GlobalProvider";
 
 export default function Quiz() {
-  const { currentQuiz, setCurrentQuiz } = useGlobalContext();
-
   const theme = useThemeProvider();
-  const { questions } = useStaticData();
   const styles = getStyleSheet({ ...theme });
-  const randomQuestions = composeRandomQuestions(questions, 15);
+  const { quizQuestions } = useStaticData();
+
+  const { currentQuiz, setCurrentQuiz } = useGlobalContext();
+  const randomQuestions = composeRandomQuestions(quizQuestions, 15);
 
   return (
     <View style={styles.container}>
-      <QuizQuestion
-        question={randomQuestions[currentQuiz]}
-        onAnswer={(data) => {}}
-      />
+      <QuizQuestion question={randomQuestions[currentQuiz]} />
       <QuizFooter onNext={() => setCurrentQuiz(currentQuiz + 1)} />
     </View>
   );
