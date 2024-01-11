@@ -17,8 +17,9 @@ type QuizQuestionProps = {
 
 export function QuizQuestion({ question }: QuizQuestionProps) {
   const theme = useThemeProvider();
-  const [answer, setAnswer] = useState<string>("");
   const styles = getStyleSheet({ ...theme });
+
+  const [answer, setAnswer] = useState<string>("");
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -28,7 +29,7 @@ export function QuizQuestion({ question }: QuizQuestionProps) {
       </Card>
       <Title style={styles.titleStyles}>შეიყვანეთ პასუხი</Title>
       <STextInput
-        placeholder="შეიყვანეთ პასუხი"
+        placeholder="ერთი სიტყვა"
         value={answer}
         onChangeText={(e) => setAnswer(composeGeoString(e))}
       />
