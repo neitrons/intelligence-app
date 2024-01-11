@@ -1,29 +1,47 @@
 import { View, StyleSheet } from "react-native";
 import { SButton } from "~/components/SButton";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import { TQuizAnswer } from "../../../../app/quiz";
 
 type QuizFooterProps = {
-  onSubmit: () => void;
   onSkip: () => void;
+  onSubmit: () => void;
+  correctAnswer: boolean;
+  answerText: string;
 };
 
-export function QuizFooter({ onSubmit, onSkip }: QuizFooterProps) {
+export function QuizFooter({
+  onSubmit,
+  onSkip,
+  correctAnswer,
+  answerText,
+}: QuizFooterProps) {
   const theme = useThemeProvider();
-  const styles = getStyleSheet({ ...theme });
+  const styles = getStyleSheet({ ...theme, correctAnswer });
 
   return (
     <View style={styles.footer}>
-      <SButton type="default" onPress={onSkip} style={styles.button}>
-        გამოტოვება
-      </SButton>
-      <SButton type="primary" onPress={onSubmit} style={styles.button}>
-        შემდეგი
+      {!correctAnswer && (
+        <SButton type="default" onPress={onSkip} style={styles.button}>
+          გამოტოვება
+        </SButton>
+      )}
+      <SButton
+        type="primary"
+        onPress={onSubmit}
+        style={styles.button}
+        disabled={!answerText}
+      >
+        {correctAnswer ? "შემდეგი" : "შემოწმება"}
       </SButton>
     </View>
   );
 }
 
-function getStyleSheet({ sizes }: ThemeContextValue) {
+function getStyleSheet({
+  sizes,
+  correctAnswer,
+}: { correctAnswer: boolean } & ThemeContextValue) {
   return StyleSheet.create({
     footer: {
       display: "flex",
@@ -32,7 +50,7 @@ function getStyleSheet({ sizes }: ThemeContextValue) {
       justifyContent: "space-between",
     },
     button: {
-      width: "48%",
+      width: correctAnswer ? "100%" : "48%",
     },
   });
 }

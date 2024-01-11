@@ -6,3 +6,8 @@ export type TQuestion = {
   sources?: string[];
   questionImage?: string;
 };
+
+export type TQuizAnswer = {
+  question: TQuestion;
+  userAnswer: string;
+};
