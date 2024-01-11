@@ -8,6 +8,8 @@ import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 import { STextInput } from "~/components/STextInput";
 import { TQuestion } from "~/@types/question.types";
+import { composeGeoString } from "~/utils/composeGeoChar";
+import { useState } from "react";
 
 type QuizQuestionProps = {
   question: TQuestion;
@@ -15,6 +17,7 @@ type QuizQuestionProps = {
 
 export function QuizQuestion({ question }: QuizQuestionProps) {
   const theme = useThemeProvider();
+  const [answer, setAnswer] = useState<string>("");
   const styles = getStyleSheet({ ...theme });
 
   return (
@@ -24,7 +27,11 @@ export function QuizQuestion({ question }: QuizQuestionProps) {
         <Text>{question.questionText}</Text>
       </Card>
       <Title style={styles.titleStyles}>შეიყვანეთ პასუხი</Title>
-      <STextInput placeholder="შეიყვანეთ პასუხი" />
+      <STextInput
+        placeholder="შეიყვანეთ პასუხი"
+        value={answer}
+        onChangeText={(e) => setAnswer(composeGeoString(e))}
+      />
     </ScrollView>
   );
 }
