@@ -2,15 +2,21 @@ import { View, StyleSheet } from "react-native";
 import { SButton } from "~/components/SButton";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-type QuizFooterProps = { onNext: () => void };
+type QuizFooterProps = {
+  onSubmit: () => void;
+  onSkip: () => void;
+};
 
-export function QuizFooter({ onNext }: QuizFooterProps) {
+export function QuizFooter({ onSubmit, onSkip }: QuizFooterProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
   return (
     <View style={styles.footer}>
-      <SButton type="primary" onPress={onNext}>
+      <SButton type="default" onPress={onSkip} style={styles.button}>
+        გამოტოვება
+      </SButton>
+      <SButton type="primary" onPress={onSubmit} style={styles.button}>
         შემდეგი
       </SButton>
     </View>
@@ -20,7 +26,13 @@ export function QuizFooter({ onNext }: QuizFooterProps) {
 function getStyleSheet({ sizes }: ThemeContextValue) {
   return StyleSheet.create({
     footer: {
+      display: "flex",
+      flexDirection: "row",
       padding: sizes.spaceMedium,
+      justifyContent: "space-between",
+    },
+    button: {
+      width: "48%",
     },
   });
 }

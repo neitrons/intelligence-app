@@ -12,10 +12,11 @@ export function STextInput({ style, ...props }: STextInputProps) {
   return <TextInput {...props} style={textInputStyles} />;
 }
 
-function getStyleSheet({ sizes }: {} & ThemeContextValue) {
+function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
   return StyleSheet.create({
     textInput: {
       borderWidth: 1,
+      backgroundColor: colors.primaryBg,
       padding: sizes.spaceMedium,
       borderRadius: sizes.radiusSmall,
     },
