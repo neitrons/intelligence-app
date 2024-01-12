@@ -4,6 +4,7 @@ import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { QuizFooter } from "~/view/Quiz/QuizFooter";
+import { QuizResult } from "~/view/Quiz/QuizResult";
 import { QuizQuestion } from "~/view/Quiz/QuizQuestion";
 import { TQuizAnswer, TQuestion } from "~/@types/question.types";
 
@@ -12,6 +13,7 @@ export default function Quiz() {
   const styles = getStyleSheet({ ...theme });
 
   const [answerText, setAnswerText] = useState<string>("");
+  const [quizFinished, setQuizFinished] = useState<boolean>(false);
   const [userAnswer, setUserAnswer] = useState<TQuizAnswer>();
 
   const {
@@ -59,6 +61,13 @@ export default function Quiz() {
       setCurrentQuiz(0);
       setAnswerText("");
       setUserAnswer(undefined);
+    } else {
+      setQuestions([]);
+      setSkippedQuestions([]);
+      setCurrentQuiz(0);
+      setAnswerText("");
+      setUserAnswer(undefined);
+      setQuizFinished(true);
     }
   }
 
@@ -75,25 +84,31 @@ export default function Quiz() {
 
   return (
     <View style={styles.container}>
-      {questions?.[currentQuiz] && (
-        <QuizQuestion
-          userAnswer={userAnswer}
-          answerText={answerText}
-          setAnswerText={setAnswerText}
-          question={questions[currentQuiz]}
-          onSupport={() => onAnswerCheck(true)}
-        />
+      {quizFinished ? (
+        <QuizResult />
+      ) : (
+        <>
+          {questions?.[currentQuiz] && (
+            <QuizQuestion
+              userAnswer={userAnswer}
+              answerText={answerText}
+              setAnswerText={setAnswerText}
+              question={questions[currentQuiz]}
+              onSupport={() => onAnswerCheck(true)}
+            />
+          )}
+          <QuizFooter
+            correctAnswer={correctAnswer}
+            answerText={answerText}
+            canSkip={currentQuiz !== questions.length - 1}
+            onSkip={onSkipQuiz}
+            onSubmit={() => {
+              if (!correctAnswer) onAnswerCheck(false);
+              else if (correctAnswer) onAnswerSubmit();
+            }}
+          />
+        </>
       )}
-      <QuizFooter
-        correctAnswer={correctAnswer}
-        answerText={answerText}
-        canSkip={currentQuiz !== questions.length - 1}
-        onSkip={onSkipQuiz}
-        onSubmit={() => {
-          if (!correctAnswer) onAnswerCheck(false);
-          else if (correctAnswer) onAnswerSubmit();
-        }}
-      />
     </View>
   );
 }
