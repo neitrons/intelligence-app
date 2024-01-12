@@ -1,11 +1,11 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import { SButton } from "~/components/SButton";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
-import { TQuizAnswer } from "../../../../app/quiz";
 
 type QuizFooterProps = {
   onSkip: () => void;
   onSubmit: () => void;
+  canSkip: boolean;
   correctAnswer: boolean;
   answerText: string;
 };
@@ -13,6 +13,7 @@ type QuizFooterProps = {
 export function QuizFooter({
   onSubmit,
   onSkip,
+  canSkip,
   correctAnswer,
   answerText,
 }: QuizFooterProps) {
