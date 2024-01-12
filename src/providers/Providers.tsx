@@ -9,13 +9,13 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 export function Providers({ children }: PropsWithChildren) {
   return (
     <SafeAreaProvider>
-      <QuizProvider>
-        <LocaleProvider>
-          <ThemeProvider>
-            <StaticDataProvider>{children}</StaticDataProvider>
-          </ThemeProvider>
-        </LocaleProvider>
-      </QuizProvider>
+      <LocaleProvider>
+        <ThemeProvider>
+          <StaticDataProvider>
+            <QuizProvider>{children}</QuizProvider>
+          </StaticDataProvider>
+        </ThemeProvider>
+      </LocaleProvider>
     </SafeAreaProvider>
   );
 }

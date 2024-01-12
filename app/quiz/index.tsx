@@ -1,24 +1,21 @@
-import { useState, useMemo, useEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { useStaticData } from "~/providers/StaticDataProvider/hooks/useStaticData";
+import { useState, useMemo } from "react";
+import { View, StyleSheet } from "react-native";
+import { useQuizContext } from "~/providers/QuizProvider";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { QuizFooter } from "~/view/Quiz/QuizFooter";
 import { QuizQuestion } from "~/view/Quiz/QuizQuestion";
-import { composeRandomQuestions } from "~/view/Quiz/utils/composeRandomQuestions";
-import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
-
-import { TQuestion, TQuizAnswer } from "~/@types/question.types";
-import { useQuizContext } from "~/providers/QuizProvider";
+import { TQuizAnswer } from "~/@types/question.types";
 
 export default function Quiz() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
-  const { quizQuestions } = useStaticData();
 
   const [answerText, setAnswerText] = useState<string>("");
-  const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [userAnswer, setUserAnswer] = useState<TQuizAnswer>();
-  const { currentQuiz, setCurrentQuiz, setCorrectAnswers } = useQuizContext();
+
+  const { currentQuiz, setCurrentQuiz, setCorrectAnswers, questions } =
+    useQuizContext();
 
   const correctAnswer = useMemo(
     () => questions[currentQuiz]?.answer === userAnswer?.userAnswer,
@@ -26,14 +23,14 @@ export default function Quiz() {
   );
 
   function onAnswerCheck() {
-    const newAnswer = {
+    const new_answer = {
       question: questions[currentQuiz],
       userAnswer: answerText,
     };
     if (answerText === questions[currentQuiz].answer) {
-      setCorrectAnswers((prev) => [...prev, newAnswer]);
+      setCorrectAnswers((prev) => [...prev, new_answer]);
     }
-    setUserAnswer(newAnswer);
+    setUserAnswer(new_answer);
   }
 
   function onAnswerSubmit() {
@@ -44,11 +41,6 @@ export default function Quiz() {
     setUserAnswer(undefined);
     setAnswerText("");
   }
-
-  useEffect(() => {
-    const randomQuestions = composeRandomQuestions(quizQuestions, 5);
-    setQuestions(randomQuestions);
-  }, [quizQuestions]);
 
   return (
     <View style={styles.container}>
