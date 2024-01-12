@@ -5,7 +5,7 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { QuizFooter } from "~/view/Quiz/QuizFooter";
 import { QuizQuestion } from "~/view/Quiz/QuizQuestion";
-import { TQuizAnswer } from "~/@types/question.types";
+import { TQuizAnswer, TQuestion } from "~/@types/question.types";
 
 export default function Quiz() {
   const theme = useThemeProvider();
@@ -16,10 +16,12 @@ export default function Quiz() {
 
   const {
     questions,
-    currentQuiz,
     setQuestions,
+    currentQuiz,
     setCurrentQuiz,
     setUserAnswers,
+    skippedQuestions,
+    setSkippedQuestions,
   } = useQuizContext();
 
   const correctAnswer = useMemo(
@@ -43,11 +45,32 @@ export default function Quiz() {
 
   function onAnswerSubmit() {
     if (currentQuiz === questions.length - 1) {
-      return;
+      return onQuizEnd(skippedQuestions);
     }
     setCurrentQuiz((prev) => prev + 1);
     setUserAnswer(undefined);
     setAnswerText("");
+  }
+
+  function onQuizEnd(newSkippedQuestions: TQuestion[]) {
+    if (skippedQuestions.length > 0) {
+      setQuestions(newSkippedQuestions);
+      setSkippedQuestions([]);
+      setCurrentQuiz(0);
+      setAnswerText("");
+      setUserAnswer(undefined);
+    }
+  }
+
+  function onSkipQuiz() {
+    const newSkippedQuestions = [...skippedQuestions, questions[currentQuiz]];
+    setSkippedQuestions(newSkippedQuestions);
+    if (currentQuiz === questions.length - 1) {
+      onQuizEnd(newSkippedQuestions);
+      return;
+    } else if (currentQuiz !== questions.length - 1) {
+      setCurrentQuiz((prev) => prev + 1);
+    }
   }
 
   return (
@@ -65,7 +88,7 @@ export default function Quiz() {
         correctAnswer={correctAnswer}
         answerText={answerText}
         canSkip={currentQuiz !== questions.length - 1}
-        onSkip={() => {}}
+        onSkip={onSkipQuiz}
         onSubmit={() => {
           if (!correctAnswer) onAnswerCheck(false);
           else if (correctAnswer) onAnswerSubmit();

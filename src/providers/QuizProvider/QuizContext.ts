@@ -6,7 +6,9 @@ type TQuizContextValue = {
   questions: TQuestion[];
   setCurrentQuiz: React.Dispatch<React.SetStateAction<number>>;
   userAnswers: TQuizAnswer[];
+  skippedQuestions: TQuestion[];
   setQuestions: React.Dispatch<React.SetStateAction<TQuestion[]>>;
+  setSkippedQuestions: React.Dispatch<React.SetStateAction<TQuestion[]>>;
   setUserAnswers: React.Dispatch<React.SetStateAction<TQuizAnswer[]>>;
 };
 
@@ -17,4 +19,6 @@ export const QuizContext = createContext<TQuizContextValue>({
   setCurrentQuiz: () => {},
   userAnswers: [],
   setUserAnswers: () => {},
+  skippedQuestions: [],
+  setSkippedQuestions: () => {},
 });

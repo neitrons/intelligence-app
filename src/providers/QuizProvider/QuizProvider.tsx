@@ -9,6 +9,7 @@ export function QuizProvider({ children }: PropsWithChildren) {
 
   const [currentQuiz, setCurrentQuiz] = useState<number>(0);
   const [questions, setQuestions] = useState<TQuestion[]>([]);
+  const [skippedQuestions, setSkippedQuestions] = useState<TQuestion[]>([]);
   const [userAnswers, setUserAnswers] = useState<TQuizAnswer[]>([]);
 
   useEffect(() => {
@@ -26,6 +27,8 @@ export function QuizProvider({ children }: PropsWithChildren) {
         setCurrentQuiz,
         userAnswers,
         setUserAnswers,
+        skippedQuestions,
+        setSkippedQuestions,
       }}
     >
       {children}
