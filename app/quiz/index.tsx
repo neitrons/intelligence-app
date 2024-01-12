@@ -8,7 +8,7 @@ import { composeRandomQuestions } from "~/view/Quiz/utils/composeRandomQuestions
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { TQuestion, TQuizAnswer } from "~/@types/question.types";
-import { useGlobalContext } from "~/providers/GlobalProvider";
+import { useQuizContext } from "~/providers/QuizProvider";
 
 export default function Quiz() {
   const theme = useThemeProvider();
@@ -26,7 +26,7 @@ export default function Quiz() {
     setCurrentQuiz,
     setCorrectAnswers,
     setCurrentQuizQuestion,
-  } = useGlobalContext();
+  } = useQuizContext();
 
   const correctAnswer = useMemo(
     () => questions[currentQuiz]?.answer === userAnswer?.userAnswer,

@@ -1,12 +1,13 @@
 import { Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { TQuizAnswer } from "../../../../app/quiz";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+
+import { TQuestion, TQuizAnswer } from "~/@types/question.types";
+import { composeGeoString } from "~/utils/composeGeoChar";
+
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 import { STextInput } from "~/components/STextInput";
-import { TQuestion } from "~/@types/question.types";
-import { composeGeoString } from "~/utils/composeGeoChar";
 
 type QuizQuestionProps = {
   question: TQuestion;
