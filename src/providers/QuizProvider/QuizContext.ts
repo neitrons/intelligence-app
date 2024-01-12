@@ -6,8 +6,6 @@ type TQuizContextValue = {
   setCurrentQuiz: React.Dispatch<React.SetStateAction<number>>;
   correctAnswers: TQuizAnswer[];
   setCorrectAnswers: React.Dispatch<React.SetStateAction<TQuizAnswer[]>>;
-  currentQuizQuestion: TQuestion[];
-  setCurrentQuizQuestion: React.Dispatch<React.SetStateAction<TQuestion[]>>;
 };
 
 export const QuizContext = createContext<TQuizContextValue>({
@@ -15,6 +13,4 @@ export const QuizContext = createContext<TQuizContextValue>({
   setCurrentQuiz: () => {},
   correctAnswers: [],
   setCorrectAnswers: () => {},
-  currentQuizQuestion: [],
-  setCurrentQuizQuestion: () => {},
 });

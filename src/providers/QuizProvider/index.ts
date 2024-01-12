@@ -1,2 +1,2 @@
-export { useQuizContext } from "./useQuizContext";
+export { useQuizContext } from "./hooks/useQuizContext";
 export { QuizProvider } from "./QuizProvider";

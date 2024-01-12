@@ -12,21 +12,13 @@ import { useQuizContext } from "~/providers/QuizProvider";
 
 export default function Quiz() {
   const theme = useThemeProvider();
-  const { quizQuestions } = useStaticData();
   const styles = getStyleSheet({ ...theme });
+  const { quizQuestions } = useStaticData();
 
-  const [quizFinished, setQuizFinished] = useState<boolean>(false);
-  const [skippedMode, setSkippedMode] = useState<boolean>(false);
   const [answerText, setAnswerText] = useState<string>("");
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [userAnswer, setUserAnswer] = useState<TQuizAnswer>();
-  const [skipedQuestions, setSkipedQuestions] = useState<TQuestion[]>([]);
-  const {
-    currentQuiz,
-    setCurrentQuiz,
-    setCorrectAnswers,
-    setCurrentQuizQuestion,
-  } = useQuizContext();
+  const { currentQuiz, setCurrentQuiz, setCorrectAnswers } = useQuizContext();
 
   const correctAnswer = useMemo(
     () => questions[currentQuiz]?.answer === userAnswer?.userAnswer,
@@ -44,20 +36,8 @@ export default function Quiz() {
     setUserAnswer(newAnswer);
   }
 
-  function onSkip() {
-    if (currentQuiz === questions.length - 1) {
-      onQuizFinish();
-      return;
-    }
-    if (!skippedMode) {
-      setSkipedQuestions((prev) => [...prev, questions[currentQuiz]]);
-    }
-    setCurrentQuiz((prev) => prev + 1);
-  }
-
   function onAnswerSubmit() {
     if (currentQuiz === questions.length - 1) {
-      onQuizFinish();
       return;
     }
     setCurrentQuiz((prev) => prev + 1);
@@ -65,52 +45,31 @@ export default function Quiz() {
     setAnswerText("");
   }
 
-  function onQuizFinish() {
-    if (skipedQuestions.length > 0) {
-      setQuestions(skipedQuestions);
-      setSkipedQuestions([]);
-      setCurrentQuiz(0);
-      setSkippedMode(true);
-    } else {
-      setCurrentQuiz(0);
-      setSkippedMode(false);
-      setQuizFinished(true);
-    }
-  }
-
   useEffect(() => {
     const randomQuestions = composeRandomQuestions(quizQuestions, 5);
     setQuestions(randomQuestions);
-    setCurrentQuizQuestion(randomQuestions);
   }, [quizQuestions]);
 
   return (
     <View style={styles.container}>
-      {quizFinished ? (
-        <Text>ქივიზ დასრულებულია</Text>
-      ) : (
-        <>
-          {questions?.[currentQuiz] && (
-            <QuizQuestion
-              userAnswer={userAnswer}
-              answer={answerText}
-              correctAnswer={correctAnswer}
-              setAnswer={setAnswerText}
-              question={questions[currentQuiz]}
-            />
-          )}
-          <QuizFooter
-            correctAnswer={correctAnswer}
-            answerText={answerText}
-            canSkip={currentQuiz !== questions.length - 1}
-            onSubmit={() => {
-              if (!correctAnswer) onAnswerCheck();
-              else if (correctAnswer) onAnswerSubmit();
-            }}
-            onSkip={onSkip}
-          />
-        </>
+      {questions?.[currentQuiz] && (
+        <QuizQuestion
+          userAnswer={userAnswer}
+          answerText={answerText}
+          setAnswerText={setAnswerText}
+          question={questions[currentQuiz]}
+        />
       )}
+      <QuizFooter
+        correctAnswer={correctAnswer}
+        answerText={answerText}
+        canSkip={currentQuiz !== questions.length - 1}
+        onSubmit={() => {
+          if (!correctAnswer) onAnswerCheck();
+          else if (correctAnswer) onAnswerSubmit();
+        }}
+        onSkip={() => {}}
+      />
     </View>
   );
 }

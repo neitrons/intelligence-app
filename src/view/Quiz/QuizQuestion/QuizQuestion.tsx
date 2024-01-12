@@ -11,21 +11,21 @@ import { STextInput } from "~/components/STextInput";
 
 type QuizQuestionProps = {
   question: TQuestion;
-  answer: string;
-  correctAnswer: boolean;
   userAnswer?: TQuizAnswer;
-  setAnswer: React.Dispatch<React.SetStateAction<string>>;
+  answerText: string;
+  setAnswerText: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export function QuizQuestion({
   question,
-  answer,
-  correctAnswer,
-  setAnswer,
+  answerText,
+  setAnswerText,
   userAnswer,
 }: QuizQuestionProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
+
+  const correctAnswer = question.answer === userAnswer?.userAnswer;
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -37,11 +37,8 @@ export function QuizQuestion({
       <Title style={styles.titleStyles}>შეიყვანეთ პასუხი</Title>
       <STextInput
         placeholder="ერთი სიტყვა"
-        editable={!correctAnswer}
-        value={answer}
-        onChangeText={(e) => {
-          setAnswer(composeGeoString(e));
-        }}
+        value={answerText}
+        onChangeText={(e) => setAnswerText(composeGeoString(e))}
       />
       {userAnswer && correctAnswer && <Text>პასუხი სწორია</Text>}
       {userAnswer && !correctAnswer && (

@@ -13,7 +13,6 @@ type QuizFooterProps = {
 export function QuizFooter({
   onSubmit,
   onSkip,
-  canSkip,
   correctAnswer,
   answerText,
 }: QuizFooterProps) {
