@@ -10,4 +10,5 @@ export type TQuestion = {
 export type TQuizAnswer = {
   question: TQuestion;
   userAnswer: string;
+  supported: boolean;
 };

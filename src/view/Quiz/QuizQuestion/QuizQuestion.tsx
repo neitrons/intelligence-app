@@ -8,11 +8,13 @@ import { composeGeoString } from "~/utils/composeGeoChar";
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 import { STextInput } from "~/components/STextInput";
+import { SButton } from "~/components/SButton";
 
 type QuizQuestionProps = {
   question: TQuestion;
   userAnswer?: TQuizAnswer;
   answerText: string;
+  onSupport: () => void;
   setAnswerText: React.Dispatch<React.SetStateAction<string>>;
 };
 
@@ -21,6 +23,7 @@ export function QuizQuestion({
   answerText,
   setAnswerText,
   userAnswer,
+  onSupport,
 }: QuizQuestionProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
@@ -40,6 +43,9 @@ export function QuizQuestion({
         value={answerText}
         onChangeText={(e) => setAnswerText(composeGeoString(e))}
       />
+      <SButton onPress={onSupport} style={styles.supportButton}>
+        დახმარება
+      </SButton>
       {userAnswer && correctAnswer && <Text>პასუხი სწორია</Text>}
       {userAnswer && !correctAnswer && (
         <Text>პასუხი არასწორია კიდევ სცადეთ</Text>
@@ -55,6 +61,9 @@ export function getStyleSheet({ sizes, colors }: ThemeContextValue) {
       display: "flex",
       flexDirection: "column",
       gap: sizes.spaceMedium,
+    },
+    supportButton: {
+      marginTop: sizes.spaceMedium,
     },
     correctAnswerBox: {
       borderColor: colors.successColor,

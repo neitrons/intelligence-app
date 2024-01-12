@@ -14,21 +14,29 @@ export default function Quiz() {
   const [answerText, setAnswerText] = useState<string>("");
   const [userAnswer, setUserAnswer] = useState<TQuizAnswer>();
 
-  const { currentQuiz, setCurrentQuiz, setCorrectAnswers, questions } =
-    useQuizContext();
+  const {
+    questions,
+    currentQuiz,
+    setQuestions,
+    setCurrentQuiz,
+    setUserAnswers,
+  } = useQuizContext();
 
   const correctAnswer = useMemo(
     () => questions[currentQuiz]?.answer === userAnswer?.userAnswer,
     [questions, currentQuiz, userAnswer?.userAnswer]
   );
 
-  function onAnswerCheck() {
+  function onAnswerCheck(withSupport: boolean = false) {
+    if (withSupport) setAnswerText(questions[currentQuiz].answer);
+
     const new_answer = {
       question: questions[currentQuiz],
-      userAnswer: answerText,
+      userAnswer: withSupport ? questions[currentQuiz].answer : answerText,
+      supported: withSupport,
     };
-    if (answerText === questions[currentQuiz].answer) {
-      setCorrectAnswers((prev) => [...prev, new_answer]);
+    if (new_answer.userAnswer === questions[currentQuiz].answer) {
+      setUserAnswers((prev) => [...prev, new_answer]);
     }
     setUserAnswer(new_answer);
   }
@@ -50,17 +58,18 @@ export default function Quiz() {
           answerText={answerText}
           setAnswerText={setAnswerText}
           question={questions[currentQuiz]}
+          onSupport={() => onAnswerCheck(true)}
         />
       )}
       <QuizFooter
         correctAnswer={correctAnswer}
         answerText={answerText}
         canSkip={currentQuiz !== questions.length - 1}
+        onSkip={() => {}}
         onSubmit={() => {
-          if (!correctAnswer) onAnswerCheck();
+          if (!correctAnswer) onAnswerCheck(false);
           else if (correctAnswer) onAnswerSubmit();
         }}
-        onSkip={() => {}}
       />
     </View>
   );

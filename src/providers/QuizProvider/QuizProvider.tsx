@@ -9,10 +9,11 @@ export function QuizProvider({ children }: PropsWithChildren) {
 
   const [currentQuiz, setCurrentQuiz] = useState<number>(0);
   const [questions, setQuestions] = useState<TQuestion[]>([]);
-  const [correctAnswers, setCorrectAnswers] = useState<TQuizAnswer[]>([]);
+  const [userAnswers, setUserAnswers] = useState<TQuizAnswer[]>([]);
 
   useEffect(() => {
-    const randomQuestions = composeRandomQuestions(quizQuestions, 10);
+    if (quizQuestions.length === 0) return;
+    const randomQuestions = composeRandomQuestions(quizQuestions, 5);
     setQuestions(randomQuestions);
   }, [quizQuestions]);
 
@@ -23,8 +24,8 @@ export function QuizProvider({ children }: PropsWithChildren) {
         setQuestions,
         currentQuiz,
         setCurrentQuiz,
-        correctAnswers,
-        setCorrectAnswers,
+        userAnswers,
+        setUserAnswers,
       }}
     >
       {children}
