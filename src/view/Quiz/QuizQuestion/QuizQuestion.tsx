@@ -1,14 +1,14 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-import { TQuestion, TQuizAnswer } from "~/@types/question.types";
-import { composeGeoString } from "~/utils/composeGeoChar";
-
+import { SAlert } from "~/components/SAlert";
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 import { STextInput } from "~/components/STextInput";
 import { SButton } from "~/components/SButton";
+import { composeGeoString } from "~/utils/composeGeoChar";
+import { TQuestion, TQuizAnswer } from "~/@types/question.types";
 
 type QuizQuestionProps = {
   question: TQuestion;
@@ -32,8 +32,8 @@ export function QuizQuestion({
 
   return (
     <ScrollView style={styles.scrollView}>
+      <View></View>
       <Title style={styles.titleStyles}>კითხვა</Title>
-      <Text>{question.answer}</Text>
       <Card>
         <Text>{question.questionText}</Text>
       </Card>
@@ -43,33 +43,31 @@ export function QuizQuestion({
         value={answerText}
         onChangeText={(e) => setAnswerText(composeGeoString(e))}
       />
-      <SButton onPress={onSupport} style={styles.supportButton}>
-        დახმარება
-      </SButton>
-      {userAnswer && correctAnswer && <Text>პასუხი სწორია</Text>}
-      {userAnswer && !correctAnswer && (
-        <Text>პასუხი არასწორია კიდევ სცადეთ</Text>
-      )}
+      <View style={styles.alertBox}>
+        {userAnswer && correctAnswer && (
+          <SAlert type="success" message="პასუხი სწორია" />
+        )}
+        {userAnswer && !correctAnswer && (
+          <SAlert type="error" message="პასუხი არასწორია კიდევ სცადეთ" />
+        )}
+      </View>
     </ScrollView>
   );
 }
 
 export function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
-    titleStyles: { paddingVertical: sizes.spaceMedium },
+    titleStyles: {
+      paddingVertical: sizes.spaceMedium,
+    },
     answersWrapper: {
       display: "flex",
       flexDirection: "column",
       gap: sizes.spaceMedium,
     },
-    supportButton: {
+    alertBox: {
+      width: "100%",
       marginTop: sizes.spaceMedium,
-    },
-    correctAnswerBox: {
-      borderColor: colors.successColor,
-    },
-    incorrectAnswerBox: {
-      borderColor: colors.errorColor,
     },
     scrollView: {
       paddingHorizontal: sizes.spaceMedium,
