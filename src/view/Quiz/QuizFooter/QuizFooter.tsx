@@ -1,11 +1,11 @@
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { SButton } from "~/components/SButton";
+import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 type QuizFooterProps = {
   onSkip: () => void;
   onSubmit: () => void;
-  answerText: string;
   correctAnswer: boolean;
 };
 
@@ -13,10 +13,11 @@ export function QuizFooter({
   onSubmit,
   onSkip,
   correctAnswer,
-  answerText,
 }: QuizFooterProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme, correctAnswer });
+
+  const { state } = useQuizContext();
 
   return (
     <View style={styles.footer}>
@@ -29,7 +30,7 @@ export function QuizFooter({
         type="primary"
         onPress={onSubmit}
         style={styles.button}
-        disabled={!answerText}
+        disabled={!state.answerText}
       >
         {correctAnswer ? "შემდეგი" : "შემოწმება"}
       </SButton>

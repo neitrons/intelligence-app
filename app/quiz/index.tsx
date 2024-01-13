@@ -13,47 +13,47 @@ export default function Quiz() {
   const styles = getStyleSheet({ ...theme });
 
   const {
-    answerText,
-    setAnswerText,
-    userAnswer,
-    setUserAnswer,
-    quizFinished,
-    setQuizFinished,
+    dispatch,
+    state,
     questions,
     setQuestions,
-    currentQuiz,
-    setCurrentQuiz,
     setUserAnswers,
     skippedQuestions,
     setSkippedQuestions,
   } = useQuizContext();
 
   const correctAnswer = useMemo(
-    () => questions[currentQuiz]?.answer === userAnswer?.userAnswer,
-    [questions, currentQuiz, userAnswer?.userAnswer]
+    () => questions[state.currentQuiz]?.answer === state.userAnswer?.userAnswer,
+    [questions, state.currentQuiz, state.userAnswer?.userAnswer]
   );
 
   function onAnswerCheck(withSupport: boolean = false) {
-    if (withSupport) setAnswerText(questions[currentQuiz].answer);
+    if (withSupport)
+      dispatch({
+        type: "ANSWER_TEXT",
+        payload: questions[state.currentQuiz].answer,
+      });
 
     const new_answer = {
-      question: questions[currentQuiz],
-      userAnswer: withSupport ? questions[currentQuiz].answer : answerText,
+      question: questions[state.currentQuiz],
+      userAnswer: withSupport
+        ? questions[state.currentQuiz].answer
+        : state.answerText,
       supported: withSupport,
     };
-    if (new_answer.userAnswer === questions[currentQuiz].answer) {
+    if (new_answer.userAnswer === questions[state.currentQuiz].answer) {
       setUserAnswers((prev) => [...prev, new_answer]);
     }
-    setUserAnswer(new_answer);
+    dispatch({ type: "USER_ANSWER", payload: new_answer });
   }
 
   function onAnswerSubmit() {
-    if (currentQuiz === questions.length - 1) {
+    if (state.currentQuiz === questions.length - 1) {
       return onQuizEnd(skippedQuestions);
     }
-    setCurrentQuiz((prev) => prev + 1);
-    setUserAnswer(undefined);
-    setAnswerText("");
+    dispatch({ type: "CURRENT_QUIZ", payload: state.currentQuiz + 1 });
+    dispatch({ type: "USER_ANSWER", payload: undefined });
+    dispatch({ type: "ANSWER_TEXT", payload: "" });
   }
 
   function onQuizEnd(newSkippedQuestions: TQuestion[]) {
@@ -61,43 +61,42 @@ export default function Quiz() {
       setQuestions(newSkippedQuestions);
     } else {
       setQuestions([]);
-      setQuizFinished(true);
+      dispatch({ type: "QUIZ_FINISHED", payload: true });
     }
-    setAnswerText("");
-    setCurrentQuiz(0);
-    setUserAnswer(undefined);
+    dispatch({ type: "ANSWER_TEXT", payload: "" });
+    dispatch({ type: "CURRENT_QUIZ", payload: 0 });
+    dispatch({ type: "USER_ANSWER", payload: undefined });
     setSkippedQuestions([]);
   }
 
   function onSkipQuiz() {
-    const newSkippedQuestions = [...skippedQuestions, questions[currentQuiz]];
+    const newSkippedQuestions = [
+      ...skippedQuestions,
+      questions[state.currentQuiz],
+    ];
     setSkippedQuestions(newSkippedQuestions);
-    if (currentQuiz === questions.length - 1) {
+    if (state.currentQuiz === questions.length - 1) {
       onQuizEnd(newSkippedQuestions);
       return;
-    } else if (currentQuiz !== questions.length - 1) {
-      setCurrentQuiz((prev) => prev + 1);
+    } else if (state.currentQuiz !== questions.length - 1) {
+      dispatch({ type: "CURRENT_QUIZ", payload: state.currentQuiz + 1 });
     }
   }
 
   return (
     <View style={styles.container}>
-      {quizFinished ? (
+      {state.quizFinished ? (
         <QuizResult />
       ) : (
         <>
-          {questions?.[currentQuiz] && (
+          {questions?.[state.currentQuiz] && (
             <QuizQuestion
-              userAnswer={userAnswer}
-              answerText={answerText}
-              setAnswerText={setAnswerText}
-              question={questions[currentQuiz]}
+              question={questions[state.currentQuiz]}
               onSupport={() => onAnswerCheck(true)}
             />
           )}
           <QuizFooter
             correctAnswer={correctAnswer}
-            answerText={answerText}
             onSkip={onSkipQuiz}
             onSubmit={() => {
               if (!correctAnswer) onAnswerCheck(false);

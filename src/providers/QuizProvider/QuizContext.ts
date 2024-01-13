@@ -1,17 +1,13 @@
 import { createContext } from "react";
 import { TQuizAnswer, TQuestion } from "~/@types/question.types";
+import { TQuizAction, TQuizState } from "./QuizProvider";
 
 type TQuizContextValue = {
+  state: TQuizState;
+  dispatch: React.Dispatch<TQuizAction>;
   quizLength: number;
-  currentQuiz: number;
-  quizFinished: boolean;
-  answerText: string;
-  userAnswer: TQuizAnswer | undefined;
-  setUserAnswer: React.Dispatch<React.SetStateAction<TQuizAnswer | undefined>>;
-  setAnswerText: React.Dispatch<React.SetStateAction<string>>;
-  setQuizFinished: React.Dispatch<React.SetStateAction<boolean>>;
+
   questions: TQuestion[];
-  setCurrentQuiz: React.Dispatch<React.SetStateAction<number>>;
   userAnswers: TQuizAnswer[];
   skippedQuestions: TQuestion[];
   setQuestions: React.Dispatch<React.SetStateAction<TQuestion[]>>;
@@ -20,19 +16,21 @@ type TQuizContextValue = {
 };
 
 export const QuizContext = createContext<TQuizContextValue>({
-  currentQuiz: 0,
+  dispatch: () => {},
+  state: {
+    answerText: "",
+    quizFinished: false,
+    currentQuiz: 0,
+    questions: [],
+    userAnswers: [],
+    skippedQuestions: [],
+  },
+
   quizLength: 15,
-  quizFinished: false,
   questions: [],
-  answerText: "",
-  setAnswerText: () => {},
   setQuestions: () => {},
-  setCurrentQuiz: () => {},
-  setUserAnswer: () => {},
-  userAnswer: undefined,
   userAnswers: [],
   setUserAnswers: () => {},
   skippedQuestions: [],
   setSkippedQuestions: () => {},
-  setQuizFinished: () => {},
 });

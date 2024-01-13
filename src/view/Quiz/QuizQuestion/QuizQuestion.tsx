@@ -7,28 +7,20 @@ import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 import { STextInput } from "~/components/STextInput";
 import { composeGeoString } from "~/utils/composeGeoChar";
-import { TQuestion, TQuizAnswer } from "~/@types/question.types";
+import { TQuestion } from "~/@types/question.types";
+import { useQuizContext } from "~/providers/QuizProvider";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 type QuizQuestionProps = {
   question: TQuestion;
-  userAnswer?: TQuizAnswer;
-  answerText: string;
   onSupport: () => void;
-  setAnswerText: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export function QuizQuestion({
-  question,
-  answerText,
-  setAnswerText,
-  userAnswer,
-  onSupport,
-}: QuizQuestionProps) {
+export function QuizQuestion({ question, onSupport }: QuizQuestionProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
-
-  const correctAnswer = question.answer === userAnswer?.userAnswer;
+  const { state, dispatch } = useQuizContext();
+  const correctAnswer = question.answer === state.userAnswer?.userAnswer;
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -44,14 +36,16 @@ export function QuizQuestion({
       <Title style={styles.title}>შეიყვანეთ პასუხი</Title>
       <STextInput
         placeholder="ერთი სიტყვა"
-        value={answerText}
-        onChangeText={(e) => setAnswerText(composeGeoString(e))}
+        value={state.answerText}
+        onChangeText={(e) =>
+          dispatch({ type: "ANSWER_TEXT", payload: composeGeoString(e) })
+        }
       />
       <View style={styles.alertWrapper}>
-        {userAnswer && correctAnswer && (
+        {state.userAnswer && correctAnswer && (
           <SAlert type="success" message="პასუხი სწორია" />
         )}
-        {userAnswer && !correctAnswer && (
+        {state.userAnswer && !correctAnswer && (
           <SAlert type="error" message="პასუხი არასწორია კიდევ სცადეთ" />
         )}
       </View>

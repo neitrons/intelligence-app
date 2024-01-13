@@ -9,7 +9,6 @@ export function QuizHeader() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
   const { userAnswers, quizLength } = useQuizContext();
-
   const ownAnswers = userAnswers.filter((answer) => answer.supported === false);
 
   return (
