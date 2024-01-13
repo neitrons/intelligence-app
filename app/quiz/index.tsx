@@ -57,18 +57,14 @@ export default function Quiz() {
   function onQuizEnd(newSkippedQuestions: TQuestion[]) {
     if (skippedQuestions.length > 0) {
       setQuestions(newSkippedQuestions);
-      setSkippedQuestions([]);
-      setCurrentQuiz(0);
-      setAnswerText("");
-      setUserAnswer(undefined);
     } else {
       setQuestions([]);
-      setSkippedQuestions([]);
-      setCurrentQuiz(0);
-      setAnswerText("");
-      setUserAnswer(undefined);
       setQuizFinished(true);
     }
+    setAnswerText("");
+    setCurrentQuiz(0);
+    setUserAnswer(undefined);
+    setSkippedQuestions([]);
   }
 
   function onSkipQuiz() {
@@ -100,7 +96,6 @@ export default function Quiz() {
           <QuizFooter
             correctAnswer={correctAnswer}
             answerText={answerText}
-            canSkip={currentQuiz !== questions.length - 1}
             onSkip={onSkipQuiz}
             onSubmit={() => {
               if (!correctAnswer) onAnswerCheck(false);

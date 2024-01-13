@@ -5,9 +5,8 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 type QuizFooterProps = {
   onSkip: () => void;
   onSubmit: () => void;
-  canSkip: boolean;
-  correctAnswer: boolean;
   answerText: string;
+  correctAnswer: boolean;
 };
 
 export function QuizFooter({
