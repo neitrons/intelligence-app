@@ -34,7 +34,7 @@ export function QuizQuestion({
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.header}>
-        <Title>კითხვა</Title>
+        <Title>კითხვა / {question.answer}</Title>
         <TouchableOpacity onPress={onSupport}>
           <Icon name="question-circle" style={styles.supportIcon} />
         </TouchableOpacity>
@@ -78,7 +78,7 @@ export function getStyleSheet({ sizes, colors }: ThemeContextValue) {
     },
     supportIcon: {
       color: colors.successColor,
-      fontSize: 24,
+      fontSize: sizes.iconSmall,
     },
     scrollView: {
       paddingHorizontal: sizes.spaceMedium,

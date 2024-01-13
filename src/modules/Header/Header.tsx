@@ -39,13 +39,12 @@ export function getStyleSheet({
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: sizes.spaceSmall,
-      paddingTop: sizes.spaceSmall + top,
+      padding: sizes.spaceMedium,
+      paddingTop: sizes.spaceMedium + top,
       borderBottomWidth: 1,
       borderColor: colors.primaryBorder,
       backgroundColor: colors.secondaryBg,
       position: "relative",
     },
-   
   });
 }
