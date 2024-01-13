@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import { Title } from "~/components/Title";
@@ -13,7 +14,7 @@ export function QuizHeader() {
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => router.push("/")}>
         <Text style={styles.cancel}>შეწყვეტა</Text>
       </TouchableOpacity>
       <Title size="small">
