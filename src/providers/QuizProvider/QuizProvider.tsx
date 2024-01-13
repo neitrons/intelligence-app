@@ -8,7 +8,10 @@ export function QuizProvider({ children }: PropsWithChildren) {
   const quizLength = 15;
   const { quizQuestions } = useStaticData();
 
+  const [answerText, setAnswerText] = useState<string>("");
+  const [userAnswer, setUserAnswer] = useState<TQuizAnswer>();
   const [currentQuiz, setCurrentQuiz] = useState<number>(0);
+  const [quizFinished, setQuizFinished] = useState<boolean>(false);
   const [questions, setQuestions] = useState<TQuestion[]>([]);
   const [skippedQuestions, setSkippedQuestions] = useState<TQuestion[]>([]);
   const [userAnswers, setUserAnswers] = useState<TQuizAnswer[]>([]);
@@ -22,6 +25,10 @@ export function QuizProvider({ children }: PropsWithChildren) {
   return (
     <QuizContext.Provider
       value={{
+        userAnswer,
+        setUserAnswer,
+        answerText,
+        setAnswerText,
         quizLength,
         questions,
         setQuestions,
@@ -31,6 +38,8 @@ export function QuizProvider({ children }: PropsWithChildren) {
         setUserAnswers,
         skippedQuestions,
         setSkippedQuestions,
+        quizFinished,
+        setQuizFinished,
       }}
     >
       {children}

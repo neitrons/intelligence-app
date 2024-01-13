@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
@@ -6,17 +6,19 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { QuizFooter } from "~/view/Quiz/QuizFooter";
 import { QuizResult } from "~/view/Quiz/QuizResult";
 import { QuizQuestion } from "~/view/Quiz/QuizQuestion";
-import { TQuizAnswer, TQuestion } from "~/@types/question.types";
+import { TQuestion } from "~/@types/question.types";
 
 export default function Quiz() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
-  const [answerText, setAnswerText] = useState<string>("");
-  const [quizFinished, setQuizFinished] = useState<boolean>(false);
-  const [userAnswer, setUserAnswer] = useState<TQuizAnswer>();
-
   const {
+    answerText,
+    setAnswerText,
+    userAnswer,
+    setUserAnswer,
+    quizFinished,
+    setQuizFinished,
     questions,
     setQuestions,
     currentQuiz,

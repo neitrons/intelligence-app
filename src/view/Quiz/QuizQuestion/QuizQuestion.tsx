@@ -8,7 +8,6 @@ import { Title } from "~/components/Title";
 import { STextInput } from "~/components/STextInput";
 import { composeGeoString } from "~/utils/composeGeoChar";
 import { TQuestion, TQuizAnswer } from "~/@types/question.types";
-
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 type QuizQuestionProps = {
