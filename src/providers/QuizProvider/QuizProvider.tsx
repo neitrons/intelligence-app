@@ -1,28 +1,8 @@
-import { PropsWithChildren, useState, useEffect, useReducer } from "react";
-import { QuizContext } from "./QuizContext";
-import { TQuestion, TQuizAnswer } from "~/@types/question.types";
-
+import { PropsWithChildren, useEffect, useReducer } from "react";
+import { QuizContext, TQuizState, TQuizAction } from "./QuizContext";
 import { composeRandomQuestions } from "./utils/composeRandomQuestions";
+
 import { useStaticData } from "../StaticDataProvider/hooks/useStaticData";
-
-export type TQuizState = {
-  answerText: string;
-  userAnswer?: TQuizAnswer;
-  currentQuiz: number;
-  quizFinished: boolean;
-  questions: TQuestion[];
-  skippedQuestions: TQuestion[];
-  userAnswers: TQuizAnswer[];
-};
-
-export type TQuizAction =
-  | { type: "ANSWER_TEXT"; payload: string }
-  | { type: "USER_ANSWER"; payload?: TQuizAnswer }
-  | { type: "CURRENT_QUIZ"; payload: number }
-  | { type: "QUIZ_FINISHED"; payload: boolean }
-  | { type: "QUESTIONS"; payload: TQuestion[] }
-  | { type: "SKIPPED_QUESTIONS"; payload: TQuestion[] }
-  | { type: "USER_ANSWERS"; payload: TQuizAnswer[] };
 
 const QuizReducer = (state: TQuizState, action: TQuizAction): TQuizState => {
   switch (action.type) {
@@ -59,14 +39,10 @@ export function QuizProvider({ children }: PropsWithChildren) {
   const quizLength = 15;
   const { quizQuestions } = useStaticData();
 
-  const [questions, setQuestions] = useState<TQuestion[]>([]);
-  const [skippedQuestions, setSkippedQuestions] = useState<TQuestion[]>([]);
-  const [userAnswers, setUserAnswers] = useState<TQuizAnswer[]>([]);
-
   useEffect(() => {
     if (quizQuestions.length === 0) return;
     const randomQuestions = composeRandomQuestions(quizQuestions, quizLength);
-    setQuestions(randomQuestions);
+    dispatch({ type: "QUESTIONS", payload: randomQuestions });
   }, [quizQuestions]);
 
   return (
@@ -75,12 +51,6 @@ export function QuizProvider({ children }: PropsWithChildren) {
         dispatch,
         state,
         quizLength,
-        questions,
-        setQuestions,
-        userAnswers,
-        setUserAnswers,
-        skippedQuestions,
-        setSkippedQuestions,
       }}
     >
       {children}

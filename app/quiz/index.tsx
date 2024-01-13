@@ -12,44 +12,41 @@ export default function Quiz() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
-  const {
-    dispatch,
-    state,
-    questions,
-    setQuestions,
-    setUserAnswers,
-    skippedQuestions,
-    setSkippedQuestions,
-  } = useQuizContext();
+  const { dispatch, state } = useQuizContext();
 
   const correctAnswer = useMemo(
-    () => questions[state.currentQuiz]?.answer === state.userAnswer?.userAnswer,
-    [questions, state.currentQuiz, state.userAnswer?.userAnswer]
+    () =>
+      state.questions[state.currentQuiz]?.answer ===
+      state.userAnswer?.userAnswer,
+    [state.questions, state.currentQuiz, state.userAnswer?.userAnswer]
   );
 
   function onAnswerCheck(withSupport: boolean = false) {
     if (withSupport)
       dispatch({
         type: "ANSWER_TEXT",
-        payload: questions[state.currentQuiz].answer,
+        payload: state.questions[state.currentQuiz].answer,
       });
 
     const new_answer = {
-      question: questions[state.currentQuiz],
+      question: state.questions[state.currentQuiz],
       userAnswer: withSupport
-        ? questions[state.currentQuiz].answer
+        ? state.questions[state.currentQuiz].answer
         : state.answerText,
       supported: withSupport,
     };
-    if (new_answer.userAnswer === questions[state.currentQuiz].answer) {
-      setUserAnswers((prev) => [...prev, new_answer]);
+    if (new_answer.userAnswer === state.questions[state.currentQuiz].answer) {
+      dispatch({
+        type: "USER_ANSWERS",
+        payload: [...state.userAnswers, new_answer],
+      });
     }
     dispatch({ type: "USER_ANSWER", payload: new_answer });
   }
 
   function onAnswerSubmit() {
-    if (state.currentQuiz === questions.length - 1) {
-      return onQuizEnd(skippedQuestions);
+    if (state.currentQuiz === state.questions.length - 1) {
+      return onQuizEnd(state.skippedQuestions);
     }
     dispatch({ type: "CURRENT_QUIZ", payload: state.currentQuiz + 1 });
     dispatch({ type: "USER_ANSWER", payload: undefined });
@@ -57,28 +54,28 @@ export default function Quiz() {
   }
 
   function onQuizEnd(newSkippedQuestions: TQuestion[]) {
-    if (skippedQuestions.length > 0) {
-      setQuestions(newSkippedQuestions);
+    if (state.skippedQuestions.length > 0) {
+      dispatch({ type: "QUESTIONS", payload: newSkippedQuestions });
     } else {
-      setQuestions([]);
+      dispatch({ type: "QUESTIONS", payload: [] });
       dispatch({ type: "QUIZ_FINISHED", payload: true });
     }
     dispatch({ type: "ANSWER_TEXT", payload: "" });
     dispatch({ type: "CURRENT_QUIZ", payload: 0 });
     dispatch({ type: "USER_ANSWER", payload: undefined });
-    setSkippedQuestions([]);
+    dispatch({ type: "SKIPPED_QUESTIONS", payload: [] });
   }
 
   function onSkipQuiz() {
     const newSkippedQuestions = [
-      ...skippedQuestions,
-      questions[state.currentQuiz],
+      ...state.skippedQuestions,
+      state.questions[state.currentQuiz],
     ];
-    setSkippedQuestions(newSkippedQuestions);
-    if (state.currentQuiz === questions.length - 1) {
+    dispatch({ type: "SKIPPED_QUESTIONS", payload: newSkippedQuestions });
+    if (state.currentQuiz === state.questions.length - 1) {
       onQuizEnd(newSkippedQuestions);
       return;
-    } else if (state.currentQuiz !== questions.length - 1) {
+    } else if (state.currentQuiz !== state.questions.length - 1) {
       dispatch({ type: "CURRENT_QUIZ", payload: state.currentQuiz + 1 });
     }
   }
@@ -89,9 +86,9 @@ export default function Quiz() {
         <QuizResult />
       ) : (
         <>
-          {questions?.[state.currentQuiz] && (
+          {state.questions?.[state.currentQuiz] && (
             <QuizQuestion
-              question={questions[state.currentQuiz]}
+              question={state.questions[state.currentQuiz]}
               onSupport={() => onAnswerCheck(true)}
             />
           )}
