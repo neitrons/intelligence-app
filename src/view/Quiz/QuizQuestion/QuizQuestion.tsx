@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
@@ -6,9 +6,10 @@ import { SAlert } from "~/components/SAlert";
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 import { STextInput } from "~/components/STextInput";
-import { SButton } from "~/components/SButton";
 import { composeGeoString } from "~/utils/composeGeoChar";
 import { TQuestion, TQuizAnswer } from "~/@types/question.types";
+
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 type QuizQuestionProps = {
   question: TQuestion;
@@ -32,18 +33,22 @@ export function QuizQuestion({
 
   return (
     <ScrollView style={styles.scrollView}>
-      <View></View>
-      <Title style={styles.titleStyles}>კითხვა</Title>
+      <View style={styles.header}>
+        <Title>კითხვა</Title>
+        <TouchableOpacity onPress={onSupport}>
+          <Icon name="question-circle" style={styles.supportIcon} />
+        </TouchableOpacity>
+      </View>
       <Card>
         <Text>{question.questionText}</Text>
       </Card>
-      <Title style={styles.titleStyles}>შეიყვანეთ პასუხი</Title>
+      <Title style={styles.title}>შეიყვანეთ პასუხი</Title>
       <STextInput
         placeholder="ერთი სიტყვა"
         value={answerText}
         onChangeText={(e) => setAnswerText(composeGeoString(e))}
       />
-      <View style={styles.alertBox}>
+      <View style={styles.alertWrapper}>
         {userAnswer && correctAnswer && (
           <SAlert type="success" message="პასუხი სწორია" />
         )}
@@ -57,17 +62,23 @@ export function QuizQuestion({
 
 export function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
-    titleStyles: {
+    title: {
       paddingVertical: sizes.spaceMedium,
     },
-    answersWrapper: {
+    header: {
       display: "flex",
-      flexDirection: "column",
-      gap: sizes.spaceMedium,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingVertical: sizes.spaceMedium,
     },
-    alertBox: {
+    alertWrapper: {
       width: "100%",
       marginTop: sizes.spaceMedium,
+    },
+    supportIcon: {
+      color: colors.successColor,
+      fontSize: 24,
     },
     scrollView: {
       paddingHorizontal: sizes.spaceMedium,
