@@ -7,22 +7,33 @@ import {
 import Icon from "react-native-vector-icons/AntDesign";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-type PlayButtonProps = {} & TouchableOpacityProps;
+type PlayButtonProps = {
+  icon: "play" | "pausecircle";
+} & TouchableOpacityProps;
 
-export function PlayButton({ children, style, ...props }: PlayButtonProps) {
+export function PlayButton({
+  children,
+  icon,
+  style,
+  ...props
+}: PlayButtonProps) {
   const theme = useThemeProvider();
 
-  const styles = getStyleSheet({ ...theme });
+  const styles = getStyleSheet({ ...theme, icon });
   const touchableStyles = StyleSheet.flatten([styles.button, style]);
 
   return (
     <TouchableOpacity {...props} style={touchableStyles}>
-      <Icon name="play" style={styles.playIcon} />
+      <Icon name={icon} style={styles.playIcon} />
     </TouchableOpacity>
   );
 }
 
-function getStyleSheet({ colors, sizes }: ThemeContextValue) {
+function getStyleSheet({
+  colors,
+  sizes,
+  icon,
+}: { icon: string } & ThemeContextValue) {
   return StyleSheet.create({
     button: {
       width: 100,
@@ -35,7 +46,7 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
     },
     playIcon: {
       fontSize: 60,
-      color: colors.successColor,
+      color: icon === "play" ? colors.successColor : colors.errorColor,
     },
   });
 }

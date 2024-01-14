@@ -1,0 +1,1 @@
+export { AgreeModal } from "./AgreeModal";

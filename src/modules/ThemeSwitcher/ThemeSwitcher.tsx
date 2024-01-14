@@ -7,8 +7,6 @@ import {
   ThemeMode_Enum,
   useThemeProvider,
 } from "~/providers/ThemeProvider";
-
-import IconAwesome from "react-native-vector-icons/FontAwesome5";
 import IconFeather from "react-native-vector-icons/Feather";
 
 type ThemeSwitcherProps = {
@@ -31,8 +29,8 @@ export function ThemeSwitcher({ style }: ThemeSwitcherProps) {
           text="მწვანე"
           onPress={() => changeTheme(ThemeMode_Enum.GREEN)}
           icon={
-            <IconAwesome
-              name="frog"
+            <IconFeather
+              name="moon"
               size={themeValues.sizes.iconMedium}
               color="#98FB98"
             />

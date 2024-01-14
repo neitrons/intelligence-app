@@ -8,10 +8,10 @@ import { TextList } from "~/components/TextList";
 import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
 
 type GuideModalProps = {
-  open: boolean;
   title: string;
   guideTexts: string[];
   image: ImageSourcePropType;
+  open: boolean;
   onClose: () => void;
   onSubmit: () => void;
 };
@@ -38,6 +38,7 @@ export function GuideModal({
       </View>
       <View style={styles.bottomContainer}>
         <PlayButton
+          icon="play"
           onPress={() => {
             onSubmit();
             onClose();

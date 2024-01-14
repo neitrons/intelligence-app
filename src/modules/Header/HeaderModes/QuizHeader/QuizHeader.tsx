@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { router } from "expo-router";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import { AgreeModal } from "~/modules/AgreeModal";
 
 import { Title } from "~/components/Title";
 import { HeaderBack } from "../../components/HeaderBack";
 
 export function QuizHeader() {
+  const [cancelGameModal, setCancelGameModal] = useState(false);
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
   const { state } = useQuizContext();
@@ -18,19 +21,24 @@ export function QuizHeader() {
   return (
     <View style={styles.header}>
       {state.quizFinished ? (
-        <View>
-          <HeaderBack />
-        </View>
+        <HeaderBack />
       ) : (
-        <View>
-          <TouchableOpacity onPress={() => router.push("/")}>
+        <>
+          <TouchableOpacity onPress={() => setCancelGameModal(true)}>
             <Text style={styles.cancel}>შეწყვეტა</Text>
           </TouchableOpacity>
           <Title size="small">
             {ownAnswers.length} / {state.quizLength}
           </Title>
-        </View>
+        </>
       )}
+      <AgreeModal
+        open={cancelGameModal}
+        onClose={() => setCancelGameModal(false)}
+        onSubmit={() => router.replace("/")}
+        title="თამაშის შეწყვეტა"
+        description="თამაშის შეწყვეტის შემთხვევაში დაგეკარგებად მიღწეული პროგრესი"
+      />
     </View>
   );
 }
