@@ -4,6 +4,17 @@ import { composeRandomQuestions } from "./utils/composeRandomQuestions";
 
 import { useStaticData } from "../StaticDataProvider/hooks/useStaticData";
 
+const initialState: TQuizState = {
+  answerText: "",
+  userAnswer: undefined,
+  currentQuiz: 0,
+  quizFinished: false,
+  quizLength: 15,
+  questions: [],
+  skippedQuestions: [],
+  userAnswers: [],
+};
+
 const QuizReducer = (state: TQuizState, action: TQuizAction): TQuizState => {
   switch (action.type) {
     case "ANSWER_TEXT":
@@ -20,6 +31,9 @@ const QuizReducer = (state: TQuizState, action: TQuizAction): TQuizState => {
       return { ...state, skippedQuestions: action.payload };
     case "USER_ANSWERS":
       return { ...state, userAnswers: action.payload };
+    case "RESET": {
+      return { ...initialState };
+    }
     default:
       return state;
   }
@@ -34,23 +48,26 @@ export function QuizProvider({ children }: PropsWithChildren) {
     questions: [],
     skippedQuestions: [],
     userAnswers: [],
+    quizLength: 15,
   });
-
-  const quizLength = 15;
   const { quizQuestions } = useStaticData();
 
-  useEffect(() => {
+  function startQuiz() {
     if (quizQuestions.length === 0) return;
-    const randomQuestions = composeRandomQuestions(quizQuestions, quizLength);
+    dispatch({ type: "RESET" });
+    const randomQuestions = composeRandomQuestions(
+      quizQuestions,
+      state.quizLength
+    );
     dispatch({ type: "QUESTIONS", payload: randomQuestions });
-  }, [quizQuestions]);
+  }
 
   return (
     <QuizContext.Provider
       value={{
         dispatch,
         state,
-        quizLength,
+        startQuiz,
       }}
     >
       {children}

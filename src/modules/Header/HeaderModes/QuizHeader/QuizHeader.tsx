@@ -1,24 +1,36 @@
 import { router } from "expo-router";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
-
-import { Title } from "~/components/Title";
 import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+
+import { Title } from "~/components/Title";
+import { HeaderBack } from "../../components/HeaderBack";
 
 export function QuizHeader() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
-  const { userAnswers, quizLength } = useQuizContext();
-  const ownAnswers = userAnswers.filter((answer) => answer.supported === false);
+  const { state } = useQuizContext();
+
+  const ownAnswers = state.userAnswers.filter(
+    (answer) => answer.supported === false
+  );
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={() => router.push("/")}>
-        <Text style={styles.cancel}>შეწყვეტა</Text>
-      </TouchableOpacity>
-      <Title size="small">
-        {ownAnswers.length} / {quizLength}
-      </Title>
+      {state.quizFinished ? (
+        <View>
+          <HeaderBack />
+        </View>
+      ) : (
+        <View>
+          <TouchableOpacity onPress={() => router.push("/")}>
+            <Text style={styles.cancel}>შეწყვეტა</Text>
+          </TouchableOpacity>
+          <Title size="small">
+            {ownAnswers.length} / {state.quizLength}
+          </Title>
+        </View>
+      )}
     </View>
   );
 }

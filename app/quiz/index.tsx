@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
@@ -11,8 +11,7 @@ import { TQuestion } from "~/@types/question.types";
 export default function Quiz() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
-
-  const { dispatch, state } = useQuizContext();
+  const { dispatch, state, startQuiz } = useQuizContext();
 
   const correctAnswer = useMemo(
     () =>
@@ -79,6 +78,10 @@ export default function Quiz() {
       dispatch({ type: "CURRENT_QUIZ", payload: state.currentQuiz + 1 });
     }
   }
+
+  useEffect(() => {
+    startQuiz();
+  }, []);
 
   return (
     <View style={styles.container}>

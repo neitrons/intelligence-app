@@ -23,7 +23,7 @@ export function HeaderBack() {
             size={theme.sizes.iconSmall}
             color={theme.colors.primaryActions}
           />
-          <Text style={styles.title}>Back</Text>
+          <Text style={styles.title}>მთავარი გვერდი</Text>
         </>
       )}
     </TouchableOpacity>

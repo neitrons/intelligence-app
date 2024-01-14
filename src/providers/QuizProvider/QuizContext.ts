@@ -9,6 +9,7 @@ export type TQuizState = {
   questions: TQuestion[];
   skippedQuestions: TQuestion[];
   userAnswers: TQuizAnswer[];
+  quizLength: number;
 };
 
 export type TQuizAction =
@@ -18,23 +19,25 @@ export type TQuizAction =
   | { type: "QUIZ_FINISHED"; payload: boolean }
   | { type: "QUESTIONS"; payload: TQuestion[] }
   | { type: "SKIPPED_QUESTIONS"; payload: TQuestion[] }
-  | { type: "USER_ANSWERS"; payload: TQuizAnswer[] };
+  | { type: "USER_ANSWERS"; payload: TQuizAnswer[] }
+  | { type: "RESET" };
 
 type TQuizContextValue = {
   state: TQuizState;
   dispatch: React.Dispatch<TQuizAction>;
-  quizLength: number;
+  startQuiz: () => void;
 };
 
 export const QuizContext = createContext<TQuizContextValue>({
-  quizLength: 15,
   dispatch: () => {},
   state: {
     answerText: "",
     quizFinished: false,
+    quizLength: 15,
     currentQuiz: 0,
     questions: [],
     userAnswers: [],
     skippedQuestions: [],
   },
+  startQuiz: () => {},
 });
