@@ -1,19 +1,13 @@
-import { PropsWithChildren, useEffect, useReducer } from "react";
-import { QuizContext, TQuizState, TQuizAction } from "./QuizContext";
-import { composeRandomQuestions } from "./utils/composeRandomQuestions";
+import { PropsWithChildren, useReducer } from "react";
+import {
+  QuizContext,
+  TQuizState,
+  TQuizAction,
+  quizInitialState,
+} from "./QuizContext";
+import { composeRandomQuestions } from "~/utils/composeRandomQuestions";
 
 import { useStaticData } from "../StaticDataProvider/hooks/useStaticData";
-
-const initialState: TQuizState = {
-  answerText: "",
-  userAnswer: undefined,
-  currentQuiz: 0,
-  quizFinished: false,
-  quizLength: 15,
-  questions: [],
-  skippedQuestions: [],
-  userAnswers: [],
-};
 
 const QuizReducer = (state: TQuizState, action: TQuizAction): TQuizState => {
   switch (action.type) {
@@ -32,7 +26,7 @@ const QuizReducer = (state: TQuizState, action: TQuizAction): TQuizState => {
     case "USER_ANSWERS":
       return { ...state, userAnswers: action.payload };
     case "RESET": {
-      return { ...initialState };
+      return { ...quizInitialState };
     }
     default:
       return state;

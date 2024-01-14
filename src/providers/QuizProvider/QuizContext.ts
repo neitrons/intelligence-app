@@ -28,16 +28,19 @@ type TQuizContextValue = {
   startQuiz: () => void;
 };
 
+export const quizInitialState: TQuizState = {
+  answerText: "",
+  userAnswer: undefined,
+  currentQuiz: 0,
+  quizFinished: false,
+  quizLength: 15,
+  questions: [],
+  skippedQuestions: [],
+  userAnswers: [],
+};
+
 export const QuizContext = createContext<TQuizContextValue>({
   dispatch: () => {},
-  state: {
-    answerText: "",
-    quizFinished: false,
-    quizLength: 15,
-    currentQuiz: 0,
-    questions: [],
-    userAnswers: [],
-    skippedQuestions: [],
-  },
+  state: quizInitialState,
   startQuiz: () => {},
 });
