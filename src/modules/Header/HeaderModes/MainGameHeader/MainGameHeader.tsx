@@ -1,5 +1,5 @@
 import { View } from "react-native";
 
-export default function Standard() {
+export function MainGameHeader() {
   return <View></View>;
 }

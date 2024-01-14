@@ -6,6 +6,7 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { QuizHeader } from "./HeaderModes/QuizHeader";
 import { StandardHeader } from "./HeaderModes/StandardHeader";
+import { MainGameHeader } from "./HeaderModes/MainGameHeader";
 
 export function Header() {
   const pathname = usePathname();
@@ -17,6 +18,8 @@ export function Header() {
   const headerContent = useMemo(() => {
     if (pathname.includes("/quiz")) {
       return <QuizHeader />;
+    } else if (pathname.includes("/standard")) {
+      return <MainGameHeader />;
     } else {
       return <StandardHeader />;
     }

@@ -6,7 +6,7 @@ import {
   mainGameInitialState,
 } from "./MainGameContext";
 
-const MainGameReducer = (
+const mainGameReducer = (
   state: TMainGameState,
   action: TMainGameAction
 ): TMainGameState => {
@@ -19,7 +19,7 @@ const MainGameReducer = (
 };
 
 export function MainGameProvider({ children }: PropsWithChildren) {
-  const [state, dispatch] = useReducer(MainGameReducer, mainGameInitialState);
+  const [state, dispatch] = useReducer(mainGameReducer, mainGameInitialState);
 
   return (
     <MainGameContext.Provider value={{ state, dispatch }}>
