@@ -26,13 +26,13 @@ export function ThemeSwitcher({ style }: ThemeSwitcherProps) {
       <Title>აირჩიე სასურველი ვიზუალი</Title>
       <View style={styles.buttons}>
         <SwitcherButton
-          text="მწვანე"
+          text="ღამე"
           onPress={() => changeTheme(ThemeMode_Enum.GREEN)}
           icon={
             <IconFeather
               name="moon"
               size={themeValues.sizes.iconMedium}
-              color="#98FB98"
+              color="#2d2d30"
             />
           }
         />
