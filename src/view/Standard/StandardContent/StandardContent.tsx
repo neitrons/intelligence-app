@@ -1,7 +1,9 @@
 import { ScrollView, Text, StyleSheet } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-export function StandardContent() {
+type StandardContentProps = {};
+
+export function StandardContent({}: StandardContentProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 

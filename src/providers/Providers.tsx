@@ -4,7 +4,7 @@ import { ThemeProvider } from "./ThemeProvider";
 import { LocaleProvider } from "./LocaleProvider";
 import { StaticDataProvider } from "./StaticDataProvider";
 import { QuizProvider } from "./QuizProvider";
-import { MainGameProvider } from "./MainGameProvider";
+import { StandardProvider } from "./StandardProvider";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export function Providers({ children }: PropsWithChildren) {
@@ -13,9 +13,9 @@ export function Providers({ children }: PropsWithChildren) {
       <LocaleProvider>
         <ThemeProvider>
           <StaticDataProvider>
-            <MainGameProvider>
+            <StandardProvider>
               <QuizProvider>{children}</QuizProvider>
-            </MainGameProvider>
+            </StandardProvider>
           </StaticDataProvider>
         </ThemeProvider>
       </LocaleProvider>
