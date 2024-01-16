@@ -1,14 +1,18 @@
-import SkeletonPlaceholder from "react-native-skeleton-placeholder";
+import { View, StyleSheet } from "react-native";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+
 export function MainSkeleton() {
-  return (
-    <SkeletonPlaceholder borderRadius={4}>
-      <SkeletonPlaceholder.Item flexDirection="row" alignItems="center">
-        <SkeletonPlaceholder.Item width={60} height={60} borderRadius={50} />
-        <SkeletonPlaceholder.Item marginLeft={20}>
-          <SkeletonPlaceholder.Item width={120} height={20} />
-          <SkeletonPlaceholder.Item marginTop={6} width={80} height={20} />
-        </SkeletonPlaceholder.Item>
-      </SkeletonPlaceholder.Item>
-    </SkeletonPlaceholder>
-  );
+  const theme = useThemeProvider();
+  const styles = getStyleSheet({ ...theme });
+
+  return <View style={styles.skeletonContainer}></View>;
+}
+
+function getStyleSheet({}: ThemeContextValue) {
+  return StyleSheet.create({
+    skeletonContainer: {
+      flexDirection: "column",
+      alignItems: "center",
+    },
+  });
 }
