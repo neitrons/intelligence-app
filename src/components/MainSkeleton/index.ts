@@ -1,0 +1,1 @@
+export { MainSkeleton } from "./MainSkeleton";
