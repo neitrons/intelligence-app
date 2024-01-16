@@ -1,5 +1,25 @@
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+
+import { StandardContent } from "~/view/Standard/StandardContent";
+import { StandardFooter } from "~/view/Standard/StandardFooter";
 
 export default function Standard() {
-  return <View></View>;
+  const theme = useThemeProvider();
+  const styles = getStyleSheet({ ...theme });
+
+  return (
+    <View style={styles.container}>
+      <StandardContent />
+      <StandardFooter />
+    </View>
+  );
+}
+
+function getStyleSheet({}: {} & ThemeContextValue) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+  });
 }
