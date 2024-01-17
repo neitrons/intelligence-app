@@ -1,11 +1,12 @@
 import { StyleSheet, Image, View, ImageSourcePropType } from "react-native";
+import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
 
 import { Title } from "~/components/Title";
 import { SModal } from "~/components/SModal";
-import { PlayButton } from "~/components/PlayButton";
 import { TextList } from "~/components/TextList";
+import { CircleButton } from "~/components/CircleButton";
 
-import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
+import Icon from "react-native-vector-icons/AntDesign";
 
 type GuideModalProps = {
   title: string;
@@ -37,22 +38,31 @@ export function GuideModal({
         <TextList texts={guideTexts} />
       </View>
       <View style={styles.bottomContainer}>
-        <PlayButton
-          icon="play"
+        <CircleButton
+          style={styles.playButton}
           onPress={() => {
             onSubmit();
             onClose();
           }}
-        />
+        >
+          <Icon name="play" style={styles.playIcon} />
+        </CircleButton>
       </View>
     </SModal>
   );
 }
 
-function getStyleSheet({ sizes }: ThemeContextValue) {
+function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
     modalContainer: {
       paddingTop: sizes.spaceLarge,
+    },
+    playButton: {
+      borderColor: colors.successColor,
+    },
+    playIcon: {
+      fontSize: 60,
+      color: colors.successColor,
     },
     imageWrapper: {
       flex: 1,

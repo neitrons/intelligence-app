@@ -1,7 +1,11 @@
-import { TouchableOpacity, StyleSheet, ViewProps } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  TouchableOpacityProps,
+} from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-type CircleButtonProps = {} & ViewProps;
+type CircleButtonProps = {} & TouchableOpacityProps;
 
 export function CircleButton({ style, ...props }: CircleButtonProps) {
   const theme = useThemeProvider();

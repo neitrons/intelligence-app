@@ -4,7 +4,9 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { Card } from "~/components/Card";
 import { SModal } from "~/components/SModal";
 import { Title } from "~/components/Title";
-import { PlayButton } from "~/components/PlayButton";
+import { CircleButton } from "~/components/CircleButton";
+
+import Icon from "react-native-vector-icons/AntDesign";
 
 type AgreeModalProps = {
   open: boolean;
@@ -32,7 +34,9 @@ export function AgreeModal({
           <Title style={styles.cardText}>{description}</Title>
         </Card>
         <View style={styles.bottomContainer}>
-          <PlayButton icon="pausecircle" onPress={onSubmit} />
+          <CircleButton style={styles.stopButton} onPress={onSubmit}>
+            <Icon name="pausecircle" style={styles.stopIcon} />
+          </CircleButton>
         </View>
       </View>
     </SModal>
@@ -43,6 +47,13 @@ function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
     modalContaienr: {
       paddingTop: sizes.spaceLarge,
+    },
+    stopButton: {
+      borderColor: colors.errorColor,
+    },
+    stopIcon: {
+      fontSize: 60,
+      color: colors.errorColor,
     },
     card: {
       marginTop: sizes.spaceLarge,
