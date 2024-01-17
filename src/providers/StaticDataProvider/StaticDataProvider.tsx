@@ -1,8 +1,9 @@
 import { PropsWithChildren } from "react";
 import { StaticDataContext } from "./StaticDataContext";
 import { useFetchQuestions } from "./hooks/useFetchQuestions";
-import { MainSkeleton } from "~/components/MainSkeleton";
 import { useQuizQuestions } from "./hooks/useQuizQuestions";
+
+import { MainSkeleton } from "~/components/MainSkeleton";
 
 export function StaticDataProvider({ children }: PropsWithChildren) {
   const { questions, questionsLoading } = useFetchQuestions();
@@ -17,7 +18,7 @@ export function StaticDataProvider({ children }: PropsWithChildren) {
         quizQuestionsLoading,
       }}
     >
-      {true ? <MainSkeleton /> : children}
+      {questionsLoading || quizQuestionsLoading ? <MainSkeleton /> : children}
     </StaticDataContext.Provider>
   );
 }

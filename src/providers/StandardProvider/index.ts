@@ -1,2 +1,2 @@
-export { useStandardProvider } from "./useMainGameProvider";
+export { useStandardProvider } from "./useStandardProvider";
 export { StandardProvider } from "./StandardProvider";
