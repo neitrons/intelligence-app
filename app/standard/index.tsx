@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { useStandardProvider } from "~/providers/StandardProvider";
@@ -9,7 +10,11 @@ export default function Standard() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
-  const { startGame } = useStandardProvider();
+  const { startGame, state } = useStandardProvider();
+
+  useEffect(() => {
+    startGame();
+  }, []);
 
   return (
     <View style={styles.container}>

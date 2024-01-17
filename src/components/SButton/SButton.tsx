@@ -3,6 +3,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
+  StyleProp,
+  TextStyle,
 } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
@@ -13,6 +15,7 @@ type SButtonProps = {
   noRadius?: boolean;
   prefix?: React.ReactNode;
   sufix?: React.ReactNode;
+  textStyle?: StyleProp<TextStyle>;
 } & TouchableOpacityProps;
 
 export function SButton({
@@ -21,17 +24,19 @@ export function SButton({
   type = "default",
   prefix,
   sufix,
+  textStyle,
   ...props
 }: SButtonProps) {
   const theme = useThemeProvider();
 
   const styles = getStyleSheet({ ...theme, type, disabled: props.disabled });
   const touchableStyles = StyleSheet.flatten([styles.touchable, style]);
+  const textStyles = StyleSheet.flatten([styles.text, textStyle]);
 
   return (
     <TouchableOpacity {...props} style={touchableStyles}>
       {prefix && prefix}
-      {children && <Text style={styles.text}>{children}</Text>}
+      {children && <Text style={textStyles}>{children}</Text>}
       {sufix && sufix}
     </TouchableOpacity>
   );
