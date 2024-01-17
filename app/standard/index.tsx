@@ -18,13 +18,13 @@ export default function Standard() {
 
   return (
     <View style={styles.container}>
-      <StandardContent />
+      <StandardContent question={state.questions?.[0]} />
       <StandardFooter />
     </View>
   );
 }
 
-function getStyleSheet({}: {} & ThemeContextValue) {
+function getStyleSheet({ sizes }: {} & ThemeContextValue) {
   return StyleSheet.create({
     container: {
       flex: 1,
