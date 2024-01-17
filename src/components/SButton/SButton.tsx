@@ -10,9 +10,12 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 type TSButtonTypes = "primary" | "default";
 
+type TButtonSize = "small" | "medium" | "large";
+
 type SButtonProps = {
   type?: TSButtonTypes;
   noRadius?: boolean;
+  size?: TButtonSize;
   prefix?: React.ReactNode;
   sufix?: React.ReactNode;
   textStyle?: StyleProp<TextStyle>;
@@ -23,13 +26,19 @@ export function SButton({
   children,
   type = "default",
   prefix,
+  size = "medium",
   sufix,
   textStyle,
   ...props
 }: SButtonProps) {
   const theme = useThemeProvider();
 
-  const styles = getStyleSheet({ ...theme, type, disabled: props.disabled });
+  const styles = getStyleSheet({
+    ...theme,
+    type,
+    disabled: props.disabled,
+    size,
+  });
   const touchableStyles = StyleSheet.flatten([styles.touchable, style]);
   const textStyles = StyleSheet.flatten([styles.text, textStyle]);
 
@@ -46,15 +55,30 @@ export function getStyleSheet({
   sizes,
   colors,
   type,
+  size,
   disabled,
-}: { type: TSButtonTypes; disabled?: boolean } & ThemeContextValue) {
+}: {
+  type: TSButtonTypes;
+  disabled?: boolean;
+  size: TButtonSize;
+} & ThemeContextValue) {
+  const padding =
+    (size === "small" && sizes.spaceSmall) ||
+    (size === "medium" && sizes.spaceMedium) ||
+    (size === "large" && sizes.spaceLarge);
+
+  const font =
+    (size === "small" && sizes.textSmall) ||
+    (size === "medium" && sizes.textMedium) ||
+    (size === "large" && sizes.textLarge);
+
   return StyleSheet.create({
     touchable: {
       flexDirection: "row",
       borderWidth: 1,
       alignItems: "center",
       justifyContent: "center",
-      padding: sizes.spaceSmall,
+      padding: padding as number,
       borderRadius: sizes.radiusSmall,
       opacity: disabled ? 0.5 : 1,
       borderColor:
@@ -66,7 +90,7 @@ export function getStyleSheet({
     },
     text: {
       fontWeight: "600",
-      fontSize: sizes.textSmall,
+      fontSize: font as number,
       color:
         (type === "primary" && colors.primaryText) ||
         ((type === "default" && colors.primaryActions) as string),

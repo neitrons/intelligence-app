@@ -42,7 +42,8 @@ function getStyleSheet({
       justifyContent: "center",
       alignItems: "center",
       borderRadius: sizes.radiusFull,
-      borderWidth: 1,
+      borderWidth: 2,
+      borderColor: icon === "play" ? colors.successColor : colors.errorColor,
     },
     playIcon: {
       fontSize: 60,
