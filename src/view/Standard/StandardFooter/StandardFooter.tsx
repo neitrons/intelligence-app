@@ -1,7 +1,9 @@
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { SButton } from "~/components/SButton";
+import { CircleButton } from "~/components/CircleButton";
+
 import Icon from "react-native-vector-icons/AntDesign";
 
 type StandardFooterProps = {};
@@ -13,9 +15,9 @@ export function StandardFooter({}: StandardFooterProps) {
   return (
     <View style={styles.footer}>
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.circleIndicator}>
+        <CircleButton style={styles.circleIndicator}>
           <Icon name="play" style={styles.circleIcon} />
-        </TouchableOpacity>
+        </CircleButton>
       </View>
       <View style={styles.buttons}>
         <SButton
@@ -47,13 +49,6 @@ function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
       padding: sizes.spaceMedium,
     },
     circleIndicator: {
-      width: 100,
-      height: 100,
-      borderRadius: 100,
-      borderWidth: 2,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
       borderColor: colors.successColor,
     },
     circleIcon: {
