@@ -5,8 +5,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { QuizHeader } from "./HeaderModes/QuizHeader";
+import { DefaultHeader } from "./HeaderModes/DefaultHeader";
 import { StandardHeader } from "./HeaderModes/StandardHeader";
-import { MainGameHeader } from "./HeaderModes/MainGameHeader";
 
 export function Header() {
   const pathname = usePathname();
@@ -19,9 +19,9 @@ export function Header() {
     if (pathname.includes("/quiz")) {
       return <QuizHeader />;
     } else if (pathname.includes("/standard")) {
-      return <MainGameHeader />;
-    } else {
       return <StandardHeader />;
+    } else {
+      return <DefaultHeader />;
     }
   }, [pathname]);
 
