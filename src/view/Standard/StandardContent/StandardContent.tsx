@@ -6,6 +6,8 @@ import { Title } from "~/components/Title";
 
 import { TQuestion } from "~/@types/question.types";
 
+import Clock from "~/assets/icons/clock.svg";
+
 type StandardContentProps = {
   question: TQuestion;
 };
@@ -18,6 +20,7 @@ export function StandardContent({ question }: StandardContentProps) {
     <ScrollView style={styles.scrollView}>
       <View style={styles.header}>
         <Title>კითხვა</Title>
+        <View style={styles.supports}></View>
       </View>
       <Card style={styles.box}>
         <Text>{question?.questionText}</Text>
@@ -37,6 +40,7 @@ function getStyleSheet({ sizes }: {} & ThemeContextValue) {
       marginTop: sizes.spaceMedium,
       justifyContent: "space-between",
     },
+    supports: {},
     box: {
       marginTop: sizes.spaceMedium,
     },
