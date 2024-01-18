@@ -1,12 +1,12 @@
 import { ScrollView, Text, StyleSheet, View } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import { useStandardProvider } from "~/providers/StandardProvider";
 
 import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 
 import { TQuestion } from "~/@types/question.types";
-
-import Clock from "~/assets/icons/clock.svg";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 type StandardContentProps = {
   question: TQuestion;
@@ -14,13 +14,20 @@ type StandardContentProps = {
 
 export function StandardContent({ question }: StandardContentProps) {
   const theme = useThemeProvider();
+  const {
+    state: { supports },
+  } = useStandardProvider();
   const styles = getStyleSheet({ ...theme });
 
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.header}>
         <Title>კითხვა</Title>
-        <View style={styles.supports}></View>
+        <View style={styles.supports}>
+          {Array.from({ length: supports }).map((_, index) => {
+            return <Icon style={styles.icon} name="stopwatch" />;
+          })}
+        </View>
       </View>
       <Card style={styles.box}>
         <Text>{question?.questionText}</Text>
@@ -33,14 +40,24 @@ export function StandardContent({ question }: StandardContentProps) {
   );
 }
 
-function getStyleSheet({ sizes }: {} & ThemeContextValue) {
+function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
   return StyleSheet.create({
     header: {
       display: "flex",
+      flexDirection: "row",
       marginTop: sizes.spaceMedium,
+      alignItems: "center",
       justifyContent: "space-between",
     },
-    supports: {},
+    supports: {
+      display: "flex",
+      flexDirection: "row",
+      gap: sizes.spaceSmall,
+    },
+    icon: {
+      fontSize: sizes.iconSmall,
+      color: colors.successColor,
+    },
     box: {
       marginTop: sizes.spaceMedium,
     },

@@ -20,6 +20,12 @@ const standardReducer = (
       state.userAnswers.push(action.payload);
       return { ...state };
     }
+    case "ADD_SUPPORT": {
+      return { ...state, supports: ++state.supports };
+    }
+    case "REMOVE_SUPPORT": {
+      return { ...state, supports: --state.supports };
+    }
     case "RESET": {
       return { ...standardInitialState };
     }
