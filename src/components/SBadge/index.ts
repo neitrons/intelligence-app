@@ -1,1 +1,0 @@
-export { SBadge } from "./SBadge";

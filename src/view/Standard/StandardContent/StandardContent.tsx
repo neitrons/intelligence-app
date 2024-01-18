@@ -25,7 +25,7 @@ export function StandardContent({ question }: StandardContentProps) {
         <Title>კითხვა</Title>
         <View style={styles.supports}>
           {Array.from({ length: supports }).map((_, index) => {
-            return <Icon style={styles.icon} name="stopwatch" />;
+            return <Icon key={index} style={styles.icon} name="stopwatch" />;
           })}
         </View>
       </View>

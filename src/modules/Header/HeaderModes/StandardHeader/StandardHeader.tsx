@@ -4,8 +4,8 @@ import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { useStandardProvider } from "~/providers/StandardProvider";
 
-import { Title } from "~/components/Title";
 import { AgreeModal } from "~/modules/AgreeModal";
+import { ResultBox } from "~/components/ResultBox";
 
 export function StandardHeader() {
   const [cancelGameModal, setCancelGameModal] = useState(false);
@@ -26,9 +26,9 @@ export function StandardHeader() {
       <TouchableOpacity onPress={() => setCancelGameModal(true)}>
         <Text style={styles.cancel}>შეწყვეტა</Text>
       </TouchableOpacity>
-      <View>
-        <Title>სწორი პასუხები: {correctAnswers.length}</Title>
-        <Title>არასწორი პასუხები: {incorrectAnswers.length}</Title>
+      <View style={styles.results}>
+        <ResultBox text={correctAnswers.length.toString()} correct />
+        <ResultBox text={incorrectAnswers.length.toString()} correct={false} />
       </View>
       <AgreeModal
         open={cancelGameModal}
@@ -41,7 +41,7 @@ export function StandardHeader() {
   );
 }
 
-function getStyleSheet({ colors }: {} & ThemeContextValue) {
+function getStyleSheet({ colors, sizes }: {} & ThemeContextValue) {
   return StyleSheet.create({
     header: {
       width: "100%",
@@ -49,6 +49,11 @@ function getStyleSheet({ colors }: {} & ThemeContextValue) {
       alignItems: "center",
       flexDirection: "row",
       justifyContent: "space-between",
+    },
+    results: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: sizes.spaceSmall,
     },
     cancel: {
       color: colors.errorColor,
