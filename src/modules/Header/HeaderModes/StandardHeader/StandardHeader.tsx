@@ -2,20 +2,34 @@ import { useState } from "react";
 import { router } from "expo-router";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import { useStandardProvider } from "~/providers/StandardProvider";
 
+import { Title } from "~/components/Title";
 import { AgreeModal } from "~/modules/AgreeModal";
 
 export function StandardHeader() {
   const [cancelGameModal, setCancelGameModal] = useState(false);
+  const {
+    state: { userAnswers },
+  } = useStandardProvider();
 
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
+
+  const correctAnswers = userAnswers.filter((userAnswer) => userAnswer.correct);
+  const incorrectAnswers = userAnswers.filter(
+    (userAnswer) => !userAnswer.correct
+  );
 
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={() => setCancelGameModal(true)}>
         <Text style={styles.cancel}>შეწყვეტა</Text>
       </TouchableOpacity>
+      <View>
+        <Title>სწორი პასუხები: {correctAnswers.length}</Title>
+        <Title>არასწორი პასუხები: {incorrectAnswers.length}</Title>
+      </View>
       <AgreeModal
         open={cancelGameModal}
         onClose={() => setCancelGameModal(false)}

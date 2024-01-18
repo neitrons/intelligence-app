@@ -12,3 +12,8 @@ export type TQuizAnswer = {
   userAnswer: string;
   supported: boolean;
 };
+
+export type TUserAnswer = {
+  question: TQuestion;
+  correct: boolean;
+};

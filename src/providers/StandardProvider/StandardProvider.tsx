@@ -16,6 +16,10 @@ const standardReducer = (
   switch (action.type) {
     case "QUESTIONS":
       return { ...state, questions: action.payload };
+    case "ADD_USER_ANSWER": {
+      state.userAnswers.push(action.payload);
+      return { ...state };
+    }
     case "RESET": {
       return { ...standardInitialState };
     }
@@ -29,7 +33,7 @@ export function StandardProvider({ children }: PropsWithChildren) {
 
   const { questions } = useStaticData();
 
-  function startGame() {
+  function prepareGame() {
     if (questions.length === 0) return;
     dispatch({ type: "RESET" });
     const randomQuestions = composeRandomQuestions(
@@ -40,7 +44,7 @@ export function StandardProvider({ children }: PropsWithChildren) {
   }
 
   return (
-    <StandardContext.Provider value={{ startGame, state, dispatch }}>
+    <StandardContext.Provider value={{ prepareGame, state, dispatch }}>
       {children}
     </StandardContext.Provider>
   );
