@@ -15,14 +15,14 @@ type StandardContentProps = {
 export function StandardContent({ question }: StandardContentProps) {
   const theme = useThemeProvider();
   const {
-    state: { supports },
+    state: { supports, currentQuestion },
   } = useStandardProvider();
   const styles = getStyleSheet({ ...theme });
 
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.header}>
-        <Title>კითხვა</Title>
+        <Title>კითხვა #{currentQuestion + 1}</Title>
         <View style={styles.supports}>
           {Array.from({ length: supports }).map((_, index) => {
             return <Icon key={index} style={styles.icon} name="stopwatch" />;
