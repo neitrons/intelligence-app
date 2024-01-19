@@ -1,4 +1,5 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { useStandardProvider } from "~/providers/StandardProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { SButton } from "~/components/SButton";
@@ -11,6 +12,10 @@ type StandardFooterProps = {};
 export function StandardFooter({}: StandardFooterProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
+  const {
+    state: { userAnswered },
+    dispatch,
+  } = useStandardProvider();
 
   const { seconds, startTimer } = useCountDown({
     secondsAmount: 60,
@@ -18,25 +23,46 @@ export function StandardFooter({}: StandardFooterProps) {
 
   return (
     <View style={styles.footer}>
-      <View style={styles.actions}>
-        <Text>{seconds}</Text>
-        <CircleButton style={styles.circleIndicator} onPress={() => {}}>
-          <Icon name="play" style={styles.circleIcon} />
-        </CircleButton>
-      </View>
+      {!userAnswered && (
+        <View style={styles.actions}>
+          <CircleButton style={styles.circleIndicator} onPress={() => {}}>
+            <Icon name="play" style={styles.circleIcon} />
+          </CircleButton>
+        </View>
+      )}
       <View style={styles.buttons}>
-        <SButton
-          style={[styles.button, styles.incorrectButton]}
-          textStyle={styles.incorrectButton}
-        >
-          არასწორი
-        </SButton>
-        <SButton
-          style={[styles.button, styles.correctButton]}
-          textStyle={styles.correctButton}
-        >
-          სწორი
-        </SButton>
+        {userAnswered ? (
+          <>
+            <SButton
+              style={styles.nextButton}
+              type="primary"
+              onPress={() => dispatch({ type: "ON_NEXT_QUESTION" })}
+            >
+              შემდეგი
+            </SButton>
+          </>
+        ) : (
+          <>
+            <SButton
+              style={[styles.answerButton, styles.incorrectButton]}
+              textStyle={styles.incorrectButton}
+              onPress={() =>
+                dispatch({ type: "ON_QUESTION_ANSWERED", payload: false })
+              }
+            >
+              არასწორი
+            </SButton>
+            <SButton
+              style={[styles.answerButton, styles.correctButton]}
+              textStyle={styles.correctButton}
+              onPress={() =>
+                dispatch({ type: "ON_QUESTION_ANSWERED", payload: true })
+              }
+            >
+              სწორი
+            </SButton>
+          </>
+        )}
       </View>
     </View>
   );
@@ -74,8 +100,11 @@ function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
       color: colors.successColor,
       borderColor: colors.successColor,
     },
-    button: {
+    answerButton: {
       width: "48%",
+    },
+    nextButton: {
+      width: "100%",
     },
   });
 }

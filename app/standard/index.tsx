@@ -11,7 +11,7 @@ export default function Standard() {
   const styles = getStyleSheet({ ...theme });
 
   const { prepareGame, state } = useStandardProvider();
-  const { questions } = state;
+  const { questions, currentQuestion } = state;
 
   useEffect(() => {
     prepareGame();
@@ -19,7 +19,7 @@ export default function Standard() {
 
   return (
     <View style={styles.container}>
-      <StandardContent question={questions?.[0]} />
+      <StandardContent question={questions?.[currentQuestion]} />
       <StandardFooter />
     </View>
   );

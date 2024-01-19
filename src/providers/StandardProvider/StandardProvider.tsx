@@ -16,24 +16,25 @@ const standardReducer = (
   switch (action.type) {
     case "QUESTIONS":
       return { ...state, questions: action.payload };
-    case "ADD_USER_ANSWER": {
-      state.userAnswers.push(action.payload);
-      return { ...state };
+
+    case "ON_QUESTION_ANSWERED": {
+      const currentQuestion = state.questions[state.currentQuestion];
+      return {
+        ...state,
+        userAnswered: true,
+        userAnswers: [
+          ...state.userAnswers,
+          { question: currentQuestion, correct: action.payload },
+        ],
+      };
     }
-    case "ADD_SUPPORT": {
-      return { ...state, supports: ++state.supports };
-    }
-    case "REMOVE_SUPPORT": {
-      return { ...state, supports: --state.supports };
-    }
-    case "NEXT_QUESTION": {
-      return { ...state, currentQuestion: ++state.currentQuestion };
-    }
-    case "SET_USER_ANSWERED": {
-      return { ...state, userAnswered: action.payload };
-    }
-    case "TIMER_USED": {
-      return { ...state, timerUsed: action.payload };
+    case "ON_NEXT_QUESTION": {
+      return {
+        ...state,
+        userAnswered: false,
+        timerUsed: false,
+        currentQuestion: ++state.currentQuestion,
+      };
     }
     case "RESET": {
       return { ...standardInitialState };
