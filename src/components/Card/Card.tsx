@@ -16,6 +16,7 @@ function getStyleSheet({ sizes, colors }: ThemeContextValue) {
     card: {
       borderWidth: 1,
       padding: sizes.spaceMedium,
+      borderColor: colors.primaryBorder,
       borderRadius: sizes.radiusSmall,
       backgroundColor: colors.primaryBg,
     },

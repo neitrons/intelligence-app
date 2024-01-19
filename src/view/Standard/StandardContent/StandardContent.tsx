@@ -30,11 +30,11 @@ export function StandardContent({ question }: StandardContentProps) {
         </View>
       </View>
       <Card style={styles.box}>
-        <Text>{question?.questionText}</Text>
+        <Text style={styles.questionText}>{question?.questionText}</Text>
       </Card>
       <Title style={styles.answerTitle}>პასუხი</Title>
-      <Card style={styles.box}>
-        <Text>{question?.answer}</Text>
+      <Card style={styles.answerBox}>
+        <Text style={styles.answerText}>{question?.answer}</Text>
       </Card>
     </ScrollView>
   );
@@ -56,6 +56,10 @@ function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
       alignItems: "center",
       gap: sizes.spaceSmall,
     },
+    questionText: {
+      fontSize: sizes.textSmall,
+      color: colors.primaryText,
+    },
     icon: {
       fontSize: sizes.iconSmall,
       color: colors.successColor,
@@ -63,7 +67,17 @@ function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
     box: {
       marginTop: sizes.spaceMedium,
     },
-    answerTitle: { marginTop: sizes.spaceMedium },
+    answerBox: {
+      marginTop: sizes.spaceMedium,
+      borderColor: colors.successColor,
+    },
+    answerText: {
+      color: colors.successColor,
+      fontSize: sizes.textSmall,
+    },
+    answerTitle: {
+      marginTop: sizes.spaceMedium,
+    },
     scrollView: {
       paddingHorizontal: sizes.spaceMedium,
     },

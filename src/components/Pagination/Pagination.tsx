@@ -28,7 +28,11 @@ export function Pagination({
     <View style={containerStyles}>
       {current - 2 > 0 && (
         <>
-          <SButton style={styles.button} onPress={() => onChange(1)}>
+          <SButton
+            size="small"
+            style={styles.button}
+            onPress={() => onChange(1)}
+          >
             1
           </SButton>
           <Icon style={styles.dividerDots} name="arrowleft" />
@@ -38,6 +42,7 @@ export function Pagination({
       {visiblePages.map((page) => {
         return (
           <SButton
+            size="small"
             key={page}
             style={styles.button}
             onPress={() => onChange(page)}
@@ -50,7 +55,11 @@ export function Pagination({
       {current + 2 < totalPages && (
         <>
           <Icon style={styles.dividerDots} name="arrowright" />
-          <SButton onPress={() => onChange(totalPages)} style={styles.button}>
+          <SButton
+            size="small"
+            onPress={() => onChange(totalPages)}
+            style={styles.button}
+          >
             {totalPages}
           </SButton>
         </>

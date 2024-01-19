@@ -45,7 +45,7 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
     container: {
       width: "100%",
       borderWidth: 1,
-      borderColor: colors.primaryBorder,
+      borderColor: colors.primaryActions,
       borderRadius: sizes.radiusSmall,
       overflow: "hidden",
     },
@@ -64,14 +64,20 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       justifyContent: "center",
       marginTop: sizes.spaceMedium,
     },
-    questionText: { fontSize: sizes.textSmall },
+    questionText: {
+      fontSize: sizes.textSmall,
+      color: colors.primaryText,
+    },
     questionImage: {
       width: "100%",
       height: "100%",
       aspectRatio: 1.5,
       resizeMode: "contain",
     },
-    answerText: { fontSize: sizes.textSmall },
+    answerText: {
+      fontSize: sizes.textSmall,
+      color: colors.successColor,
+    },
     showButton: {
       borderRadius: 0,
       borderLeftWidth: 0,
