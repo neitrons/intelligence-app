@@ -42,6 +42,13 @@ const standardReducer = (
         timerUsed: action.payload,
       };
     }
+    case "USE_SUPPORT": {
+      return {
+        ...state,
+        supports: --state.supports,
+        supportUsed: true,
+      };
+    }
     case "RESET": {
       return { ...standardInitialState };
     }

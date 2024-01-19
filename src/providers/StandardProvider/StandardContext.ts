@@ -9,6 +9,7 @@ export type TStandardState = {
   currentQuestion: number;
   questionsLength: number;
   userAnswers: TUserAnswer[];
+  supportUsed: boolean;
 };
 
 export const standardInitialState: TStandardState = {
@@ -19,6 +20,7 @@ export const standardInitialState: TStandardState = {
   questionsLength: 12,
   timerUsed: false,
   userAnswered: false,
+  supportUsed: false,
 };
 
 export type TStandardAction =
@@ -26,6 +28,7 @@ export type TStandardAction =
   | { type: "ON_QUESTION_ANSWERED"; payload: boolean }
   | { type: "ON_NEXT_QUESTION" }
   | { type: "SET_TIMER_USED"; payload: boolean }
+  | { type: "USE_SUPPORT" }
   | { type: "RESET" };
 
 type TStandardContextValue = {

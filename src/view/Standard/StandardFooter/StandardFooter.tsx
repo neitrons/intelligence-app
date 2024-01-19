@@ -6,6 +6,7 @@ import { SButton } from "~/components/SButton";
 import { CircleButton } from "~/components/CircleButton";
 import { useCountDown } from "~/hooks/useCountDown";
 import { Title } from "~/components/Title";
+
 import Icon from "react-native-vector-icons/AntDesign";
 import IconAwesome from "react-native-vector-icons/FontAwesome5";
 
@@ -15,20 +16,28 @@ export function StandardFooter({}: StandardFooterProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
   const {
-    state: { userAnswered, timerUsed, supports },
+    state: { userAnswered, timerUsed, supports, supportUsed },
     dispatch,
   } = useStandardProvider();
 
   const { seconds, startTimer, running } = useCountDown({
-    secondsAmount: 60,
+    secondsAmount: 10,
   });
 
+  const initialMode = !timerUsed && !running;
+  const timerMode = timerUsed && running;
+  const supportsMode = timerUsed && !running && supports > 0 && !supportUsed;
+  const answerMode =
+    (timerUsed && !running && supports === 0) ||
+    (timerUsed && !running && supportUsed);
+
   function onCircleButtonPress() {
-    if (!timerUsed && !running) {
+    if (initialMode) {
       startTimer();
       dispatch({ type: "SET_TIMER_USED", payload: true });
-    } else if (timerUsed && !running && supports > 0) {
-      console.log("დახმარების გამოყენება");
+    } else if (supportsMode) {
+      dispatch({ type: "USE_SUPPORT" });
+      startTimer();
     }
   }
 
@@ -39,14 +48,14 @@ export function StandardFooter({}: StandardFooterProps) {
           <CircleButton
             style={styles.circleIndicator}
             onPress={onCircleButtonPress}
+            disabled={timerMode && answerMode}
           >
-            {timerUsed && running && <Title>{seconds}</Title>}
-            {!timerUsed && !running && (
-              <Icon name="play" style={styles.circleIcon} />
-            )}
-            {timerUsed && !running && supports > 0 && (
+            {timerMode && <Title>{seconds}</Title>}
+            {initialMode && <Icon name="play" style={styles.circleIcon} />}
+            {supportsMode && (
               <IconAwesome name="stopwatch" style={styles.circleIcon} />
             )}
+            {answerMode && <Title>პასუხის დროა</Title>}
           </CircleButton>
         </View>
       )}

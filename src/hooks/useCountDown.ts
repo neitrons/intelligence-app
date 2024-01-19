@@ -27,6 +27,7 @@ export function useCountDown({ secondsAmount }: UseCountDownProps) {
   }, [running]);
 
   function startTimer() {
+    setSeconds(secondsAmount);
     setRunning(true);
   }
 
