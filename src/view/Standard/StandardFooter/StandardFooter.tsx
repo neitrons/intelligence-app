@@ -1,9 +1,9 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { SButton } from "~/components/SButton";
 import { CircleButton } from "~/components/CircleButton";
-
+import { useCountDown } from "~/hooks/useCountDown";
 import Icon from "react-native-vector-icons/AntDesign";
 
 type StandardFooterProps = {};
@@ -12,10 +12,15 @@ export function StandardFooter({}: StandardFooterProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
+  const { seconds, startTimer } = useCountDown({
+    secondsAmount: 60,
+  });
+
   return (
     <View style={styles.footer}>
       <View style={styles.actions}>
-        <CircleButton style={styles.circleIndicator}>
+        <Text>{seconds}</Text>
+        <CircleButton style={styles.circleIndicator} onPress={() => {}}>
           <Icon name="play" style={styles.circleIcon} />
         </CircleButton>
       </View>
