@@ -16,10 +16,10 @@ export type Colors = {
 };
 
 export const colors: Colors = {
-  [ThemeMode_Enum.GREEN]: {
-    primaryBg: "#1C3132",
-    primaryBorder: "#000000",
-    secondaryBg: "#244443",
+  [ThemeMode_Enum.DARK]: {
+    primaryBg: "#152238",
+    primaryBorder: "#ffffff",
+    secondaryBg: "#1C2E4A",
     primaryText: "#DFE0DA",
     primaryActions: "#D5A368",
     primaryOverlay: "rgba(0, 0, 0, 0.5)",

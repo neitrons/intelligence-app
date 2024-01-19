@@ -3,7 +3,7 @@ import { ColorScheme } from "./config/colors";
 import { SizesScheme } from "./config/sizes";
 
 export enum ThemeMode_Enum {
-  GREEN = "green",
+  DARK = "dark",
   LIGHT = "light",
 }
 
@@ -16,7 +16,7 @@ export type ThemeContextValue = {
 };
 
 export const ThemeContext = createContext<ThemeContextValue>({
-  theme: ThemeMode_Enum.GREEN,
+  theme: ThemeMode_Enum.DARK,
   setTheme: () => {},
   colors: {} as ColorScheme,
   sizes: {} as SizesScheme,

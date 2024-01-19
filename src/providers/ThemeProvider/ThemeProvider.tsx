@@ -8,7 +8,7 @@ import { colors } from "./config/colors";
 import { sizes } from "./config/sizes";
 
 export function ThemeProvider({ children }: PropsWithChildren) {
-  const [theme, setTheme] = useState<ThemeMode_Enum>(ThemeMode_Enum.GREEN);
+  const [theme, setTheme] = useState<ThemeMode_Enum>(ThemeMode_Enum.DARK);
 
   async function changeTheme(newTheme: ThemeMode_Enum) {
     await Storage.setItem(THEME_KEY, newTheme);

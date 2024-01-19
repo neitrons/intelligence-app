@@ -27,7 +27,7 @@ export function ThemeSwitcher({ style }: ThemeSwitcherProps) {
       <View style={styles.buttons}>
         <SwitcherButton
           text="ღამე"
-          onPress={() => changeTheme(ThemeMode_Enum.GREEN)}
+          onPress={() => changeTheme(ThemeMode_Enum.DARK)}
           icon={
             <IconFeather
               name="moon"

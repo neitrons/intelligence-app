@@ -103,8 +103,8 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       width: "100%",
       display: "flex",
       flexDirection: "column",
-      gap: sizes.spaceSmall,
-      marginTop: sizes.spaceMedium,
+      gap: sizes.spaceMedium,
+      marginTop: sizes.spaceLarge,
     },
   });
 }
