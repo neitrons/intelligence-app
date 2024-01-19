@@ -6,6 +6,7 @@ import { Card } from "~/components/Card";
 import { Title } from "~/components/Title";
 
 import { TQuestion } from "~/@types/question.types";
+
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 type StandardContentProps = {
@@ -24,9 +25,8 @@ export function StandardContent({ question }: StandardContentProps) {
       <View style={styles.header}>
         <Title>კითხვა #{currentQuestion + 1}</Title>
         <View style={styles.supports}>
-          {Array.from({ length: supports }).map((_, index) => {
-            return <Icon key={index} style={styles.icon} name="stopwatch" />;
-          })}
+          <Icon style={styles.icon} name="stopwatch" />
+          <Title size="large">{supports}</Title>
         </View>
       </View>
       <Card style={styles.box}>
@@ -52,6 +52,8 @@ function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
     supports: {
       display: "flex",
       flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
       gap: sizes.spaceSmall,
     },
     icon: {

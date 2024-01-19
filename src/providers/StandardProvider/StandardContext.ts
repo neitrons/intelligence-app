@@ -16,7 +16,7 @@ export type TStandardState = {
 export const standardInitialState: TStandardState = {
   questions: [],
   userAnswers: [],
-  supports: 3,
+  supports: 0,
   currentQuestion: 0,
   questionsLength: 12,
   timerUsed: false,

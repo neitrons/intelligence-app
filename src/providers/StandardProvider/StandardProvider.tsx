@@ -20,6 +20,10 @@ const standardReducer = (
     case "ON_QUESTION_ANSWERED": {
       const currentQuestion = state.questions[state.currentQuestion];
 
+      if (!state.timerUsed && action.payload) {
+        state.supports++;
+      }
+
       return {
         ...state,
         userAnswered: true,
