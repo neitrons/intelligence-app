@@ -1,3 +1,4 @@
+import { Title } from "../Title";
 import {
   Text,
   View,
@@ -7,17 +8,17 @@ import {
   ViewStyle,
   ImageSourcePropType,
   TouchableOpacity,
+  GestureResponderEvent,
 } from "react-native";
-
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-import { Title } from "../Title";
+import { useSoundProvider } from "~/providers/SoundProvider/useSoundProvider";
 
 type ActionCardProps = {
   title: string;
   description: string;
   style?: StyleProp<ViewStyle>;
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   image: ImageSourcePropType;
 };
 
@@ -32,8 +33,17 @@ export function ActionCard({
   const styles = getStyleSheet({ ...theme });
   const pressableStyles = StyleSheet.flatten([styles.container, style]);
 
+  const { standardClickS } = useSoundProvider();
+
   return (
-    <TouchableOpacity style={pressableStyles} onPress={onPress}>
+    <TouchableOpacity
+      style={pressableStyles}
+      touchSoundDisabled
+      onPress={(event) => {
+        standardClickS?.replayAsync();
+        onPress && onPress(event);
+      }}
+    >
       <View style={styles.content}>
         <Title>{title}</Title>
         <Text style={styles.description}>{description}</Text>
