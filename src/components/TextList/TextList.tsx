@@ -12,7 +12,6 @@ export function TextList({ texts }: TextListProps) {
     <>
       {texts.map((item, index) => (
         <View style={styles.itemContainer} key={index}>
-          <Text style={styles.dot}>•</Text>
           <Text style={styles.itemText}>{item}</Text>
         </View>
       ))}

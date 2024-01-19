@@ -33,7 +33,9 @@ export function GuideModal({
       <View style={styles.imageWrapper}>
         <Image style={styles.image} source={image} />
       </View>
-      <Title size="large">{title}</Title>
+      <Title size="large" style={styles.title}>
+        {title}
+      </Title>
       <View style={styles.itemsContainer}>
         <TextList texts={guideTexts} />
       </View>
@@ -60,6 +62,11 @@ function getStyleSheet({ sizes, colors }: ThemeContextValue) {
     playButton: {
       borderColor: colors.successColor,
     },
+    title: {
+      width: "100%",
+      textAlign: "left",
+      marginTop: sizes.spaceLarge,
+    },
     playIcon: {
       fontSize: 60,
       color: colors.successColor,
@@ -81,7 +88,6 @@ function getStyleSheet({ sizes, colors }: ThemeContextValue) {
       width: "100%",
       marginTop: sizes.spaceMedium,
       justifyContent: "flex-start",
-      paddingHorizontal: sizes.spaceLarge,
     },
     bottomContainer: {
       flex: 2,
