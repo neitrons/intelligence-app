@@ -26,6 +26,15 @@ const standardReducer = (
     case "REMOVE_SUPPORT": {
       return { ...state, supports: --state.supports };
     }
+    case "NEXT_QUESTION": {
+      return { ...state, currentQuestion: ++state.currentQuestion };
+    }
+    case "SET_USER_ANSWERED": {
+      return { ...state, userAnswered: action.payload };
+    }
+    case "TIMER_USED": {
+      return { ...state, timerUsed: action.payload };
+    }
     case "RESET": {
       return { ...standardInitialState };
     }
