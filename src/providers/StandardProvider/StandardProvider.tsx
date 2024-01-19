@@ -33,6 +33,7 @@ const standardReducer = (
         ...state,
         userAnswered: false,
         timerUsed: false,
+        supportUsed: false,
         currentQuestion: ++state.currentQuestion,
       };
     }
