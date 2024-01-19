@@ -6,11 +6,12 @@ import { useStandardProvider } from "~/providers/StandardProvider";
 
 import { AgreeModal } from "~/modules/AgreeModal";
 import { ResultBox } from "~/components/ResultBox";
+import { HeaderBack } from "../../components/HeaderBack";
 
 export function StandardHeader() {
   const [cancelGameModal, setCancelGameModal] = useState(false);
   const {
-    state: { userAnswers },
+    state: { userAnswers, finished },
   } = useStandardProvider();
 
   const theme = useThemeProvider();
@@ -23,13 +24,22 @@ export function StandardHeader() {
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={() => setCancelGameModal(true)}>
-        <Text style={styles.cancel}>შეწყვეტა</Text>
-      </TouchableOpacity>
-      <View style={styles.results}>
-        <ResultBox text={correctAnswers.length.toString()} correct />
-        <ResultBox text={incorrectAnswers.length.toString()} correct={false} />
-      </View>
+      {finished ? (
+        <HeaderBack />
+      ) : (
+        <>
+          <TouchableOpacity onPress={() => setCancelGameModal(true)}>
+            <Text style={styles.cancel}>შეწყვეტა</Text>
+          </TouchableOpacity>
+          <View style={styles.results}>
+            <ResultBox text={correctAnswers.length.toString()} correct />
+            <ResultBox
+              text={incorrectAnswers.length.toString()}
+              correct={false}
+            />
+          </View>
+        </>
+      )}
       <AgreeModal
         open={cancelGameModal}
         onClose={() => setCancelGameModal(false)}

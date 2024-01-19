@@ -20,7 +20,7 @@ export function StandardFooter({}: StandardFooterProps) {
     dispatch,
   } = useStandardProvider();
 
-  const { seconds, startTimer, running } = useCountDown({
+  const { seconds, startTimer, running, stopReset } = useCountDown({
     secondsAmount: 10,
   });
 
@@ -65,7 +65,10 @@ export function StandardFooter({}: StandardFooterProps) {
             <SButton
               style={styles.nextButton}
               type="primary"
-              onPress={() => dispatch({ type: "ON_NEXT_QUESTION" })}
+              onPress={() => {
+                dispatch({ type: "ON_NEXT_QUESTION" });
+                stopReset();
+              }}
             >
               შემდეგი
             </SButton>

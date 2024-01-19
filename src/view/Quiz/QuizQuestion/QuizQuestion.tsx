@@ -1,6 +1,6 @@
 import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import { ScrollView } from "react-native-gesture-handler";
 
 import { SAlert } from "~/components/SAlert";
 import { Card } from "~/components/Card";
