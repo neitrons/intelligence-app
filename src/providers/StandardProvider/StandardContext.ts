@@ -10,6 +10,7 @@ export type TStandardState = {
   questionsLength: number;
   userAnswers: TUserAnswer[];
   supportUsed: boolean;
+  finished: boolean;
 };
 
 export const standardInitialState: TStandardState = {
@@ -21,6 +22,7 @@ export const standardInitialState: TStandardState = {
   timerUsed: false,
   userAnswered: false,
   supportUsed: false,
+  finished: false,
 };
 
 export type TStandardAction =

@@ -19,6 +19,7 @@ const standardReducer = (
 
     case "ON_QUESTION_ANSWERED": {
       const currentQuestion = state.questions[state.currentQuestion];
+
       return {
         ...state,
         userAnswered: true,
@@ -29,12 +30,22 @@ const standardReducer = (
       };
     }
     case "ON_NEXT_QUESTION": {
+      let finished = false;
+      let currentQuestion = state.currentQuestion;
+
+      if (state.currentQuestion === state.questions.length - 1) {
+        finished = true;
+      } else {
+        currentQuestion = ++currentQuestion;
+      }
+
       return {
         ...state,
+        finished,
+        currentQuestion,
         userAnswered: false,
         timerUsed: false,
         supportUsed: false,
-        currentQuestion: ++state.currentQuestion,
       };
     }
     case "SET_TIMER_USED": {

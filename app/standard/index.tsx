@@ -5,13 +5,14 @@ import { useStandardProvider } from "~/providers/StandardProvider";
 
 import { StandardContent } from "~/view/Standard/StandardContent";
 import { StandardFooter } from "~/view/Standard/StandardFooter";
+import { StandardResult } from "~/view/Standard/StandardResult";
 
 export default function Standard() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
   const { prepareGame, state } = useStandardProvider();
-  const { questions, currentQuestion } = state;
+  const { questions, currentQuestion, finished } = state;
 
   useEffect(() => {
     prepareGame();
@@ -19,8 +20,14 @@ export default function Standard() {
 
   return (
     <View style={styles.container}>
-      <StandardContent question={questions?.[currentQuestion]} />
-      <StandardFooter />
+      {finished ? (
+        <StandardResult />
+      ) : (
+        <>
+          <StandardContent question={questions?.[currentQuestion]} />
+          <StandardFooter />
+        </>
+      )}
     </View>
   );
 }
