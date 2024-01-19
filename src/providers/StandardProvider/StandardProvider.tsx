@@ -36,6 +36,12 @@ const standardReducer = (
         currentQuestion: ++state.currentQuestion,
       };
     }
+    case "SET_TIMER_USED": {
+      return {
+        ...state,
+        timerUsed: action.payload,
+      };
+    }
     case "RESET": {
       return { ...standardInitialState };
     }

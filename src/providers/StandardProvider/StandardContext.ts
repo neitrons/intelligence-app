@@ -25,6 +25,7 @@ export type TStandardAction =
   | { type: "QUESTIONS"; payload: TQuestion[] }
   | { type: "ON_QUESTION_ANSWERED"; payload: boolean }
   | { type: "ON_NEXT_QUESTION" }
+  | { type: "SET_TIMER_USED"; payload: boolean }
   | { type: "RESET" };
 
 type TStandardContextValue = {

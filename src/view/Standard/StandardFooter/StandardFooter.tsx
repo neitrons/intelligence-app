@@ -5,7 +5,9 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { SButton } from "~/components/SButton";
 import { CircleButton } from "~/components/CircleButton";
 import { useCountDown } from "~/hooks/useCountDown";
+import { Title } from "~/components/Title";
 import Icon from "react-native-vector-icons/AntDesign";
+import IconAwesome from "react-native-vector-icons/FontAwesome5";
 
 type StandardFooterProps = {};
 
@@ -13,20 +15,38 @@ export function StandardFooter({}: StandardFooterProps) {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
   const {
-    state: { userAnswered },
+    state: { userAnswered, timerUsed, supports },
     dispatch,
   } = useStandardProvider();
 
-  const { seconds, startTimer } = useCountDown({
+  const { seconds, startTimer, running } = useCountDown({
     secondsAmount: 60,
   });
+
+  function onCircleButtonPress() {
+    if (!timerUsed && !running) {
+      startTimer();
+      dispatch({ type: "SET_TIMER_USED", payload: true });
+    } else if (timerUsed && !running && supports > 0) {
+      console.log("დახმარების გამოყენება");
+    }
+  }
 
   return (
     <View style={styles.footer}>
       {!userAnswered && (
         <View style={styles.actions}>
-          <CircleButton style={styles.circleIndicator} onPress={() => {}}>
-            <Icon name="play" style={styles.circleIcon} />
+          <CircleButton
+            style={styles.circleIndicator}
+            onPress={onCircleButtonPress}
+          >
+            {timerUsed && running && <Title>{seconds}</Title>}
+            {!timerUsed && !running && (
+              <Icon name="play" style={styles.circleIcon} />
+            )}
+            {timerUsed && !running && supports > 0 && (
+              <IconAwesome name="stopwatch" style={styles.circleIcon} />
+            )}
           </CircleButton>
         </View>
       )}
