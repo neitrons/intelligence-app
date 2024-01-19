@@ -8,7 +8,6 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import cup from "~/assets/images/cup.png";
 import books from "~/assets/images/books.png";
 import list from "~/assets/images/list.png";
-
 import cupLarge from "~/assets/images/cupLarge.png";
 import booksLarge from "~/assets/images/booksLarge.png";
 
@@ -16,14 +15,18 @@ import { GuideModal } from "~/modules/GuideModal";
 
 export default function Page() {
   const theme = useThemeProvider();
-  const { formatMessage } = useIntl();
   const styles = getStyleSheet({ ...theme });
+
+  const { formatMessage } = useIntl();
   const [showStandardModal, setShowStandardModal] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{formatMessage({ id: "main.title" })}</Text>
+      <Text style={styles.subTitle}>
+        {formatMessage({ id: "main.subtitle" })}
+      </Text>
       <View style={styles.cardsContainer}>
         <ActionCard
           onPress={() => setShowStandardModal(true)}
@@ -83,18 +86,25 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       padding: sizes.spaceMedium,
     },
     title: {
-      fontSize: 54,
+      fontSize: 48,
       fontWeight: "bold",
       width: "100%",
-      textAlign: "center",
+      textAlign: "left",
       color: colors.primaryText,
-      marginBottom: sizes.spaceLarge,
+    },
+    subTitle: {
+      width: "100%",
+      fontSize: 16,
+      textAlign: "left",
+      color: colors.primaryText,
+      marginTop: sizes.spaceMedium,
     },
     cardsContainer: {
       width: "100%",
       display: "flex",
       flexDirection: "column",
       gap: sizes.spaceSmall,
+      marginTop: sizes.spaceMedium,
     },
   });
 }
