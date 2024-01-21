@@ -6,6 +6,7 @@ import { Card } from "~/components/Card";
 import { SModal } from "~/components/SModal";
 import { Title } from "~/components/Title";
 import { SButton } from "~/components/SButton";
+import Icon from "react-native-vector-icons/AntDesign";
 
 type AgreeModalProps = {
   open: boolean;
@@ -38,6 +39,14 @@ export function AgreeModal({
           style={[styles.footerButton, styles.stopButton]}
           textStyle={styles.stopButton}
           onPress={onSubmit}
+          sufix={
+            <Icon
+              name="closecircle"
+              size={theme.sizes.iconSmall}
+              color={theme.colors.errorColor}
+              style={{ marginLeft: theme.sizes.spaceMedium }}
+            />
+          }
         >
           {formatMessage({ id: "main.agree.modal.cancel" })}
         </SButton>
@@ -45,6 +54,14 @@ export function AgreeModal({
           style={[styles.footerButton, styles.continueButton]}
           textStyle={styles.continueButton}
           onPress={onClose}
+          sufix={
+            <Icon
+              name="play"
+              size={theme.sizes.iconSmall}
+              color={theme.colors.successColor}
+              style={{ marginLeft: theme.sizes.spaceMedium }}
+            />
+          }
         >
           {formatMessage({ id: "main.agree.modal.continue" })}
         </SButton>

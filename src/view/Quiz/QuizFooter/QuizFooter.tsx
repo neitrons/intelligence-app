@@ -1,7 +1,10 @@
 import { View, StyleSheet } from "react-native";
-import { SButton } from "~/components/SButton";
 import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+
+import { SButton } from "~/components/SButton";
+
+import Icon from "react-native-vector-icons/AntDesign";
 
 type QuizFooterProps = {
   onSkip: () => void;
@@ -22,15 +25,37 @@ export function QuizFooter({
   return (
     <View style={styles.footer}>
       {!correctAnswer && (
-        <SButton type="default" onPress={onSkip} style={styles.button}>
+        <SButton
+          type="default"
+          onPress={onSkip}
+          style={styles.button}
+          sufix={
+            <Icon
+              name="rightcircle"
+              style={{ marginLeft: theme.sizes.spaceMedium }}
+              size={theme.sizes.iconSmall}
+              color={theme.colors.primaryActions}
+            />
+          }
+        >
           გამოტოვება
         </SButton>
       )}
       <SButton
-        type="primary"
         onPress={onSubmit}
-        style={styles.button}
+        textStyle={styles.next}
+        style={[styles.button, styles.next]}
         disabled={!state.answerText}
+        sufix={
+          correctAnswer && (
+            <Icon
+              name="rightcircle"
+              style={{ marginLeft: theme.sizes.spaceMedium }}
+              size={theme.sizes.iconSmall}
+              color={theme.colors.successColor}
+            />
+          )
+        }
       >
         {correctAnswer ? "შემდეგი" : "შემოწმება"}
       </SButton>
@@ -40,6 +65,7 @@ export function QuizFooter({
 
 function getStyleSheet({
   sizes,
+  colors,
   correctAnswer,
 }: { correctAnswer: boolean } & ThemeContextValue) {
   return StyleSheet.create({
@@ -48,6 +74,10 @@ function getStyleSheet({
       flexDirection: "row",
       padding: sizes.spaceMedium,
       justifyContent: "space-between",
+    },
+    next: {
+      color: colors.successColor,
+      borderColor: colors.successColor,
     },
     button: {
       width: correctAnswer ? "100%" : "48%",

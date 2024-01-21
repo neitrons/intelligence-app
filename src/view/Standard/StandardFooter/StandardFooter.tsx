@@ -63,12 +63,20 @@ export function StandardFooter({}: StandardFooterProps) {
         {userAnswered ? (
           <>
             <SButton
-              style={styles.nextButton}
-              type="primary"
+              style={[styles.correctButton, styles.nextButton]}
+              textStyle={styles.correctButton}
               onPress={() => {
                 dispatch({ type: "ON_NEXT_QUESTION" });
                 stopReset();
               }}
+              sufix={
+                <Icon
+                  name="rightcircle"
+                  style={{ marginLeft: theme.sizes.spaceMedium }}
+                  size={theme.sizes.iconSmall}
+                  color={theme.colors.successColor}
+                />
+              }
             >
               შემდეგი
             </SButton>
@@ -81,6 +89,14 @@ export function StandardFooter({}: StandardFooterProps) {
               onPress={() =>
                 dispatch({ type: "ON_QUESTION_ANSWERED", payload: false })
               }
+              sufix={
+                <Icon
+                  name="closecircle"
+                  size={theme.sizes.iconSmall}
+                  color={theme.colors.errorColor}
+                  style={{ marginLeft: theme.sizes.spaceMedium }}
+                />
+              }
             >
               არასწორი
             </SButton>
@@ -89,6 +105,14 @@ export function StandardFooter({}: StandardFooterProps) {
               textStyle={styles.correctButton}
               onPress={() =>
                 dispatch({ type: "ON_QUESTION_ANSWERED", payload: true })
+              }
+              sufix={
+                <Icon
+                  name="checkcircle"
+                  size={theme.sizes.iconSmall}
+                  color={theme.colors.successColor}
+                  style={{ marginLeft: theme.sizes.spaceMedium }}
+                />
               }
             >
               სწორი
