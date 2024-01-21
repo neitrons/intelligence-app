@@ -8,5 +8,10 @@
   "main.all.questions.title": "თავისფუალი",
   "main.all.questions.description": "ამ რეჟიმში მოცემულია ყველა შეკითხვა რაც შეიძლება შეგვდეთ აპლიკაციაში",
   "main.agree.modal.cancel": "შეწყვეტა",
-  "main.agree.modal.continue": "გაგრძელება"
+  "main.agree.modal.continue": "გაგრძელება",
+  "common.correct": "სწორი",
+  "common.incorrect": "არასწორი",
+  "common.results": "შედეგები",
+  "standard.result.replay": "თავიდან დაწყება",
+  "standard.result.break": "მთავარ გვერდზე დაბრუნება"
 }

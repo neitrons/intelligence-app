@@ -1,31 +1,56 @@
+import { useMemo } from "react";
+import { useIntl } from "react-intl";
+import { router } from "expo-router";
 import { Text, StyleSheet, View } from "react-native";
+import { useStandardProvider } from "~/providers/StandardProvider";
 import { ThemeContextValue, useThemeProvider } from "~/providers/ThemeProvider";
 
-import Icon from "react-native-vector-icons/AntDesign";
-
 import { SButton } from "~/components/SButton";
+import Icon from "react-native-vector-icons/AntDesign";
 
 export function StandardResult() {
   const theme = useThemeProvider();
+  const { formatMessage } = useIntl();
   const styles = getStyleSheet({ ...theme });
+
+  const {
+    prepareGame,
+    state: { userAnswers },
+  } = useStandardProvider();
+
+  const correctAnswerCount = useMemo(
+    () => userAnswers.filter((answer) => answer.correct).length,
+    [userAnswers]
+  );
+  const incorrectAnswerCount = useMemo(
+    () => userAnswers.filter((answer) => !answer.correct).length,
+    [userAnswers]
+  );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>შედეგები</Text>
+      <Text style={styles.title}>
+        {formatMessage({ id: "common.results" })}
+      </Text>
       <View style={styles.boxes}>
         <View style={[styles.box, styles.success]}>
-          <Text style={styles.boxTextSmall}>სწორი</Text>
-          <Text style={styles.boxText}>10</Text>
+          <Text style={styles.boxTextSmall}>
+            {formatMessage({ id: "common.correct" })}
+          </Text>
+          <Text style={styles.boxText}>{correctAnswerCount}</Text>
         </View>
         <View style={[styles.box]}>
-          <Text style={styles.boxTextSmall}>არასწორი</Text>
-          <Text style={styles.boxText}>5</Text>
+          <Text style={styles.boxTextSmall}>
+            {formatMessage({ id: "common.incorrect" })}
+          </Text>
+          <Text style={styles.boxText}>{incorrectAnswerCount}</Text>
         </View>
       </View>
       <View style={styles.actions}>
         <SButton
           style={styles.startAgain}
           textStyle={styles.startAgain}
+          onPress={() => prepareGame()}
           sufix={
             <Icon
               name="play"
@@ -35,11 +60,12 @@ export function StandardResult() {
             />
           }
         >
-          თავიდან დაწყება
+          {formatMessage({ id: "standard.result.replay" })}
         </SButton>
         <SButton
           style={styles.goToMain}
           textStyle={styles.goToMain}
+          onPress={() => router.push("/")}
           prefix={
             <Icon
               name="leftcircle"
@@ -49,7 +75,7 @@ export function StandardResult() {
             />
           }
         >
-          მთავარ გვერდზე დაბრუნება
+          {formatMessage({ id: "standard.result.break" })}
         </SButton>
       </View>
     </View>

@@ -22,7 +22,7 @@ export const standardInitialState: TStandardState = {
   timerUsed: false,
   userAnswered: false,
   supportUsed: false,
-  finished: true,
+  finished: false,
 };
 
 export type TStandardAction =
