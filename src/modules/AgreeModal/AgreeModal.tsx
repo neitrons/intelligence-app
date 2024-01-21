@@ -1,12 +1,11 @@
+import { useIntl } from "react-intl";
 import { StyleSheet, View } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 import { Card } from "~/components/Card";
 import { SModal } from "~/components/SModal";
 import { Title } from "~/components/Title";
-import { CircleButton } from "~/components/CircleButton";
-
-import Icon from "react-native-vector-icons/AntDesign";
+import { SButton } from "~/components/SButton";
 
 type AgreeModalProps = {
   open: boolean;
@@ -26,18 +25,29 @@ export function AgreeModal({
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
 
+  const { formatMessage } = useIntl();
+
   return (
-    <SModal onClose={onClose} open={open}>
-      <View style={styles.modalContaienr}>
-        <Title style={styles.title}>{title}</Title>
-        <Card style={styles.card}>
-          <Title style={styles.cardText}>{description}</Title>
-        </Card>
-        <View style={styles.bottomContainer}>
-          <CircleButton style={styles.stopButton} onPress={onSubmit}>
-            <Icon name="pausecircle" style={styles.stopIcon} />
-          </CircleButton>
-        </View>
+    <SModal onClose={onClose} open={open} viewStyle={styles.modalContaienr}>
+      <Title style={styles.title}>{title}</Title>
+      <Card style={styles.card}>
+        <Title style={styles.cardText}>{description}</Title>
+      </Card>
+      <View style={styles.bottomContainer}>
+        <SButton
+          style={[styles.footerButton, styles.stopButton]}
+          textStyle={styles.stopButton}
+          onPress={onSubmit}
+        >
+          {formatMessage({ id: "main.agree.modal.cancel" })}
+        </SButton>
+        <SButton
+          style={[styles.footerButton, styles.continueButton]}
+          textStyle={styles.continueButton}
+          onPress={onClose}
+        >
+          {formatMessage({ id: "main.agree.modal.continue" })}
+        </SButton>
       </View>
     </SModal>
   );
@@ -47,31 +57,40 @@ function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
     modalContaienr: {
       paddingTop: sizes.spaceLarge,
-    },
-    stopButton: {
-      borderColor: colors.errorColor,
-    },
-    stopIcon: {
-      fontSize: 60,
-      color: colors.errorColor,
+      height: "25%",
     },
     card: {
-      marginTop: sizes.spaceLarge,
-      padding: sizes.spaceLarge,
+      width: "100%",
+      marginTop: sizes.spaceMedium,
+      padding: sizes.spaceMedium,
       backgroundColor: "rgba(181, 75, 75, 0.3)",
     },
     cardText: {
-      textAlign: "center",
+      textAlign: "left",
       fontWeight: "500",
     },
+    footerButton: {
+      width: "48%",
+    },
+    continueButton: {
+      borderColor: colors.successColor,
+      color: colors.successColor,
+    },
+    stopButton: {
+      borderColor: colors.errorColor,
+      color: colors.errorColor,
+    },
     title: {
-      textAlign: "center",
+      width: "100%",
+      textAlign: "left",
     },
     bottomContainer: {
       flex: 2,
       display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+      gap: sizes.spaceMedium,
+      flexDirection: "row",
+      alignItems: "flex-start",
+      marginTop: sizes.spaceMedium,
     },
   });
 }

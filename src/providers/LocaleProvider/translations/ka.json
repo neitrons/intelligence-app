@@ -6,5 +6,7 @@
   "main.quiz.title": "ქვიზი",
   "main.quiz.description": "ქვიზი განკუთნილია სოლო მოთამაშეებისთვის, ცონდის გასაღრმავებლად",
   "main.all.questions.title": "თავისფუალი",
-  "main.all.questions.description": "ამ რეჟიმში მოცემულია ყველა შეკითხვა რაც შეიძლება შეგვდეთ აპლიკაციაში"
+  "main.all.questions.description": "ამ რეჟიმში მოცემულია ყველა შეკითხვა რაც შეიძლება შეგვდეთ აპლიკაციაში",
+  "main.agree.modal.cancel": "შეწყვეტა",
+  "main.agree.modal.continue": "გაგრძელება"
 }
