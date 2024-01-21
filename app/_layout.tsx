@@ -25,10 +25,6 @@ export default function AppLayout() {
             name="standard/index"
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="settings/index"
-            options={{ headerShown: false }}
-          />
         </Stack>
       </LayoutContainer>
       <Footer />
