@@ -16,7 +16,7 @@ export function ResultBox({ text, mode = "correct" }: ResultBoxProps) {
 
   return (
     <View style={styles.box}>
-      <Title>{text}</Title>
+      <Title style={styles.title}>{text}</Title>
     </View>
   );
 }
@@ -39,6 +39,9 @@ function getStyleSheet({
       justifyContent: "center",
       borderRadius: sizes.radiusSmall,
       backgroundColor,
+    },
+    title: {
+      color: "black",
     },
   });
 }

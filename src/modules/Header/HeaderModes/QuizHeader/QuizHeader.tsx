@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { router } from "expo-router";
+import { useState, useMemo } from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
@@ -14,11 +14,16 @@ export function QuizHeader() {
   const styles = getStyleSheet({ ...theme });
   const { state } = useQuizContext();
 
-  const ownAnswers = state.userAnswers.filter(
-    (answer) => answer.supported === false
+  const ownAnswers = useMemo(
+    () =>
+      state.userAnswers.filter((answer) => answer.supported === false).length,
+    [state.userAnswers]
   );
-  const incorrectAnswers = state.userAnswers.filter(
-    (answer) => answer.supported === true
+
+  const incorrectAnswers = useMemo(
+    () =>
+      state.userAnswers.filter((answer) => answer.supported === true).length,
+    [state.userAnswers]
   );
 
   return (
@@ -31,11 +36,8 @@ export function QuizHeader() {
             <Text style={styles.cancel}>შეწყვეტა</Text>
           </TouchableOpacity>
           <View style={styles.results}>
-            <ResultBox
-              text={incorrectAnswers.length.toString()}
-              mode={"supported"}
-            />
-            <ResultBox text={ownAnswers.length.toString()} mode="correct" />
+            <ResultBox text={ownAnswers.toString()} mode="correct" />
+            <ResultBox text={incorrectAnswers.toString()} mode={"supported"} />
           </View>
         </>
       )}
