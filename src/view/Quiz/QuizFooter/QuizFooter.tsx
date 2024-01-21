@@ -41,24 +41,41 @@ export function QuizFooter({
           გამოტოვება
         </SButton>
       )}
-      <SButton
-        onPress={onSubmit}
-        textStyle={styles.next}
-        style={[styles.button, styles.next]}
-        disabled={!state.answerText}
-        sufix={
-          correctAnswer && (
+      {correctAnswer ? (
+        <>
+          <SButton
+            onPress={onSubmit}
+            textStyle={styles.next}
+            style={[styles.button, styles.next]}
+            sufix={
+              <Icon
+                name="rightcircle"
+                style={{ marginLeft: theme.sizes.spaceMedium }}
+                size={theme.sizes.iconSmall}
+                color={theme.colors.successColor}
+              />
+            }
+          >
+            შემდეგი
+          </SButton>
+        </>
+      ) : (
+        <SButton
+          onPress={onSubmit}
+          style={[styles.button]}
+          disabled={!state.answerText}
+          sufix={
             <Icon
-              name="rightcircle"
+              name="checkcircleo"
               style={{ marginLeft: theme.sizes.spaceMedium }}
               size={theme.sizes.iconSmall}
-              color={theme.colors.successColor}
+              color={theme.colors.primaryActions}
             />
-          )
-        }
-      >
-        {correctAnswer ? "შემდეგი" : "შემოწმება"}
-      </SButton>
+          }
+        >
+          შემოწმება
+        </SButton>
+      )}
     </View>
   );
 }
@@ -79,6 +96,7 @@ function getStyleSheet({
       color: colors.successColor,
       borderColor: colors.successColor,
     },
+    buttonCheck: {},
     button: {
       width: correctAnswer ? "100%" : "48%",
     },
