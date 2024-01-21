@@ -32,10 +32,13 @@ export function StandardHeader() {
             <Text style={styles.cancel}>შეწყვეტა</Text>
           </TouchableOpacity>
           <View style={styles.results}>
-            <ResultBox text={correctAnswers.length.toString()} correct />
+            <ResultBox
+              text={correctAnswers.length.toString()}
+              mode="incorrect"
+            />
             <ResultBox
               text={incorrectAnswers.length.toString()}
-              correct={false}
+              mode={"correct"}
             />
           </View>
         </>

@@ -5,8 +5,8 @@ import { useQuizContext } from "~/providers/QuizProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { AgreeModal } from "~/modules/AgreeModal";
 
-import { Title } from "~/components/Title";
 import { HeaderBack } from "../../components/HeaderBack";
+import { ResultBox } from "~/components/ResultBox";
 
 export function QuizHeader() {
   const [cancelGameModal, setCancelGameModal] = useState(false);
@@ -16,6 +16,9 @@ export function QuizHeader() {
 
   const ownAnswers = state.userAnswers.filter(
     (answer) => answer.supported === false
+  );
+  const incorrectAnswers = state.userAnswers.filter(
+    (answer) => answer.supported === true
   );
 
   return (
@@ -27,9 +30,13 @@ export function QuizHeader() {
           <TouchableOpacity onPress={() => setCancelGameModal(true)}>
             <Text style={styles.cancel}>შეწყვეტა</Text>
           </TouchableOpacity>
-          <Title size="small">
-            {ownAnswers.length} / {state.quizLength}
-          </Title>
+          <View style={styles.results}>
+            <ResultBox
+              text={incorrectAnswers.length.toString()}
+              mode={"supported"}
+            />
+            <ResultBox text={ownAnswers.length.toString()} mode="correct" />
+          </View>
         </>
       )}
       <AgreeModal
@@ -43,7 +50,7 @@ export function QuizHeader() {
   );
 }
 
-function getStyleSheet({ colors }: {} & ThemeContextValue) {
+function getStyleSheet({ colors, sizes }: ThemeContextValue) {
   return StyleSheet.create({
     header: {
       width: "100%",
@@ -51,6 +58,11 @@ function getStyleSheet({ colors }: {} & ThemeContextValue) {
       alignItems: "center",
       justifyContent: "space-between",
       flexDirection: "row",
+    },
+    results: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: sizes.spaceSmall,
     },
     cancel: {
       color: colors.errorColor,
