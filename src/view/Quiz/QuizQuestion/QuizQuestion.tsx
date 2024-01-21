@@ -31,12 +31,14 @@ export function QuizQuestion({ question, onSupport }: QuizQuestionProps) {
         </TouchableOpacity>
       </View>
       <Card>
-        <Text>{question.questionText}</Text>
+        <Text style={styles.questionText}>{question.questionText}</Text>
       </Card>
       <Title style={styles.title}>შეიყვანეთ პასუხი</Title>
       <STextInput
-        placeholder="ერთი სიტყვა"
+        placeholder="შემოიყავანეთ ერთი სიტყვა"
         value={state.answerText}
+        style={styles.answerInput}
+        placeholderTextColor={theme.colors.primaryActions}
         onChangeText={(e) =>
           dispatch({ type: "ANSWER_TEXT", payload: composeGeoString(e) })
         }
@@ -57,6 +59,13 @@ export function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
     title: {
       paddingVertical: sizes.spaceMedium,
+    },
+    answerInput: {
+      color: colors.primaryText,
+      borderColor: colors.primaryText,
+    },
+    questionText: {
+      color: colors.primaryText,
     },
     header: {
       display: "flex",
