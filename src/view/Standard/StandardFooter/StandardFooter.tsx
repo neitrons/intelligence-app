@@ -1,19 +1,20 @@
+import { useMemo } from "react";
+import { useIntl } from "react-intl";
 import { View, StyleSheet } from "react-native";
 import { useStandardProvider } from "~/providers/StandardProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-import { SButton } from "~/components/SButton";
-import { CircleButton } from "~/components/CircleButton";
-import { useCountDown } from "~/hooks/useCountDown";
 import { Title } from "~/components/Title";
+import { SButton } from "~/components/SButton";
+import { useCountDown } from "~/hooks/useCountDown";
+import { CircleButton } from "~/components/CircleButton";
 
 import Icon from "react-native-vector-icons/AntDesign";
 import IconAwesome from "react-native-vector-icons/FontAwesome5";
 
-type StandardFooterProps = {};
-
-export function StandardFooter({}: StandardFooterProps) {
+export function StandardFooter() {
   const theme = useThemeProvider();
+  const { formatMessage } = useIntl();
   const styles = getStyleSheet({ ...theme });
   const {
     state: { userAnswered, timerUsed, supports, supportUsed },
@@ -24,12 +25,23 @@ export function StandardFooter({}: StandardFooterProps) {
     secondsAmount: 10,
   });
 
-  const initialMode = !timerUsed && !running;
-  const timerMode = timerUsed && running;
-  const supportsMode = timerUsed && !running && supports > 0 && !supportUsed;
-  const answerMode =
-    (timerUsed && !running && supports === 0) ||
-    (timerUsed && !running && supportUsed);
+  const initialMode = useMemo(
+    () => !timerUsed && !running,
+    [timerUsed, running]
+  );
+  const timerMode = useMemo(() => timerUsed && running, [timerUsed, running]);
+
+  const supportsMode = useMemo(
+    () => timerUsed && !running && supports > 0 && !supportUsed,
+    [timerUsed, running, supports, supportUsed]
+  );
+
+  const answerMode = useMemo(
+    () =>
+      (timerUsed && !running && supports === 0) ||
+      (timerUsed && !running && supportUsed),
+    [timerUsed, running, supports, supportUsed]
+  );
 
   function onCircleButtonPress() {
     if (initialMode) {
@@ -55,7 +67,11 @@ export function StandardFooter({}: StandardFooterProps) {
             {supportsMode && (
               <IconAwesome name="stopwatch" style={styles.circleIcon} />
             )}
-            {answerMode && <Title>პასუხის დროა</Title>}
+            {answerMode && (
+              <Title>
+                {formatMessage({ id: "standard.footer.answer.time" })}
+              </Title>
+            )}
           </CircleButton>
         </View>
       )}
@@ -78,7 +94,7 @@ export function StandardFooter({}: StandardFooterProps) {
                 />
               }
             >
-              შემდეგი
+              {formatMessage({ id: "common.next" })}
             </SButton>
           </>
         ) : (
@@ -98,7 +114,7 @@ export function StandardFooter({}: StandardFooterProps) {
                 />
               }
             >
-              არასწორი
+              {formatMessage({ id: "common.incorrect" })}
             </SButton>
             <SButton
               style={[styles.answerButton, styles.correctButton]}
@@ -115,7 +131,7 @@ export function StandardFooter({}: StandardFooterProps) {
                 />
               }
             >
-              სწორი
+              {formatMessage({ id: "common.correct" })}
             </SButton>
           </>
         )}
