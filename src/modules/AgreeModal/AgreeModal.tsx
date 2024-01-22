@@ -74,7 +74,7 @@ function getStyleSheet({ sizes, colors }: ThemeContextValue) {
   return StyleSheet.create({
     modalContaienr: {
       paddingTop: sizes.spaceLarge,
-      height: "25%",
+      height: "35%",
     },
     card: {
       width: "100%",

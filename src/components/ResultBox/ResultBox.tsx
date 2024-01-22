@@ -33,7 +33,7 @@ function getStyleSheet({
   return StyleSheet.create({
     box: {
       width: 50,
-      height: 20,
+      height: 25,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
