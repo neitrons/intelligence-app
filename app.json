@@ -15,16 +15,14 @@
       "tsconfigPaths": true
     },
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.nikocxvedadze.intelligence"
+      "supportsTablet": true
     },
     "scheme": "intelligence",
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.nikocxvedadze.intelligence"
+      }
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
@@ -34,9 +32,6 @@
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "b1010f58-e592-4c39-8df0-2164e62a7a1a"
       }
     }
   }
