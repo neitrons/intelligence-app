@@ -13,5 +13,6 @@
   "common.incorrect": "არასწორი",
   "common.results": "შედეგები",
   "standard.result.replay": "თავიდან დაწყება",
-  "standard.result.break": "მთავარ გვერდზე დაბრუნება"
+  "standard.result.break": "მთავარ გვერდზე დაბრუნება",
+  "common.supported": "დაუძლეველი"
 }

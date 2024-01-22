@@ -39,7 +39,7 @@ export function StandardResult() {
           </Text>
           <Text style={styles.boxText}>{correctAnswerCount}</Text>
         </View>
-        <View style={[styles.box]}>
+        <View style={[styles.box, styles.incorrect]}>
           <Text style={styles.boxTextSmall}>
             {formatMessage({ id: "common.incorrect" })}
           </Text>
@@ -69,7 +69,7 @@ export function StandardResult() {
           prefix={
             <Icon
               name="leftcircle"
-              color={theme.colors.errorColor}
+              color={theme.colors.primaryActions}
               size={theme.sizes.iconSmall}
               style={{ marginRight: theme.sizes.spaceMedium }}
             />
@@ -101,7 +101,6 @@ export function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       height: "100%",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "red",
       borderRadius: sizes.radiusSmall,
     },
     boxText: {
@@ -114,6 +113,9 @@ export function getStyleSheet({ colors, sizes }: ThemeContextValue) {
     success: {
       backgroundColor: colors.successColor,
     },
+    incorrect: {
+      backgroundColor: colors.errorColor,
+    },
     title: {
       fontSize: 48,
       fontWeight: "bold",
@@ -122,8 +124,8 @@ export function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       color: colors.primaryText,
     },
     goToMain: {
-      color: colors.errorColor,
-      borderColor: colors.errorColor,
+      color: colors.primaryActions,
+      borderColor: colors.primaryActions,
     },
     startAgain: {
       color: colors.successColor,

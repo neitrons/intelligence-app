@@ -2,9 +2,10 @@ import { useMemo } from "react";
 import { router } from "expo-router";
 import { useIntl } from "react-intl";
 import { StyleSheet, Text, View } from "react-native";
-import { SButton } from "~/components/SButton";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { useQuizContext } from "~/providers/QuizProvider";
+
+import { SButton } from "~/components/SButton";
 import Icon from "react-native-vector-icons/AntDesign";
 
 export function QuizResult() {
@@ -37,9 +38,9 @@ export function QuizResult() {
           </Text>
           <Text style={styles.boxText}>{correctAnswers}</Text>
         </View>
-        <View style={[styles.box]}>
+        <View style={[styles.box, styles.supported]}>
           <Text style={styles.boxTextSmall}>
-            {formatMessage({ id: "common.incorrect" })}
+            {formatMessage({ id: "common.supported" })}
           </Text>
           <Text style={styles.boxText}>{supportedAnswers}</Text>
         </View>
@@ -67,7 +68,7 @@ export function QuizResult() {
           prefix={
             <Icon
               name="leftcircle"
-              color={theme.colors.errorColor}
+              color={theme.colors.primaryActions}
               size={theme.sizes.iconSmall}
               style={{ marginRight: theme.sizes.spaceMedium }}
             />
@@ -89,6 +90,9 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
     success: {
       backgroundColor: colors.successColor,
     },
+    supported: {
+      backgroundColor: colors.primaryActions,
+    },
     title: {
       fontSize: 48,
       fontWeight: "bold",
@@ -109,7 +113,7 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       height: "100%",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "red",
+      backgroundColor: colors.errorColor,
       borderRadius: sizes.radiusSmall,
     },
     boxText: {
@@ -120,8 +124,8 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       fontSize: sizes.textMedium,
     },
     goToMain: {
-      color: colors.errorColor,
-      borderColor: colors.errorColor,
+      color: colors.primaryActions,
+      borderColor: colors.primaryActions,
     },
     startAgain: {
       color: colors.successColor,
