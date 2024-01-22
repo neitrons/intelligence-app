@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useIntl } from "react-intl";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { useStandardProvider } from "~/providers/StandardProvider";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
@@ -62,15 +62,21 @@ export function StandardFooter() {
             onPress={onCircleButtonPress}
             disabled={timerMode && answerMode}
           >
-            {timerMode && <Title>{seconds}</Title>}
+            {timerMode && (
+              <View style={styles.timer}>
+                <Text style={styles.timerText}>{seconds}</Text>
+              </View>
+            )}
             {initialMode && <Icon name="play" style={styles.circleIcon} />}
             {supportsMode && (
               <IconAwesome name="stopwatch" style={styles.circleIcon} />
             )}
             {answerMode && (
-              <Title>
-                {formatMessage({ id: "standard.footer.answer.time" })}
-              </Title>
+              <View style={styles.answerMode}>
+                <Title style={styles.answerModeText}>
+                  {formatMessage({ id: "standard.footer.answer.time" })}
+                </Title>
+              </View>
             )}
           </CircleButton>
         </View>
@@ -147,6 +153,27 @@ function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
       alignItems: "center",
       flexDirection: "row",
       justifyContent: "center",
+    },
+    timer: {
+      width: 60,
+      height: 60,
+      borderRadius: sizes.radiusFull,
+      backgroundColor: colors.successColor,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    timerText: {
+      fontWeight: "bold",
+      fontSize: sizes.textLarge * 1.5,
+    },
+    answerMode: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    answerModeText: {
+      textAlign: "center",
     },
     footer: {
       padding: sizes.spaceMedium,

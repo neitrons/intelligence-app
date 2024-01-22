@@ -26,7 +26,10 @@ export function QuizQuestion({ question, onSupport }: QuizQuestionProps) {
     <ScrollView style={styles.scrollView}>
       <View style={styles.header}>
         <Title>კითხვა #{state.currentQuiz + 1}</Title>
-        <TouchableOpacity onPress={onSupport}>
+        <TouchableOpacity
+          onPress={onSupport}
+          disabled={state.userAnswer?.supported}
+        >
           <Icon name="question-circle" style={styles.supportIcon} />
         </TouchableOpacity>
       </View>

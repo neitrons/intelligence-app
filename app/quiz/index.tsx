@@ -71,6 +71,8 @@ export default function Quiz() {
       state.questions[state.currentQuiz],
     ];
     dispatch({ type: "SKIPPED_QUESTIONS", payload: newSkippedQuestions });
+    dispatch({ type: "ANSWER_TEXT", payload: "" });
+    dispatch({ type: "USER_ANSWER", payload: undefined });
     if (state.currentQuiz === state.questions.length - 1) {
       onQuizEnd(newSkippedQuestions);
       return;
