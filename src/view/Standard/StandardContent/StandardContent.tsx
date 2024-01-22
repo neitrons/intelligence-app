@@ -1,4 +1,4 @@
-import { ScrollView, Text, StyleSheet, View } from "react-native";
+import { ScrollView, Text, StyleSheet, View, Image } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { useStandardProvider } from "~/providers/StandardProvider";
 
@@ -31,6 +31,14 @@ export function StandardContent({ question }: StandardContentProps) {
       </View>
       <Card style={styles.box}>
         <Text style={styles.questionText}>{question?.questionText}</Text>
+        {question?.questionImage && (
+          <View style={styles.imageWrapper}>
+            <Image
+              style={styles.questionImage}
+              source={{ uri: question.questionImage }}
+            />
+          </View>
+        )}
       </Card>
       <Title style={styles.answerTitle}>პასუხი</Title>
       <Card style={styles.answerBox}>
@@ -80,6 +88,20 @@ function getStyleSheet({ sizes, colors }: {} & ThemeContextValue) {
     },
     scrollView: {
       paddingHorizontal: sizes.spaceMedium,
+    },
+    imageWrapper: {
+      flex: 1,
+      overflow: "hidden",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: sizes.spaceMedium,
+    },
+    questionImage: {
+      width: "100%",
+      height: "100%",
+      aspectRatio: 1.5,
+      resizeMode: "contain",
     },
   });
 }

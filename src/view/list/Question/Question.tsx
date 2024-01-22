@@ -64,15 +64,15 @@ function getStyleSheet({ colors, sizes }: ThemeContextValue) {
       justifyContent: "center",
       marginTop: sizes.spaceMedium,
     },
-    questionText: {
-      fontSize: sizes.textSmall,
-      color: colors.primaryText,
-    },
     questionImage: {
       width: "100%",
       height: "100%",
       aspectRatio: 1.5,
       resizeMode: "contain",
+    },
+    questionText: {
+      fontSize: sizes.textSmall,
+      color: colors.primaryText,
     },
     answerText: {
       fontSize: sizes.textSmall,

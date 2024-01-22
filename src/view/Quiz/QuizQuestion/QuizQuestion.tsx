@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -35,6 +35,14 @@ export function QuizQuestion({ question, onSupport }: QuizQuestionProps) {
       </View>
       <Card>
         <Text style={styles.questionText}>{question.questionText}</Text>
+        {question?.questionImage && (
+          <View style={styles.imageWrapper}>
+            <Image
+              style={styles.questionImage}
+              source={{ uri: question.questionImage }}
+            />
+          </View>
+        )}
       </Card>
       <Title style={styles.title}>შეიყვანეთ პასუხი</Title>
       <STextInput
@@ -80,6 +88,20 @@ export function getStyleSheet({ sizes, colors }: ThemeContextValue) {
     alertWrapper: {
       width: "100%",
       marginTop: sizes.spaceMedium,
+    },
+    imageWrapper: {
+      flex: 1,
+      overflow: "hidden",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: sizes.spaceMedium,
+    },
+    questionImage: {
+      width: "100%",
+      height: "100%",
+      aspectRatio: 1.5,
+      resizeMode: "contain",
     },
     supportIcon: {
       color: colors.successColor,
