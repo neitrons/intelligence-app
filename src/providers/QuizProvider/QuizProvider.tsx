@@ -34,16 +34,7 @@ const QuizReducer = (state: TQuizState, action: TQuizAction): TQuizState => {
 };
 
 export function QuizProvider({ children }: PropsWithChildren) {
-  const [state, dispatch] = useReducer(QuizReducer, {
-    answerText: "",
-    userAnswer: undefined,
-    currentQuiz: 0,
-    quizFinished: false,
-    questions: [],
-    skippedQuestions: [],
-    userAnswers: [],
-    quizLength: 15,
-  });
+  const [state, dispatch] = useReducer(QuizReducer, quizInitialState);
   const { quizQuestions } = useStaticData();
 
   function startQuiz() {
