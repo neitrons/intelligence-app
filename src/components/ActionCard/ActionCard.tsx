@@ -12,8 +12,6 @@ import {
 } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
-import { useSoundProvider } from "~/providers/SoundProvider/useSoundProvider";
-
 type ActionCardProps = {
   title: string;
   description: string;
@@ -33,16 +31,11 @@ export function ActionCard({
   const styles = getStyleSheet({ ...theme });
   const pressableStyles = StyleSheet.flatten([styles.container, style]);
 
-  const { standardClickS } = useSoundProvider();
-
   return (
     <TouchableOpacity
       style={pressableStyles}
       touchSoundDisabled
-      onPress={(event) => {
-        standardClickS?.replayAsync();
-        onPress && onPress(event);
-      }}
+      onPress={onPress}
     >
       <View style={styles.content}>
         <Title>{title}</Title>
