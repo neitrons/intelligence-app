@@ -12,7 +12,7 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 
 type SModalProps = {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   viewStyle?: StyleProp<ViewStyle>;
 };
 
@@ -32,9 +32,9 @@ export function SModal({
       animationType="slide"
       transparent={true}
       visible={open}
-      onRequestClose={onClose}
+      onRequestClose={() => onClose?.()}
     >
-      <TouchableWithoutFeedback onPress={onClose}>
+      <TouchableWithoutFeedback onPress={() => onClose?.()}>
         <View style={styles.modalContainer}>
           <View style={modalView}>{children}</View>
         </View>

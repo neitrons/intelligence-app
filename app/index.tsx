@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { router } from "expo-router";
 import { ActionCard } from "~/components/ActionCard";
@@ -13,6 +13,7 @@ import booksLarge from "~/assets/images/booksLarge.png";
 
 import { GuideModal } from "~/modules/GuideModal";
 
+
 export default function Page() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
@@ -20,6 +21,8 @@ export default function Page() {
   const { formatMessage } = useIntl();
   const [showStandardModal, setShowStandardModal] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
+
+
 
   return (
     <View style={styles.container}>
