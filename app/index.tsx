@@ -1,28 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useIntl } from "react-intl";
 import { router } from "expo-router";
 import { ActionCard } from "~/components/ActionCard";
 import { View, StyleSheet, Text } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
+import { useGlobalProvider } from "~/providers/GlobalProvider/useGlobalProvider";
 
 import cup from "~/assets/images/cup.png";
 import books from "~/assets/images/books.png";
 import list from "~/assets/images/list.png";
 import cupLarge from "~/assets/images/cupLarge.png";
 import booksLarge from "~/assets/images/booksLarge.png";
-
 import { GuideModal } from "~/modules/GuideModal";
-
 
 export default function Page() {
   const theme = useThemeProvider();
   const styles = getStyleSheet({ ...theme });
+  const { isConnected } = useGlobalProvider();
 
   const { formatMessage } = useIntl();
   const [showStandardModal, setShowStandardModal] = useState(false);
   const [showQuizModal, setShowQuizModal] = useState(false);
-
-
 
   return (
     <View style={styles.container}>
@@ -32,18 +30,21 @@ export default function Page() {
       </Text>
       <View style={styles.cardsContainer}>
         <ActionCard
+          disabled={!isConnected}
           onPress={() => setShowStandardModal(true)}
           title={formatMessage({ id: "main.standard.game.title" })}
           description={formatMessage({ id: "main.standard.game.description" })}
           image={cup}
         />
         <ActionCard
+          disabled={!isConnected}
           onPress={() => setShowQuizModal(true)}
           title={formatMessage({ id: "main.quiz.title" })}
           description={formatMessage({ id: "main.quiz.description" })}
           image={books}
         />
         <ActionCard
+          disabled={!isConnected}
           onPress={() => router.push("/list")}
           title={formatMessage({ id: "main.all.questions.title" })}
           description={formatMessage({ id: "main.all.questions.description" })}

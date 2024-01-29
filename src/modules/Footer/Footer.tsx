@@ -10,7 +10,7 @@ export function Footer() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>რეკლამა</Text>
+      <Text style={styles.text}></Text>
     </View>
   );
 }

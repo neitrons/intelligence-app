@@ -15,6 +15,7 @@ import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 type ActionCardProps = {
   title: string;
   description: string;
+  disabled?: boolean;
   style?: StyleProp<ViewStyle>;
   onPress?: (e: GestureResponderEvent) => void;
   image: ImageSourcePropType;
@@ -24,6 +25,7 @@ export function ActionCard({
   title,
   description,
   image,
+  disabled,
   onPress,
   style,
 }: ActionCardProps) {
@@ -33,9 +35,10 @@ export function ActionCard({
 
   return (
     <TouchableOpacity
-      style={pressableStyles}
+      disabled={disabled}
       touchSoundDisabled
       onPress={onPress}
+      style={pressableStyles}
     >
       <View style={styles.content}>
         <Title>{title}</Title>

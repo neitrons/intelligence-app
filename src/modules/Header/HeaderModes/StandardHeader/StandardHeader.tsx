@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { router } from "expo-router";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, Switch } from "react-native";
 import { useThemeProvider, ThemeContextValue } from "~/providers/ThemeProvider";
 import { useStandardProvider } from "~/providers/StandardProvider";
 
