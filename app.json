@@ -15,7 +15,8 @@
       "tsconfigPaths": true
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nikocxvedadze.intelligence"
     },
     "scheme": "intelligence",
     "android": {
@@ -28,8 +29,12 @@
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
-    "assetBundlePatterns": ["**/*"],
-    "plugins": ["expo-router"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      "expo-router"
+    ],
     "extra": {
       "router": {
         "origin": false

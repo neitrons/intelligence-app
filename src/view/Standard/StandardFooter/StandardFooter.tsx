@@ -22,7 +22,7 @@ export function StandardFooter() {
   } = useStandardProvider();
 
   const { seconds, startTimer, running, stopReset } = useCountDown({
-    secondsAmount: 10,
+    secondsAmount: 60,
   });
 
   const initialMode = useMemo(
